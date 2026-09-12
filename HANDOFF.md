@@ -1,6 +1,6 @@
 # Traspaso del proyecto Código Cero / intenta.cl
 
-Estado al 11 de septiembre de 2026. Base inicial: `adf9e2b`.
+Estado al 12 de septiembre de 2026. Base inicial: `adf9e2b`.
 
 ### Repositorio principal desde el 11 de septiembre de 2026
 
@@ -12,7 +12,10 @@ repositorio previo como `legacy-origin`; `origin/main` apunta a `capdev`.
 
 GitHub Pages se activó desde `main`, raíz `/`. El dominio personalizado continúa
 siendo `capsulasdev.com`; Supabase, Resend y Namecheap no cambian porque la URL
-pública se conserva.
+pública se conserva. HTTPS está forzado y el despliegue `34706339328` terminó
+correctamente. GitHub atribuye el repositorio público solo a `PabSepul`.
+`PabSepul/SpanaPS.github.io` quedó privado como respaldo y la copia provisional
+`PabloSepul/capdev` también quedó privada.
 
 ### Última entrega publicada: nuevas rutas Docker y MongoDB
 
