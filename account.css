@@ -1,0 +1,56 @@
+.account-shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 84px 0 96px; }
+.account-shell > h1 { max-width: 780px; margin: 0; font-size: clamp(3rem, 6vw, 5.3rem); line-height: .98; }
+.account-shell > h1 + p { max-width: 680px; margin: 26px 0 0; color: var(--ink-soft); font-size: 1.04rem; line-height: 1.65; }
+.account-shell > .eyebrow { margin-bottom: 20px; }
+
+.account-status { display: flex; align-items: center; min-height: 48px; margin: 34px 0 0; padding: 12px 16px; border: 1px solid var(--line); border-left: 3px solid var(--purple); background: var(--card-muted); color: var(--ink-soft); font-size: .84rem; line-height: 1.45; }
+.account-status::before { content: "ESTADO"; flex: 0 0 auto; margin-right: 12px; color: var(--purple); font: 700 .65rem/1 "Cascadia Code", Consolas, monospace; letter-spacing: .1em; }
+.account-status a { color: var(--purple); font-weight: 700; }
+
+#account-panel { margin-top: 16px; }
+.account-card { position: relative; margin: 0 0 16px; padding: 28px; border: 1px solid var(--line); border-radius: 0; background: var(--card); }
+.account-card h2 { margin: 0 0 18px; font-size: 1.35rem; line-height: 1.2; }
+.account-card h2::before { content: "//"; margin-right: 9px; color: var(--purple); font: 700 .8rem/1 "Cascadia Code", Consolas, monospace; }
+.account-card p { max-width: 690px; margin: 0 0 14px; color: var(--ink-soft); line-height: 1.65; }
+.account-card label { display: block; margin: 20px 0 7px; color: var(--ink); font-size: .78rem; font-weight: 700; letter-spacing: .035em; }
+.account-card input:not([type=checkbox]) { width: min(100%, 520px); min-height: 46px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 0; color: var(--ink); background: var(--surface-muted); font: inherit; }
+.account-card input:not([type=checkbox]):focus { border-color: var(--purple); outline: 0; box-shadow: inset 3px 0 var(--purple); }
+.account-card input[type=checkbox] { accent-color: var(--action); }
+.account-card button { min-height: 42px; margin: 16px 8px 0 0; padding: 10px 14px; border: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--ink); font: 700 .72rem/1 Inter, sans-serif; letter-spacing: .045em; text-transform: uppercase; cursor: pointer; transition: border-color .18s ease, background-color .18s ease, color .18s ease; }
+.account-card button:hover { border-color: var(--purple); background: var(--purple-soft); }
+.account-card button:disabled { opacity: .5; cursor: not-allowed; }
+.account-card input:focus-visible, .account-card button:focus-visible, .account-card summary:focus-visible { outline: 3px solid var(--purple); outline-offset: 3px; }
+
+#account-login, #account-enroll { padding: clamp(28px, 5vw, 54px); border-color: var(--code-line); background: var(--hero-bg); color: var(--on-dark); }
+#account-login::before, #account-enroll::before { content: "PERFIL"; display: block; margin-bottom: 42px; color: var(--purple); font: 700 .68rem/1 "Cascadia Code", Consolas, monospace; letter-spacing: .12em; }
+#account-login h2, #account-enroll h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
+#account-login h2::before, #account-enroll h2::before { color: #76aaf0; }
+#account-login p, #account-enroll p { color: var(--on-dark-muted); }
+#account-login label, #account-enroll label { color: var(--on-dark); }
+#account-login input:not([type=checkbox]), #account-enroll input:not([type=checkbox]) { border-color: var(--code-line); background: var(--code-elevated); color: var(--on-dark); }
+#account-login button, #account-enroll button, #account-save-alias { border-color: var(--action); background: var(--action); color: #fff; }
+#account-login button:hover, #account-enroll button:hover, #account-save-alias:hover { border-color: var(--action-hover); background: var(--action-hover); }
+
+#account-data { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+#account-data .account-card { min-height: 220px; margin: 0; }
+#account-data .account-card:first-child, #account-data .account-card:last-child, #account-conflict-section { grid-column: 1 / -1; }
+#account-summary { color: var(--ink) !important; font-size: 1.1rem; font-weight: 700; }
+.account-card ul { margin: 20px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.account-card li { margin: 0; border-bottom: 1px solid var(--line); }
+.account-card li a { display: block; padding: 14px 0; color: var(--ink); font-weight: 700; text-decoration: none; }
+.account-card li a:hover { color: var(--purple); }
+.account-card pre { max-height: 260px; margin: 16px 0 0; padding: 16px; overflow: auto; border: 1px solid var(--code-line); border-radius: 0; background: var(--console-bg); color: var(--on-dark); white-space: pre-wrap; overflow-wrap: anywhere; }
+.account-card details { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+.account-card summary { color: #c2414a; font-size: .78rem; font-weight: 700; cursor: pointer; }
+.account-card details button:last-child { border-color: #c2414a; color: #c2414a; }
+.account-card details button:last-child:hover { background: rgba(194, 65, 74, .12); }
+.account-header-link { font-size: .9rem; white-space: nowrap; }
+.account-card [hidden], .account-shell [hidden] { display: none !important; }
+
+@media (max-width: 720px) {
+  .account-shell { width: min(100% - 32px, 1120px); padding: 56px 0 72px; }
+  .account-shell > h1 { font-size: clamp(2.7rem, 13vw, 4rem); }
+  .account-card, #account-login, #account-enroll { padding: 24px; }
+  #account-data { grid-template-columns: 1fr; }
+  #account-data .account-card:first-child, #account-data .account-card:last-child, #account-conflict-section { grid-column: auto; }
+}

@@ -1,0 +1,13 @@
+.foundation-support { margin: 20px 0; font-size: .84rem; line-height: 1.8; }
+.foundation-support summary, .foundation-extra summary { padding: 12px 0; cursor: pointer; color: var(--ink); font-size: .8rem; font-weight: 700; line-height: 1.7; }
+.foundation-support ol { padding-left: 23px; margin: 8px 0 22px; color: var(--ink-soft); }
+.foundation-support li + li { margin-top: 9px; }
+.prediction-card { padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
+.prediction-card h4, .foundation-extra h4 { margin: 0 0 9px; font-size: .83rem; line-height: 1.5; }
+.prediction-card p, .foundation-extra p { color: var(--ink-soft); font-size: .83rem; line-height: 1.8; margin: 9px 0; }
+.prediction-card details { border-top: 1px solid var(--line); margin-top: 14px; }
+.prediction-card details p { margin-bottom: 0; }
+.foundation-extra { margin: 22px 0 0; border-top: 1px solid var(--line); font-size: .84rem; }
+.foundation-extra h4 { margin-top: 18px; }
+.foundation-extra .learning-save-note { font-size: .72rem; }
+.foundation-feedback { border-top: 1px solid var(--line); padding-top: 14px; margin: 16px 0 0; color: var(--ink); font-size: .8rem; line-height: 1.8; }

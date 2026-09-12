@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es-CL" class="is-maintenance">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Descubre rutas prácticas para aprender programación creando proyectos desde el primer día.">
+  <meta name="theme-color" content="#1c69d4">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:url" content="https://capsulasdev.com/">
+  <meta property="og:title" content="CápsulasDev — Un pequeño paso, algo nuevo">
+  <meta property="og:description" content="Elige una tecnología y aprende construyendo proyectos paso a paso.">
+  <meta property="og:image" content="https://capsulasdev.com/og.png?v=20260902-bmw">
+  <meta property="og:image:alt" content="CápsulasDev — Un pequeño paso, algo nuevo.">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CápsulasDev — Un pequeño paso, algo nuevo">
+  <meta name="twitter:description" content="Elige una tecnología y aprende construyendo proyectos paso a paso.">
+  <meta name="twitter:image" content="https://capsulasdev.com/og.png?v=20260902-bmw">
+  <meta name="twitter:image:alt" content="CápsulasDev — Un pequeño paso, algo nuevo.">
+  <title>CápsulasDev — Un pequeño paso, algo nuevo</title>
+  <script>
+    (() => {
+      const publicHosts = ["intenta.cl", "www.intenta.cl", "capsulasdev.com", "www.capsulasdev.com"];
+      const showMaintenance = publicHosts.includes(window.location.hostname)
+        || new URLSearchParams(window.location.search).has("maintenance");
+      if (showMaintenance) {
+        document.documentElement.classList.add("is-maintenance");
+        document.title = "Código Cero — Estamos preparando algo nuevo";
+        const robots = document.createElement("meta");
+        robots.name = "robots";
+        robots.content = "noindex, nofollow";
+        document.head.append(robots);
+      } else {
+        document.documentElement.classList.remove("is-maintenance");
+      }
+      const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      try {
+        const saved = localStorage.getItem("codigo-cero.theme");
+        document.documentElement.dataset.theme = saved === "dark" || saved === "light" ? saved : preferred;
+      } catch {
+        document.documentElement.dataset.theme = preferred;
+      }
+    })();
+  </script>
+  <script src="review-preview.js?v=20260903-review1"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg?v=20260902-bmw1" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20260909-profile3">
+  <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
+  <link rel="stylesheet" href="account.css?v=20260909-profile3">
+  <link rel="stylesheet" href="home.css?v=20260909-home1">
+</head>
+<body class="home-page">
+  <section class="maintenance-screen" aria-labelledby="maintenance-title">
+    <div class="maintenance-shell">
+      <div class="maintenance-brand"><span aria-hidden="true">&gt;_</span> Código Cero</div>
+      <p class="maintenance-kicker">Actualización en curso</p>
+      <h1 id="maintenance-title">Estamos preparando la siguiente etapa.</h1>
+      <p>Estamos preparando nuevas rutas, ejercicios y mejores explicaciones para aprender paso a paso.</p>
+      <div class="maintenance-progress" aria-hidden="true"><span></span></div>
+      <small>Volvemos pronto.</small>
+    </div>
+  </section>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="CápsulasDev, volver al inicio">
+      <span class="brand-mark" aria-hidden="true">&gt;_</span>
+      <span>Cápsulas<span class="brand-light">Dev</span></span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="#rutas">Explorar rutas</a>
+      <a href="#como-aprender">Cómo funciona</a>
+      <a href="#preguntas">Dudas frecuentes</a>
+    </nav>
+    <div class="header-actions">
+      <a class="account-header-link" href="cuenta.html">Mi cuenta</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Activar modo oscuro">
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg>
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <span id="theme-toggle-label">Oscuro</span>
+      </button>
+
+    </div>
+  </header>
+  <main id="contenido">
+    <div class="home-wrap">
+      <section class="continue-learning" id="continue-learning" aria-labelledby="continue-title" hidden><div><p class="home-kicker">Tu espacio de aprendizaje</p><h2 id="continue-title">Continúa donde quedaste</h2><p id="continue-description"></p></div><a class="button button-primary" id="continue-link" href="#rutas">Continuar aprendiendo →</a></section>
+      <section class="home-hero" id="inicio" aria-labelledby="landing-title">
+        <div class="home-hero-copy">
+          <p class="home-kicker"><span class="home-dot" aria-hidden="true"></span> Aprende a tu ritmo. Crea desde el primer día.</p>
+          <h1 id="landing-title">Un pequeño paso.<br>Algo <em>nuevo</em><span class="hero-period">.</span></h1>
+          <p class="hero-description">Aprender a programar empieza con una idea sencilla. Entiéndela, pruébala y mira lo que eres capaz de crear.</p>
+          <div class="home-actions"><a class="button button-primary" href="python.html">Empezar desde cero <span aria-hidden="true">↗</span></a><a class="home-text-link" href="#rutas">Explorar las rutas <span aria-hidden="true">↓</span></a></div>
+          <p class="hero-footnote">En español <span aria-hidden="true">·</span> Sin instalaciones <span aria-hidden="true">·</span> Ejercicios en tu navegador</p>
+        </div>
+        <aside class="capsule-preview" aria-label="Ejemplo de una cápsula de Python">
+          <div class="capsule-top"><span class="capsule-label">TU PRIMERA CÁPSULA</span><span class="capsule-language">Python</span></div>
+          <div class="capsule-intro"><span class="capsule-step">01 / 20</span><h2>Todo empieza con un hola.</h2><p>Con <code>print()</code> puedes mostrar un mensaje.<br>Así se ve tu primera línea de Python:</p></div>
+          <div class="capsule-code"><span class="code-file">hola.py <span aria-hidden="true">•••</span></span><pre><code><span class="code-number" aria-hidden="true">1</span> <span class="code-function">print</span>(<span class="code-string">"Hola, mundo"</span>)</code></pre><div class="capsule-output"><span>Resultado del ejemplo</span><samp>Hola, mundo</samp></div></div>
+          <a class="capsule-next" href="python.html">Ahora inténtalo tú <span aria-hidden="true">→</span></a>
+          <span class="capsule-decoration" aria-hidden="true">{ }</span>
+        </aside>
+      </section>
+      <section class="start-here" id="que-es" aria-labelledby="start-title">
+        <div><p class="home-kicker">TU PUNTO DE PARTIDA</p><h2 id="start-title">¿Qué te gustaría crear?</h2><p>No necesitas conocer las tecnologías. Empieza por lo que te interesa.</p></div>
+        <div class="start-options">
+          <a href="python.html"><span class="start-symbol" aria-hidden="true">&gt;_</span><span><strong>Mi primer programa</strong><small>Empieza con Python</small></span><span aria-hidden="true">↗</span></a>
+          <a href="html-css.html"><span class="start-symbol" aria-hidden="true">&lt;/&gt;</span><span><strong>Mi primera página web</strong><small>Empieza con HTML y CSS</small></span><span aria-hidden="true">↗</span></a>
+          <a href="sql.html"><span class="start-symbol" aria-hidden="true">▤</span><span><strong>Respuestas con datos</strong><small>Empieza con SQL</small></span><span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <section class="home-catalog" id="rutas" aria-labelledby="routes-title">
+        <div class="home-section-heading"><div><p class="home-kicker">ENCUENTRA TU PRÓXIMO PASO</p><h2 id="routes-title">Una ruta para cada curiosidad.</h2><p>Elige un tema y avanza con ejemplos, ejercicios y pequeños retos.</p></div><span class="route-total">19 rutas para explorar</span></div>
+        <div class="catalog-controls" hidden>
+          <div class="catalog-filters" role="group" aria-label="Filtrar rutas por tema"><button type="button" data-filter="all" aria-pressed="true">Todas</button><button type="button" data-filter="inicio" aria-pressed="false">Primeros pasos</button><button type="button" data-filter="web" aria-pressed="false">Desarrollo web</button><button type="button" data-filter="datos" aria-pressed="false">Datos e IA</button><button type="button" data-filter="herramientas" aria-pressed="false">Herramientas</button></div>
+          <label class="catalog-search"><span aria-hidden="true">⌕</span><span class="sr-only">Buscar una ruta</span><input type="search" id="route-search" placeholder="Busca Python, web, datos…" autocomplete="off"></label>
+        </div>
+        <p class="catalog-results" id="catalog-results" role="status" aria-live="polite"></p>
+        <div class="technology-grid" id="route-grid"><a class="technology-card is-available" href="python.html" data-category="inicio datos" data-learning-route="python">
+          <div class="technology-top"><span class="technology-icon">Py</span><span class="status status-open">20 proyectos</span></div>
+          <h3>Python</h3>
+          <p>Aprende a programar paso a paso: desde tu primer mensaje hasta tus propias funciones.</p>
+          <div class="route-progress"><span data-route-progress>0/20 proyectos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong>
+        </a>
+<a class="technology-card is-preview" href="html-css.html" data-category="inicio web" data-learning-route="html-css"><div class="technology-top"><span class="technology-icon">&lt;/&gt;</span><span class="status status-preview">16 módulos</span></div><h3>HTML y CSS</h3><p>Crea tu primera página y dale forma con colores, estilos y diseño adaptable.</p><div class="route-progress"><span data-route-progress>0/16 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="javascript.html" data-category="inicio web" data-learning-route="javascript"><div class="technology-top"><span class="technology-icon">JS</span><span class="status status-preview">16 módulos</span></div><h3>JavaScript</h3><p>Haz que tus ideas respondan: trabaja con datos, decisiones y funciones.</p><div class="route-progress"><span data-route-progress>0/16 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="sql.html" data-category="inicio datos" data-learning-route="sql"><div class="technology-top"><span class="technology-icon">SQL</span><span class="status status-preview">16 módulos + práctica</span></div><h3>SQL</h3><p>Aprende a hacer preguntas a una base de datos y encontrar las respuestas.</p><div class="route-progress"><span data-route-progress>0/16 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="git.html" data-category="inicio herramientas" data-learning-route="git"><div class="technology-top"><span class="technology-icon">Git</span><span class="status status-preview">16 módulos</span></div><h3>Git y GitHub</h3><p>Guarda versiones de tu trabajo y aprende a volver atrás con confianza.</p><div class="route-progress"><span data-route-progress>0/16 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="apis.html" data-category="web herramientas" data-learning-route="apis"><div class="technology-top"><span class="technology-icon">API</span><span class="status status-preview">16 módulos</span></div><h3>APIs</h3><p>Entiende cómo se comunican las aplicaciones con peticiones y respuestas HTTP.</p><div class="route-progress"><span data-route-progress>0/16 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="terminal.html" data-category="inicio herramientas" data-learning-route="terminal"><div class="technology-top"><span class="technology-icon">&gt;_</span><span class="status status-preview">12 módulos</span></div><h3>Terminal</h3><p>Muévete entre carpetas y trabaja con archivos usando comandos.</p><div class="route-progress"><span data-route-progress>0/12 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="regex.html" data-category="herramientas" data-learning-route="regex"><div class="technology-top"><span class="technology-icon">.*</span><span class="status status-preview">12 módulos</span></div><h3>Expresiones regulares</h3><p>Encuentra y transforma texto aprendiendo a reconocer patrones.</p><div class="route-progress"><span data-route-progress>0/12 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="ia.html" data-category="datos" data-learning-route="ia"><div class="technology-top"><span class="technology-icon">IA</span><span class="status status-preview">12 módulos</span></div><h3>Inteligencia artificial</h3><p>Explora cómo funcionan los tokens, los prompts y la selección de respuestas.</p><div class="route-progress"><span data-route-progress>0/12 ejercicios</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="datos-python.html" data-category="datos" data-learning-route="datos-python"><div class="technology-top"><span class="technology-icon">Dat</span><span class="status status-preview">12 módulos</span></div><h3>Datos con Python</h3><p>Limpia, organiza y resume datos para convertirlos en un informe.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="nodejs.html" data-category="web" data-learning-route="nodejs"><div class="technology-top"><span class="technology-icon">Node</span><span class="status status-preview">12 módulos</span></div><h3>Node.js</h3><p>Explora archivos, módulos y servidores en un laboratorio educativo de Node.js.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="typescript.html" data-category="web" data-learning-route="typescript"><div class="technology-top"><span class="technology-icon">TS</span><span class="status status-preview">12 módulos</span></div><h3>TypeScript</h3><p>Descubre errores en tu código con tipos, objetos y funciones.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="react.html" data-category="web" data-learning-route="react"><div class="technology-top"><span class="technology-icon">Re</span><span class="status status-preview">12 módulos</span></div><h3>React</h3><p>Practica componentes y estado en un laboratorio educativo de interfaces.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="json.html" data-category="datos herramientas" data-learning-route="json"><div class="technology-top"><span class="technology-icon">{ }</span><span class="status status-preview">12 módulos</span></div><h3>JSON</h3><p>Lee, escribe y comprueba el formato que usan las aplicaciones para compartir datos.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="markdown.html" data-category="herramientas" data-learning-route="markdown"><div class="technology-top"><span class="technology-icon">MD</span><span class="status status-preview">12 módulos</span></div><h3>Markdown y documentación</h3><p>Escribe documentación clara con títulos, listas y ejemplos de código.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="accesibilidad.html" data-category="web herramientas" data-learning-route="accesibilidad"><div class="technology-top"><span class="technology-icon">A11y</span><span class="status status-preview">12 módulos</span></div><h3>Accesibilidad web</h3><p>Construye páginas más fáciles de usar con teclado y tecnologías de apoyo.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="testing.html" data-category="herramientas" data-learning-route="testing"><div class="technology-top"><span class="technology-icon">Test</span><span class="status status-preview">12 módulos</span></div><h3>Pruebas automatizadas</h3><p>Escribe comprobaciones que te ayuden a detectar errores antes de publicar.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="docker.html" data-category="web herramientas" data-learning-route="docker"><div class="technology-top"><span class="technology-icon">Dkr</span><span class="status status-preview">12 módulos</span></div><h3>Docker</h3><p>Empaqueta aplicaciones y conecta servicios con imágenes, volúmenes y redes.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a>
+<a class="technology-card is-preview" href="mongodb.html" data-category="datos web" data-learning-route="mongodb"><div class="technology-top"><span class="technology-icon">MDB</span><span class="status status-preview">12 módulos</span></div><h3>MongoDB</h3><p>Consulta y modifica documentos con filtros, orden y operaciones CRUD.</p><div class="route-progress"><span data-route-progress>0/12 módulos</span><div class="route-progress-track" aria-hidden="true"><span data-route-fill></span></div><small data-route-detail></small></div><strong data-route-action>Abrir ruta <span aria-hidden="true">→</span></strong></a></div>
+        <div class="catalog-empty" id="catalog-empty" hidden><h3>No encontramos esa ruta.</h3><p>Prueba con otro nombre o vuelve a explorar todos los temas.</p><button class="button button-secondary" id="catalog-reset" type="button">Ver todas las rutas</button></div>
+        <div class="catalog-more"><button class="button button-secondary" id="catalog-more" type="button" hidden>Ver las 19 rutas <span aria-hidden="true">↓</span></button></div>
+        <p class="catalog-scope">Practica los fundamentos en laboratorios educativos. Cada ruta explica sus alcances y te permite avanzar paso a paso.</p>
+      </section>
+    </div>
+    <section class="home-method" id="como-aprender" aria-labelledby="method-title"><div class="home-wrap"><div class="home-section-heading"><div><p class="home-kicker">MENOS VUELTAS. MÁS PRÁCTICA.</p><h2 id="method-title">Aprende haciendo, una idea a la vez.</h2></div><p>Sin saltar entre videos y pestañas.<br>La explicación y el ejercicio, juntos.</p></div><ol class="method-steps"><li><span>01</span><h3>Entiende la idea</h3><p>Una explicación concreta y un ejemplo para saber por dónde empezar.</p></li><li><span>02</span><h3>Hazlo tuyo</h3><p>Modifica el código, prueba posibilidades y aprende también de los errores.</p></li><li><span>03</span><h3>Da el siguiente paso</h3><p>Comprueba tu solución y aplica lo aprendido en el próximo reto.</p></li></ol></div></section>
+    <div class="home-wrap">
+      <section class="home-account" aria-labelledby="save-title"><div><p class="home-kicker">TU APRENDIZAJE, CONTIGO</p><h2 id="save-title">Hoy un ejercicio.<br>Mañana, un paso más.</h2><p class="catalog-storage" id="catalog-storage">Tu perfil conserva el progreso de cada ruta.</p></div><div class="account-invitation"><a class="button button-primary" href="cuenta.html">Ir a mi cuenta <span aria-hidden="true">↗</span></a><p class="account-status" role="status" data-account-status><a href="cuenta.html">Crea tu perfil o entra</a> para guardar tu avance.</p><small>Puedes explorar y practicar antes de crear tu perfil.</small></div></section>
+      <section class="home-faq" id="preguntas" aria-labelledby="faq-title"><div><p class="home-kicker">ANTES DE EMPEZAR</p><h2 id="faq-title">Es normal tener preguntas.</h2></div><div class="faq-list"><details><summary>¿Necesito saber programar?</summary><p>No. Puedes empezar desde cero con Python o HTML y CSS. Encontrarás explicaciones y ejemplos antes de cada ejercicio.</p></details><details><summary>¿Tengo que instalar algo?</summary><p>No para hacer los ejercicios de la plataforma. Practicas directamente en el navegador, dentro de un laboratorio educativo.</p></details><details><summary>¿Necesito una cuenta?</summary><p>Puedes explorar las rutas y ejecutar ejercicios sin cuenta. Para guardar avances y borradores, necesitas activar tu perfil en <a href="cuenta.html">Mi cuenta</a>. Esta primera etapa está dirigida a mayores de 18 años.</p></details><details><summary>¿Puedo cambiar de ruta o repetir ejercicios?</summary><p>Sí. Puedes explorar otras tecnologías y volver a practicar. Con un perfil activo, cada ruta conserva su propio progreso.</p></details></div></section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a class="brand footer-brand" href="#inicio"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a>
+      <p>Programación clara para dar el primer paso.</p>
+      <p><a href="privacidad.html">Privacidad</a></p>
+      <p class="footer-meta">Hecho para aprender · <span data-current-year></span></p>
+    </div>
+  </footer>
+
+  <script src="learning-state.js?v=20260910-newtech1"></script>
+  <script src="account-config.js?v=20260909-profile3"></script>
+  <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
+  <script src="learning-sync.js?v=20260907-cuentas1"></script>
+  <script src="account.js?v=20260909-offline1"></script>
+  <script src="json-lab.js?v=20260907-json1"></script>
+  <script src="course-logos.js?v=20260911-newtech2"></script>
+  <script src="catalog.js?v=20260909-profile3"></script>
+  <script src="home.js?v=20260909-home1"></script>
+  <script src="site.js?v=20260903-review1"></script>
+</body>
+</html>

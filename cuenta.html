@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es-CL" class="is-maintenance">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Descubre rutas prácticas para aprender programación creando proyectos desde el primer día.">
+  <meta name="theme-color" content="#1c69d4">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:url" content="https://capsulasdev.com/cuenta.html">
+  <meta property="og:title" content="Mi cuenta — Continúa aprendiendo en CápsulasDev">
+  <meta property="og:description" content="Elige una tecnología y aprende construyendo proyectos paso a paso.">
+  <meta property="og:image" content="https://capsulasdev.com/og.png?v=20260902-bmw">
+  <meta property="og:image:alt" content="Mi cuenta — Continúa aprendiendo en CápsulasDev.">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mi cuenta — Continúa aprendiendo en CápsulasDev">
+  <meta name="twitter:description" content="Elige una tecnología y aprende construyendo proyectos paso a paso.">
+  <meta name="twitter:image" content="https://capsulasdev.com/og.png?v=20260902-bmw">
+  <meta name="twitter:image:alt" content="Mi cuenta — Continúa aprendiendo en CápsulasDev.">
+  <title>Mi cuenta — Continúa aprendiendo en CápsulasDev</title>
+  <script>
+    (() => {
+      const publicHosts = ["intenta.cl", "www.intenta.cl", "capsulasdev.com", "www.capsulasdev.com"];
+      const showMaintenance = publicHosts.includes(window.location.hostname)
+        || new URLSearchParams(window.location.search).has("maintenance");
+      if (showMaintenance) {
+        document.documentElement.classList.add("is-maintenance");
+        document.title = "Código Cero — Estamos preparando algo nuevo";
+        const robots = document.createElement("meta");
+        robots.name = "robots";
+        robots.content = "noindex, nofollow";
+        document.head.append(robots);
+      } else {
+        document.documentElement.classList.remove("is-maintenance");
+      }
+      const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      try {
+        const saved = localStorage.getItem("codigo-cero.theme");
+        document.documentElement.dataset.theme = saved === "dark" || saved === "light" ? saved : preferred;
+      } catch {
+        document.documentElement.dataset.theme = preferred;
+      }
+    })();
+  </script>
+  <script src="review-preview.js?v=20260903-review1"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg?v=20260902-bmw1" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20260909-profile3">
+  <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
+  <link rel="stylesheet" href="account.css?v=20260909-profile3">
+  <link rel="stylesheet" href="experience.css?v=20260909-experience1">
+</head>
+<body class="experience-page">
+  <section class="maintenance-screen" aria-labelledby="maintenance-title">
+    <div class="maintenance-shell">
+      <div class="maintenance-brand"><span aria-hidden="true">&gt;_</span> Código Cero</div>
+      <p class="maintenance-kicker">Actualización en curso</p>
+      <h1 id="maintenance-title">Estamos preparando la siguiente etapa.</h1>
+      <p>Estamos preparando nuevas rutas, ejercicios y mejores explicaciones para aprender paso a paso.</p>
+      <div class="maintenance-progress" aria-hidden="true"><span></span></div>
+      <small>Volvemos pronto.</small>
+    </div>
+  </section>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html#inicio" aria-label="CápsulasDev, volver al inicio">
+      <span class="brand-mark" aria-hidden="true">&gt;_</span>
+      <span>CápsulasDev</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html#rutas">Explorar rutas</a>
+      <a href="index.html#como-aprender">Cómo funciona</a>
+      <a href="index.html#preguntas">Dudas frecuentes</a>
+    </nav>
+    <div class="header-actions">
+      <a class="account-header-link" href="cuenta.html">Mi cuenta</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Activar modo oscuro">
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg>
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <span id="theme-toggle-label">Oscuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido" class="account-shell">
+    <p class="eyebrow">CápsulasDev · Tu aprendizaje</p><h1>Mi cuenta</h1>
+    <p>Un lugar para tu progreso, tus ideas y el próximo paso.</p>
+    <p class="account-status" role="status" aria-live="polite" data-account-status>Preparando tu cuenta…</p>
+    <section id="account-panel">
+      <div class="account-card" id="account-login">
+        <div class="account-welcome"><p class="account-eyebrow">TU APRENDIZAJE, CONTIGO</p><h2>Un código.<br>Y seguimos creando.</h2><p>Entra con tu correo para guardar lo que haces y volver justo donde lo dejaste.</p><ul class="account-benefits"><li>Tu avance en cada ruta</li><li>Tus borradores, listos para continuar</li><li>El mismo perfil en otros dispositivos</li></ul><a class="account-explore" href="index.html#rutas">Prefiero explorar primero →</a></div>
+        <div class="account-access"><h3>Crea tu perfil o entra</h3><p>Te enviaremos un código al correo. No necesitas recordar una contraseña.</p><label for="account-email">Tu correo electrónico</label><input id="account-email" type="email" autocomplete="email" placeholder="tu@correo.com" required maxlength="254"><button id="account-send" type="button">Enviar código de acceso</button><div id="account-verify-area" hidden><label for="account-code">Código recibido por correo</label><input id="account-code" inputmode="numeric" autocomplete="one-time-code" maxlength="10"><button id="account-verify" type="button">Entrar a mi cuenta</button></div><p class="account-privacy-note">Esta primera etapa es para mayores de 18 años. Para guardar avances y borradores necesitas activar tu perfil. <a href="privacidad.html">Cómo cuidamos tus datos</a>.</p></div>
+      </div>
+      <div class="account-card" id="account-enroll" hidden><h2>Activa tu perfil</h2>
+        <label for="account-new-alias">Cómo quieres que te llamemos (opcional)</label><input id="account-new-alias" maxlength="60" autocomplete="nickname">
+        <label><input id="account-adult" type="checkbox"> Confirmo que tengo 18 años o más.</label>
+        <label><input id="account-privacy" type="checkbox"> He leído el <a href="privacidad.html">aviso de privacidad</a> y acepto guardar mi progreso y borradores en mi cuenta.</label>
+        <button id="account-enroll-submit" type="button">Activar mi perfil</button>
+      </div>
+      <div id="account-data" hidden>
+        <section class="account-card"><h2>Tu aprendizaje</h2><p id="account-summary"></p><ul id="account-routes"></ul><a href="index.html#rutas">Explorar todas las rutas</a>
+          <p>El progreso se guarda automáticamente mientras aprendes y se recupera al volver a abrir la plataforma.</p>
+        </section>
+        <section class="account-card"><h2>Tu perfil</h2><label for="account-alias">Nombre o alias (opcional)</label><input id="account-alias" maxlength="60" autocomplete="nickname"><button id="account-save-alias" type="button">Guardar nombre</button></section>
+        <section class="account-card" id="account-conflict-section" hidden><h2>Borradores con versiones distintas</h2><p>Dos dispositivos guardaron cambios diferentes. Revisa el código antes de elegir la versión que quieres continuar.</p><ul id="account-conflicts"></ul></section>
+        <section class="account-card"><h2>Tus datos</h2><p>La descarga incluye progreso, borradores, historial disponible y cambios pendientes de este navegador. No escribas datos sensibles en los ejercicios.</p>
+          <button id="account-export" type="button">Descargar datos de mi cuenta</button><button id="account-logout" type="button">Cerrar sesión en este dispositivo</button>
+          <p>Al cerrar sesión se elimina la sesión de este dispositivo. Tu avance seguirá asociado a tu perfil.</p>
+          <details><summary>Eliminar mi cuenta</summary><p>Se eliminarán la cuenta, el progreso y los borradores en la plataforma. Esta acción no puede deshacerse.</p><label for="account-delete-confirm">Escribe ELIMINAR MI CUENTA</label><input id="account-delete-confirm" autocomplete="off"><button id="account-delete" type="button">Eliminar definitivamente</button></details>
+        </section>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <a class="brand footer-brand" href="index.html#inicio"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a>
+      <p>Programación clara para dar el primer paso.</p>
+      <p><a href="privacidad.html">Privacidad</a></p>
+      <p class="footer-meta">Hecho para aprender · <span data-current-year></span></p>
+    </div>
+  </footer>
+
+  <script src="learning-state.js?v=20260910-newtech1"></script>
+  <script src="account-config.js?v=20260909-profile3"></script>
+  <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
+  <script src="learning-sync.js?v=20260907-cuentas1"></script>
+  <script src="account.js?v=20260909-offline1"></script>
+  <script src="site.js?v=20260903-review1"></script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es-CL" class="is-maintenance">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Aprende Python paso a paso con cinco niveles, veinte proyectos, pistas y validaciones que se ejecutan en el navegador.">
+  <meta name="theme-color" content="#1c69d4">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:url" content="https://capsulasdev.com/python.html">
+  <meta property="og:title" content="Ruta Python — CápsulasDev">
+  <meta property="og:description" content="Cinco niveles y veinte proyectos para aprender Python desde cero.">
+  <meta property="og:image" content="https://capsulasdev.com/og.png?v=20260902-bmw">
+  <meta property="og:image:alt" content="Código Cero — Aprende programación creando.">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ruta Python — CápsulasDev">
+  <meta name="twitter:description" content="Cinco niveles y veinte proyectos para aprender Python desde cero.">
+  <meta name="twitter:image" content="https://capsulasdev.com/og.png?v=20260902-bmw">
+  <meta name="twitter:image:alt" content="Código Cero — Aprende programación creando.">
+  <title>Ruta Python — CápsulasDev</title>
+  <script>
+    (() => {
+      const publicHosts = ["intenta.cl", "www.intenta.cl", "capsulasdev.com", "www.capsulasdev.com"];
+      const showMaintenance = publicHosts.includes(window.location.hostname)
+        || new URLSearchParams(window.location.search).has("maintenance");
+
+      if (showMaintenance) {
+        document.documentElement.classList.add("is-maintenance");
+        document.title = "Código Cero — Estamos preparando algo nuevo";
+        const robots = document.createElement("meta");
+        robots.name = "robots";
+        robots.content = "noindex, nofollow";
+        document.head.append(robots);
+      } else {
+        document.documentElement.classList.remove("is-maintenance");
+      }
+
+      const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      try {
+        const saved = localStorage.getItem("codigo-cero.theme");
+        document.documentElement.dataset.theme = saved === "dark" || saved === "light" ? saved : preferred;
+      } catch {
+        document.documentElement.dataset.theme = preferred;
+      }
+    })();
+  </script>
+  <script src="review-preview.js?v=20260903-review1"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg?v=20260902-bmw1" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20260909-profile3">
+  <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
+  <link rel="stylesheet" href="account.css?v=20260909-profile3">
+  <link rel="stylesheet" href="experience.css?v=20260909-experience1">
+  <link rel="stylesheet" href="python-foundations.css?v=20260909-foundations1">
+</head>
+<body class="course-page experience-page">
+  <section class="maintenance-screen" aria-labelledby="maintenance-title">
+    <div class="maintenance-shell">
+      <div class="maintenance-brand"><span aria-hidden="true">&gt;_</span> Código Cero</div>
+      <p class="maintenance-kicker">Actualización en curso</p>
+      <h1 id="maintenance-title">Estamos preparando la siguiente etapa.</h1>
+      <p>La ruta de Python está creciendo con más niveles, nuevos proyectos y mejores explicaciones.</p>
+      <div class="maintenance-progress" aria-hidden="true"><span></span></div>
+      <small>Volvemos pronto.</small>
+    </div>
+  </section>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="CápsulasDev, volver a la portada">
+      <span class="brand-mark" aria-hidden="true">&gt;_</span>
+      <span>CápsulasDev</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html#rutas">Todas las rutas</a>
+      <a href="#niveles">Niveles</a>
+      <a href="#proyectos">Proyectos</a>
+    </nav>
+    <div class="header-actions">
+      <a class="account-header-link" href="cuenta.html">Mi cuenta</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Activar modo oscuro">
+        <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg>
+        <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <span id="theme-toggle-label">Oscuro</span>
+      </button>
+    </div>
+  </header>
+  <p class="account-status" role="status" data-account-status><a href="cuenta.html">Crea tu perfil o entra</a> para guardar tu avance.</p>
+
+  <main id="contenido"><nav class="course-breadcrumb" aria-label="Ubicación"><a href="index.html#rutas">← Explorar rutas</a><span aria-hidden="true">/</span><span aria-current="page">Python</span></nav>
+    <section class="python-hero" id="inicio" aria-labelledby="python-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Tu primera ruta · Python</p>
+        <h1 id="python-title">Tu primer programa.<br>Y todo lo que viene después.</h1>
+        <p class="hero-lead">Empieza con una línea de código y avanza hasta crear tus propios programas. Cinco niveles, ejemplos claros y ayuda cuando la necesites.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#proyectos">Empezar a practicar <span aria-hidden="true">→</span></a>
+          <span class="route-duration">5 niveles · 20 proyectos · a tu ritmo</span>
+        </div>
+        <ul class="hero-notes" aria-label="Características de la ruta">
+          <li>Sin instalaciones</li>
+          <li>Pistas progresivas</li>
+          <li>Validación inmediata</li>
+          <li>Guarda el avance con tu perfil</li>
+        </ul>
+      </div>
+
+      <div class="code-demo" aria-label="Ejemplo interactivo de Python">
+        <div class="window-bar"><div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div><span>hola.py</span><span class="language">Python</span></div>
+        <div class="editor-wrap"><span class="line-number" aria-hidden="true">1</span><textarea id="hero-code" rows="2" spellcheck="false" aria-label="Código Python de ejemplo">print("Hola, Python")</textarea></div>
+        <div class="demo-controls"><button class="run-button" id="hero-run" type="button"><span aria-hidden="true">▶</span> Ejecutar</button><span>Modifica el mensaje y pruébalo</span></div>
+        <div class="console" aria-live="polite"><div class="console-label">RESULTADO</div><div id="hero-output"><span aria-hidden="true">›</span> Presiona “Ejecutar” para ver el resultado.</div></div>
+        <div class="demo-tip"><span aria-hidden="true">✦</span> El laboratorio acepta la sintaxis utilizada dentro de esta ruta.</div>
+      </div>
+    </section>
+
+    <section class="route-strip" id="niveles" aria-label="Niveles de la ruta Python">
+      <button type="button" data-level-target="1"><strong>01</strong><span>Fundamentos</span><small>4 proyectos</small></button>
+      <button type="button" data-level-target="2"><strong>02</strong><span>Decisiones y ciclos</span><small>4 proyectos</small></button>
+      <button type="button" data-level-target="3"><strong>03</strong><span>Colecciones de datos</span><small>4 proyectos</small></button>
+      <button type="button" data-level-target="4"><strong>04</strong><span>Funciones propias</span><small>4 proyectos</small></button>
+      <button type="button" data-level-target="5"><strong>05</strong><span>Integración final</span><small>4 proyectos</small></button>
+    </section>
+
+    <section class="projects-section" id="proyectos" aria-labelledby="projects-title">
+      <div class="projects-heading">
+        <div><p class="eyebrow"><span></span> Laboratorio Python</p><h2 id="projects-title">Cinco niveles. Veinte proyectos conectados.</h2></div>
+        <div class="route-progress" aria-label="Progreso de la ruta"><div><span>Tu avance</span><strong id="route-progress-text">0 de 20</strong></div><div class="progress-track" aria-hidden="true"><span id="route-progress-fill"></span></div></div>
+      </div>
+
+      <details class="lesson-primer course-guide"><summary>Antes de comenzar</summary><div class="course-guide-body"><p>No necesitas experiencia previa. El laboratorio ejecuta Python de verdad: escribe tu propia solución y compara la salida con lo que esperabas.</p><ol><li>Lee el ejemplo y predice qué mostrará.</li><li>Escribe tu versión, ejecútala y revisa las tres comprobaciones.</li><li>Completa los cuatro proyectos del nivel; luego realiza su examen de repaso.</li></ol><p>Los exámenes se aprueban con 4 de 5 respuestas. Puedes avanzar de nivel sin rendirlos, pero necesitas los cinco para cerrar la ruta. No otorgan una certificación profesional.</p></div></details>
+      <div class="level-tabs" id="level-tabs" role="tablist" aria-label="Niveles de Python"></div>
+
+      <div class="curriculum-layout">
+        <aside class="project-index" aria-label="Proyectos del nivel activo">
+          <p>Proyectos del nivel</p>
+          <div id="project-list"></div>
+        </aside>
+
+        <div class="course-workspace">
+          <article class="project-shell" id="course-project" role="tabpanel" aria-labelledby="level-tab-1 course-project-title">
+            <div class="project-panel">
+              <div class="project-lesson"><p class="workspace-step">01 · Entiende la idea</p>
+                <p class="project-kicker" id="course-project-kicker"></p>
+                <h3 id="course-project-title"></h3>
+                <p id="course-project-summary"></p><details class="lab-scope"><summary>Qué puedes ejecutar en este laboratorio</summary><p class="learning-save-note" id="python-lab-scope"></p></details>
+                <div class="concept-card lesson-explanation">
+                  <code id="course-project-example"></code>
+                  <div><h4>Qué aprenderás</h4><p id="course-project-explanation"></p><ul id="course-project-concepts"></ul></div>
+                </div>
+                <div class="project-goal"><span aria-hidden="true">✓</span><p><strong>Tu misión</strong><span id="course-project-goal"></span></p></div>
+                <section class="foundation-support" id="python-lesson-support" hidden aria-label="Comprende el ejemplo">
+                  <details id="python-walkthrough"><summary>El ejemplo, paso a paso</summary><ol id="python-example-steps"></ol></details>
+                  <div class="prediction-card"><h4>Antes de ejecutar, piensa</h4><p id="python-prediction"></p><details id="python-prediction-answer"><summary>Comparar con la explicación</summary><p id="python-prediction-explanation"></p></details></div>
+                </section>
+                <div class="hint-box">
+                  <div><div><span>AYUDA GRADUAL</span><strong>Pistas del proyecto</strong></div><button type="button" id="show-hint">Ver pista 1</button></div>
+                  <ol id="project-hints" aria-live="polite"></ol>
+                </div>
+                <details class="foundation-extra" id="python-lesson-extra" hidden><summary>Explora un poco más (opcional)</summary><h4>Comprueba que lo entendiste</h4><p id="python-reflection"></p><h4>Tu siguiente reto</h4><p id="python-extension"></p><p class="learning-save-note">Estos retos no añaden requisitos a las tres comprobaciones de la misión. Si quieres conservar tu solución principal, cópiala antes de experimentar.</p></details>
+              </div>
+
+              <div class="project-lab"><p class="workspace-step">02 · Prueba tu código</p>
+                <div class="lab-heading"><div><span>EJERCICIO</span><strong id="course-lab-title"></strong></div><span class="difficulty" id="course-project-difficulty"></span></div>
+                <div class="lab-editor">
+                  <div class="lab-file"><span aria-hidden="true">●</span> <span id="course-project-file"></span></div>
+                  <label class="sr-only" for="course-project-code">Código del proyecto</label>
+                  <div class="code-input with-lines"><span id="course-code-lines" aria-hidden="true"></span><textarea id="course-project-code" rows="11" spellcheck="false"></textarea></div>
+                  <div class="lab-actions"><button class="run-button" id="run-course-project" type="button"><span aria-hidden="true">▶</span> Ejecutar código</button><button class="reset-button" id="reset-course-project" type="button">Restablecer</button></div>
+                  <div class="lab-console" aria-live="polite"><span>RESULTADO</span><div id="course-project-output">Tu resultado aparecerá aquí.</div></div>
+                </div>
+                <div class="validation-panel" aria-live="polite"><div><span>03 · Comprueba el resultado</span><strong>Qué comprobaremos</strong></div><ul id="project-validations"></ul><p class="foundation-feedback" id="python-coaching" hidden></p></div>
+                <div class="lab-success" id="course-project-success" hidden><span aria-hidden="true">✓</span><div><strong>¡Proyecto validado!</strong><p id="course-project-success-copy"></p></div></div>
+                <button class="button complete-project" id="complete-course-project" type="button" disabled>Completar proyecto</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="project-navigation">
+            <button type="button" class="nav-project-button" id="course-previous" disabled><span aria-hidden="true">←</span> Proyecto anterior</button>
+            <p id="course-project-position">Proyecto 1 de 20</p>
+            <button type="button" class="nav-project-button" id="course-next">Siguiente proyecto <span aria-hidden="true">→</span></button>
+          </div>
+
+          <section class="checkpoint-panel" id="level-checkpoint" hidden aria-labelledby="checkpoint-title">
+            <div class="checkpoint-copy">
+              <p class="eyebrow"><span></span> <span id="checkpoint-kicker">Punto de control</span></p>
+              <h3 id="checkpoint-title"></h3>
+              <p id="checkpoint-copy"></p>
+            </div>
+            <div class="checkpoint-actions">
+              <button class="button button-primary" id="checkpoint-exam" type="button">Rendir el mini examen</button>
+              <button class="button button-light" id="checkpoint-next" type="button" hidden>Continuar</button>
+            </div>
+          </section>
+
+          <section class="exam-panel" id="level-exam" hidden aria-labelledby="exam-title">
+            <div class="exam-head">
+              <div>
+                <p class="eyebrow"><span></span> <span id="exam-kicker">Mini examen</span></p>
+                <h3 id="exam-title" tabindex="-1"></h3>
+                <p id="exam-intro"></p>
+              </div>
+              <button class="exam-ghost" id="exam-close" type="button">Cerrar</button>
+            </div>
+            <ol class="exam-questions" id="exam-questions"></ol>
+            <div class="exam-actions">
+              <button class="button button-primary" id="exam-submit" type="button">Revisar respuestas</button>
+              <button class="exam-ghost" id="exam-retry" type="button" hidden>Intentar de nuevo</button>
+              <p class="exam-result" id="exam-result" aria-live="polite" tabindex="-1"></p>
+            </div>
+          </section>
+          <div class="python-finish" id="course-finish" hidden>
+            <span aria-hidden="true">✓</span>
+            <div><p>Ruta Python completada</p><h3>Construiste veinte programas y aprobaste los cinco puntos de control.</h3><small>Ya tienes una base sólida para continuar con proyectos más grandes.</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-section" id="metodo" aria-labelledby="method-title">
+      <div class="section-heading centered-heading">
+        <p class="eyebrow"><span></span> Aprender sin enredos</p>
+        <h2 id="method-title">Entiende una idea. Inténtala. Comprueba.</h2>
+        <p>Cada proyecto explica una pieza, entrega ayuda progresiva y comprueba el resultado antes de avanzar.</p>
+      </div>
+      <div class="method-grid">
+        <article><span>01</span><h3>Comprende</h3><p>Una explicación breve y concentrada en una sola idea.</p></article>
+        <article><span>02</span><h3>Intenta</h3><p>Edita el código y solicita pistas solamente cuando las necesites.</p></article>
+        <article><span>03</span><h3>Comprueba</h3><p>La validación muestra qué funciona y qué falta por resolver.</p></article>
+      </div>
+      <div class="final-cta"><div><p>La ruta comienza desde cero.</p><h2>Tu siguiente proyecto siempre está claro.</h2></div><a class="button button-light" href="#proyectos">Ir a mis proyectos <span aria-hidden="true">↑</span></a></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a>
+      <p>Programación clara para dar el primer paso.</p>
+      <p><a href="privacidad.html">Privacidad</a></p>
+      <p class="footer-meta">Hecho para aprender · <span data-current-year></span></p>
+    </div>
+  </footer>
+
+  <script src="learning-state.js?v=20260910-newtech1"></script>
+  <script src="account-config.js?v=20260909-profile3"></script>
+  <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
+  <script src="learning-sync.js?v=20260907-cuentas1"></script>
+  <script src="account.js?v=20260909-offline1"></script>
+  <script src="site.js?v=20260903-review1"></script>
+  <script src="python-runtime.js?v=20260906-datos1"></script>
+  <script src="python.js?v=20260910-complete1"></script>
+</body>
+</html>

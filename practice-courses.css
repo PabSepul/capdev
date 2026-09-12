@@ -1,0 +1,9 @@
+/* Los ejemplos de documentación y pruebas necesitan conservar sus saltos de línea. */
+#starter-example {
+  display: block;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+#learning-guidance:empty { display: none; }
+.starter-preview-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; }

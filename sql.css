@@ -1,0 +1,81 @@
+.sql-page .starter-hero { min-height: auto; padding-top: 60px; padding-bottom: 60px; }
+.sql-page .starter-summary { min-height: 220px; }
+.sql-section { padding: 64px max(24px, calc((100% - var(--content)) / 2)); }
+.sql-section h2 { max-width: 900px; margin: 0; font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 1.1; }
+.sql-lead { max-width: 900px; margin: 22px 0 0; color: var(--ink-soft); line-height: 1.8; }
+.sql-basics-grid { margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.sql-basics-grid article { padding: 24px; border: 1px solid var(--line); background: var(--card); }
+.sql-basics-grid article > span { color: var(--purple-dark); font: 700 .8rem/1 monospace; }
+.sql-basics-grid h3 { margin: 20px 0 12px; font-size: 1.15rem; }
+.sql-basics-grid p { margin: 0; color: var(--ink-soft); line-height: 1.75; font-size: .9rem; }
+.sql-page code { overflow-wrap: anywhere; }
+.sql-callout { margin-top: 24px; padding: 22px 24px; border-left: 4px solid var(--purple); background: var(--purple-soft); }
+.sql-callout strong { color: var(--ink); }
+.sql-callout p { margin: 10px 0 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.75; }
+.sql-page section[id] { scroll-margin-top: 82px; }
+.sql-page .starter-summary strong { font-size: clamp(1.65rem, 2.7vw, 2.8rem); line-height: 1.14; }
+.sql-section-nav { padding: 20px max(24px, calc((100% - var(--content)) / 2)); display: flex; flex-wrap: wrap; gap: 12px 26px; border-bottom: 1px solid var(--line); background: var(--surface-muted); }
+.sql-section-nav a { font-size: .8rem; line-height: 1.6; }
+.sql-data-section, .sql-reference-section { background: var(--surface-muted); border-top: 1px solid var(--line); }
+.sql-data-controls { margin: 28px 0 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.sql-data-controls button, .sql-practice-picker button { min-height: 44px; padding: 12px 18px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: .85rem; font-weight: 700; cursor: pointer; }
+.sql-data-controls button[aria-pressed="true"], .sql-practice-picker button[aria-pressed="true"] { border-color: var(--purple); color: var(--purple-dark); background: var(--purple-soft); }
+.sql-data-controls > span { color: var(--ink-soft); font-size: .8rem; }
+.sql-table-scroll { width: 100%; min-width: 0; max-width: 100%; overflow: auto; border: 1px solid var(--line); background: var(--card); }
+.sql-data-table { width: 100%; border-collapse: collapse; font-size: .83rem; text-align: left; color: var(--ink); }
+.sql-data-table caption { padding: 13px 16px; color: var(--ink-soft); font-size: .75rem; text-align: left; line-height: 1.5; }
+.sql-data-table th { background: var(--neutral-soft); font-weight: 700; }
+.sql-data-table th, .sql-data-table td { padding: 12px 16px; border-top: 1px solid var(--line); white-space: nowrap; line-height: 1.5; }
+.sql-data-table tbody tr:nth-child(even) { background: var(--card-muted); }
+.sql-details { margin-top: 20px; padding: 18px 20px; border: 1px solid var(--line); background: var(--card); }
+.sql-details summary { color: var(--ink); font-size: .88rem; font-weight: 700; line-height: 1.6; cursor: pointer; }
+.sql-details p { margin: 16px 0 0; color: var(--ink-soft); font-size: .88rem; line-height: 1.8; }
+.sql-details h4 { margin: 24px 0 0; font-size: .9rem; overflow-wrap: anywhere; }
+.sql-details .sql-table-scroll, .sql-details .sql-code-example { margin-top: 18px; }
+.sql-dictionary { display: grid; grid-template-columns: minmax(180px, .34fr) minmax(0, 1fr); margin: 18px 0 0; font-size: .85rem; line-height: 1.75; }
+.sql-dictionary dt { margin: 0; padding: 16px 16px 16px 0; font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--line); }
+.sql-dictionary dd { margin: 0; padding: 16px 0; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+.sql-lesson-paragraph { margin: 22px 0 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.85; }
+.sql-subheading { margin: 30px 0 18px; font-size: 1.1rem; }
+.sql-query-steps { margin: 0; padding-left: 22px; color: var(--purple-dark); }
+.sql-query-steps li { padding: 0 0 20px 6px; }
+.sql-query-steps li:last-child { padding-bottom: 0; }
+.sql-query-steps code { color: var(--ink); font-size: .83rem; font-weight: 700; }
+.sql-query-steps p { margin: 8px 0 0; color: var(--ink-soft); font-size: .88rem; line-height: 1.8; }
+.sql-code-example { margin: 18px 0 0; padding: 20px; border: 1px solid var(--code-line); color: var(--on-dark); background: var(--code); font: .84rem/1.8 "Cascadia Code", Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.sql-page .concept-card > code { white-space: pre-wrap; line-height: 1.7; }
+.sql-page .lesson-explanation p, .sql-page .lesson-explanation ul { font-size: .9rem; line-height: 1.8; }
+.sql-page .project-goal p, .sql-page .hint-box li { font-size: .88rem; line-height: 1.7; }
+.sql-editor-tip { color: var(--ink-soft); font-size: .8rem; line-height: 1.7; }
+.sql-editor-tip a { color: var(--purple-dark); }
+.sql-page .starter-preview-panel > .sql-table-scroll { padding: 0; display: block; border: 0; }
+#sql-result-table, #sql-extra-result { max-height: 370px; }
+.sql-result-status { margin: 14px 0; color: var(--ink-soft); font-size: .84rem; line-height: 1.7; }
+.sql-result-status.is-success { color: var(--success-dark); }
+.sql-result-status.is-error, .sql-table-error { color: #b42318; }
+:root[data-theme="dark"] .sql-result-status.is-error, :root[data-theme="dark"] .sql-table-error { color: #ff8b82; }
+.sql-table-error { padding: 16px; font-size: .85rem; line-height: 1.7; }
+.sql-reference-grid, .sql-practice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
+.sql-reference-grid article { min-width: 0; padding: 28px; border: 1px solid var(--line); background: var(--card); }
+.sql-reference-grid h3, .sql-practice-grid h3 { margin: 0; font-size: 1.2rem; }
+.sql-reference-grid p, .sql-practice-grid p { color: var(--ink-soft); font-size: .88rem; line-height: 1.8; }
+.sql-thinking-order { padding-left: 22px; color: var(--ink-soft); font-size: .88rem; line-height: 1.8; }
+.sql-thinking-order li { margin: 0 0 12px; padding-left: 4px; }
+.sql-thinking-order strong { color: var(--ink); }
+.sql-practice-picker { margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.sql-practice-grid > div { min-width: 0; }
+.sql-page summary:focus-visible, .sql-table-scroll:focus-visible { outline: 3px solid var(--purple-dark); outline-offset: 3px; }
+@media (max-width: 820px) {
+  .sql-basics-grid { grid-template-columns: 1fr; }
+  .sql-reference-grid, .sql-practice-grid { grid-template-columns: 1fr; }
+  .sql-reference-grid article { padding: 22px; }
+}
+@media (max-width: 620px) {
+  .sql-section { padding-top: 48px; padding-bottom: 48px; }
+  .sql-dictionary { grid-template-columns: 1fr; }
+  .sql-dictionary dt { padding: 16px 0 0; border-bottom: 0; }
+  .sql-dictionary dd { padding: 6px 0 16px; }
+  .sql-details { padding: 16px; }
+  .sql-code-example { padding: 16px; font-size: .78rem; }
+  .sql-practice-picker { flex-direction: column; align-items: stretch; }
+}

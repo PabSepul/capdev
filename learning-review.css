@@ -1,0 +1,42 @@
+/* Continuidad y ajustes de lectura; reutiliza los colores de ambos temas. */
+.review-banner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 5%; background: var(--card-muted); color: var(--ink); border-bottom: 2px solid var(--purple); font-size: .875rem; line-height: 1.6; }
+.review-banner p { margin: 0; }
+.review-banner a { color: var(--purple); padding: 10px 0; font-weight: 700; flex-shrink: 0; }
+@media (max-width: 680px) { .review-banner { flex-direction: column; align-items: start; gap: 4px; } }
+.continue-learning { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px; border: 1px solid var(--line); border-left: 4px solid var(--purple); background: var(--card); margin-bottom: 32px; }
+.continue-learning h3 { font-size: 1.5rem; margin: 0 0 10px; }
+.continue-learning p { margin: 0; max-width: 720px; font-size: .94rem; line-height: 1.7; color: var(--ink-soft); }
+.continue-learning .button { flex-shrink: 0; }
+.catalog-group-title { margin: 34px 0 10px; font-size: 1.5rem; }
+.catalog-group-copy, .catalog-storage { max-width: 840px; color: var(--ink-soft); line-height: 1.7; }
+.catalog-storage { font-size: .85rem; }
+.technology-card h4 { margin: 24px 0 8px; font-size: 1.35rem; line-height: 1.2; }
+.technology-card .route-progress { margin-top: auto; padding-top: 22px; display: grid; gap: 9px; width: 100%; }
+.technology-card .route-progress > span { color: var(--ink); font-size: .85rem; font-weight: 700; }
+.technology-card .route-progress small { color: var(--ink-soft); font-size: .78rem; line-height: 1.6; }
+.route-progress-track { height: 5px; background: var(--progress-bg); }
+.route-progress-track span { display: block; width: 0; height: 100%; background: var(--purple); }
+.lesson-primer { padding: 22px; margin: 22px 0; background: var(--card-muted); border: 1px solid var(--line); color: var(--ink-soft); line-height: 1.7; font-size: .9rem; }
+.lesson-primer h3 { margin: 0 0 12px; font-size: 1rem; color: var(--ink); }
+.lesson-primer p { margin: 8px 0; }
+.lesson-primer li + li { margin-top: 8px; }
+.starter-lesson .starter-intro, .starter-lesson .lesson-explanation p, .starter-lesson .lesson-explanation ul, .starter-lesson .project-goal p, .starter-lesson .hint-box ol { font-size: .9rem; line-height: 1.75; }
+.starter-learning-note { font-size: .9rem; line-height: 1.75; }
+.course-page .lab-actions button, .course-page .hint-box button, .course-page .theme-toggle { min-height: 44px; }
+.course-page .hint-box button { font-size: .8rem; }
+.course-page .validation-panel li { font-size: .84rem; line-height: 1.6; align-items: start; }
+.course-page .validation-panel li > span:first-child { flex: 0 0 19px; }
+.course-page .code-input textarea { font-size: .88rem; line-height: 1.7; }
+.level-tabs, .starter-module-list { scroll-margin-top: 100px; }
+.starter-module-button, .level-tab { min-width: 0; }
+.learning-save-note { font-size: .8rem; color: var(--ink-soft); line-height: 1.6; }
+.course-page #python-title { margin: 0; font-size: clamp(2.4rem, 4.5vw, 4.7rem); line-height: 1.1; }
+.guidance-output { margin: 12px 0; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; font: .85rem/1.7 Consolas, monospace; }
+@media (max-width: 680px) {
+  .continue-learning { align-items: stretch; flex-direction: column; padding: 20px; }
+  .continue-learning .button { width: 100%; }
+  .course-page .lab-actions { gap: 12px; flex-wrap: wrap; }
+  .course-page .starter-workspace { min-width: 0; }
+  .course-page .starter-lesson, .course-page .starter-lab { padding: 18px; }
+  .course-page .starter-code-input { padding: 16px 12px; }
+}
