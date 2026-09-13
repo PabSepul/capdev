@@ -150,21 +150,77 @@
     }
   }
   function control(selector) { return document.querySelector(selector); }
+  function reviewHref(href) {
+    if (!document.documentElement.dataset.review) return href;
+    const url=new URL(href,location.href); url.searchParams.set("revision",document.documentElement.dataset.review); return url.href;
+  }
+  function renderLearningDashboard() {
+    const summary=state.resumen();
+    control("#account-summary").textContent=summary.modulos + " ejercicios y " + summary.examenes + " exámenes completados.";
+    const paths=globalThis.LearningExperience?.paths || [];
+    const path=paths.find(item=>item.id===state.itinerario());
+    const goal=control("#account-goal"), title=control("#account-goal-title"), copy=control("#account-goal-copy");
+    const meter=control("#account-goal-progress"), meterFill=meter.querySelector("span"), meterCopy=control("#account-goal-progress-copy");
+    const nextLink=control("#account-next-step"), itinerary=control("#account-itinerary"), steps=control("#account-itinerary-steps");
+    const routeList=control("#account-routes"), emptyRoutes=control("#account-empty-routes");
+    routeList.replaceChildren(); steps.replaceChildren();
+    if (!path) {
+      title.textContent="Elige una meta para ordenar tus rutas";
+      copy.textContent="Te mostraremos qué estudiar ahora y cómo se conecta con lo que viene después.";
+      meter.hidden=true; meterCopy.hidden=true; itinerary.hidden=true;
+      nextLink.href=reviewHref("index.html#itinerarios"); nextLink.textContent="Elegir un itinerario →";
+    } else {
+      const progress=path.routes.map(id=>state.progress(id));
+      const completed=progress.reduce((sum,item)=>sum+item.completed,0);
+      const total=progress.reduce((sum,item)=>sum+item.count,0);
+      const percent=total ? Math.round(completed/total*100) : 0;
+      const nextIndex=progress.findIndex(item=>!item.done);
+      const next=nextIndex<0 ? null : progress[nextIndex];
+      meter.hidden=false; meterCopy.hidden=false; itinerary.hidden=false;
+      meter.setAttribute("aria-valuenow",String(percent)); meterFill.style.width=percent+"%";
+      meterCopy.textContent=completed+" de "+total+" ejercicios · "+percent+"% del itinerario";
+      control("#account-itinerary-title").textContent=path.name;
+      if (next) {
+        const pendingLevel=Math.floor(next.completed/4);
+        const pendingExam=next.completed>0 && next.completed%4===0 && next.exams<pendingLevel;
+        title.textContent=pendingExam ? "Cierra el nivel con su mini examen" : (next.started ? "Continúa con "+next.name : "Empieza con "+next.name);
+        copy.textContent=pendingExam ? "Ya completaste los ejercicios del nivel "+pendingLevel+" de "+next.name+". Comprueba lo aprendido para abrir el siguiente." : "Tu próximo ejercicio es el "+(next.active+1)+" de "+next.count+" en "+next.name+".";
+        nextLink.href=reviewHref(next.href); nextLink.textContent=pendingExam ? "Ir al mini examen →" : "Continuar aprendiendo →";
+      } else {
+        title.textContent="Completaste tu itinerario";
+        copy.textContent="Terminaste todas sus rutas y mini exámenes. Puedes repetir una ruta o elegir una meta diferente.";
+        nextLink.href=reviewHref("index.html#itinerarios"); nextLink.textContent="Elegir otra meta →";
+      }
+      progress.forEach((route,index)=>{
+        const item=document.createElement("li"), link=document.createElement("a"), marker=document.createElement("span"), detail=document.createElement("span");
+        const current=index===(nextIndex<0 ? progress.length-1 : nextIndex);
+        item.className=route.done ? "is-done" : current ? "is-current" : "is-upcoming";
+        marker.className="account-step-marker"; marker.textContent=route.done ? "✓" : String(index+1).padStart(2,"0");
+        link.href=reviewHref(route.href); link.textContent=route.name;
+        detail.className="account-step-detail"; detail.textContent=route.done ? "Completada" : current ? (route.started ? route.completed+" de "+route.count : "Siguiente ruta") : "Más adelante";
+        item.append(marker,link,detail); steps.append(item);
+      });
+    }
+    const pathRoutes=new Set(path?.routes || []);
+    for (const route of state.routes) {
+      const progress=state.progress(route.id);
+      if ((!progress.started && !progress.completed) || pathRoutes.has(route.id)) continue;
+      const item=document.createElement("li"), link=document.createElement("a"), bar=document.createElement("span"), fill=document.createElement("span"), value=document.createElement("span");
+      link.href=reviewHref(progress.href); link.textContent=route.name;
+      bar.className="account-route-progress"; fill.style.width=progress.percent+"%"; bar.append(fill);
+      value.className="account-route-value"; value.textContent=progress.completed+"/"+route.count;
+      item.append(link,bar,value); routeList.append(item);
+    }
+    emptyRoutes.hidden=routeList.children.length>0;
+    goal.dataset.itinerary=path?.id || "none";
+  }
   function render() {
     if (!accountPage) return;
     control("#account-login").hidden=Boolean(owner && ready);
     control("#account-data").hidden=!(owner && ready);
     if (!snapshot) return;
     control("#account-alias").value=snapshot.profile.alias;
-    control("#account-summary").textContent=state.resumen().modulos + " ejercicios y " + state.resumen().examenes + " exámenes completados.";
-    const list=control("#account-routes"); list.replaceChildren();
-    for (const route of state.routes) {
-      const p=state.progress(route.id); if (!p.started && !p.completed) continue;
-      const item=document.createElement("li"), link=document.createElement("a");
-      link.href=p.href; link.textContent=route.name + " · " + p.completed+"/"+route.count + " · Continuar";
-      if (document.documentElement.dataset.review) { const url=new URL(link.href,location.href); url.searchParams.set("revision",document.documentElement.dataset.review); link.href=url.href; }
-      item.append(link); list.append(item);
-    }
+    renderLearningDashboard();
     const conflicts=control("#account-conflicts"); conflicts.replaceChildren();
     for (const conflict of snapshot.conflicts) {
       const item=document.createElement("li"), title=document.createElement("p"), code=document.createElement("pre"), button=document.createElement("button");

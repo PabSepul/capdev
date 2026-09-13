@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Calidad de las cápsulas — CápsulasDev</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0c1e18; --panel:#132c23; --panel2:#18372b; --line:#315247; --ink:#f5f6e8; --soft:#a9bcb4; --accent:#cce995; --blue:#76aaf0; --danger:#f0a68f; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; }
+    main { width:min(1180px,calc(100% - 40px)); margin:auto; padding:64px 0 80px; }
+    .eyebrow { margin:0 0 14px; color:var(--accent); font:700 .7rem/1.2 Consolas,monospace; letter-spacing:.14em; }
+    h1 { max-width:760px; margin:0; font-size:clamp(2.5rem,6vw,5rem); line-height:.96; }
+    .intro { max-width:720px; margin:22px 0 0; color:var(--soft); line-height:1.65; }
+    .meta { margin:12px 0 0; color:var(--soft); font-size:.78rem; }
+    .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:38px 0 24px; }
+    .metric { min-height:132px; padding:22px; border:1px solid var(--line); background:var(--panel); }
+    .metric span { display:block; color:var(--soft); font-size:.75rem; }
+    .metric strong { display:block; margin-top:12px; font-size:clamp(1.8rem,4vw,3rem); }
+    .metric small { display:block; margin-top:6px; color:var(--soft); }
+    .panel { margin-top:16px; padding:24px; border:1px solid var(--line); background:var(--panel); }
+    .panel-head { display:flex; align-items:end; justify-content:space-between; gap:20px; }
+    h2 { margin:0; font-size:1.25rem; }
+    label { display:grid; gap:7px; color:var(--soft); font-size:.72rem; font-weight:700; }
+    select { min-width:220px; min-height:42px; padding:8px 12px; border:1px solid var(--line); background:var(--panel2); color:var(--ink); font:inherit; }
+    .areas { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-top:22px; }
+    .area { padding:16px; border-left:3px solid var(--blue); background:var(--panel2); }
+    .area strong,.area span { display:block; }
+    .area span { margin-top:6px; color:var(--soft); font-size:.72rem; }
+    .table-wrap { margin-top:20px; overflow:auto; }
+    table { width:100%; border-collapse:collapse; min-width:720px; }
+    th,td { padding:13px 10px; border-bottom:1px solid var(--line); text-align:left; }
+    th { color:var(--soft); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; }
+    td { font-size:.86rem; }
+    .rate { font-weight:700; color:var(--accent); }
+    .rate.high { color:var(--danger); }
+    #empty { margin:24px 0 0; padding:24px; border:1px dashed var(--line); color:var(--soft); }
+    .privacy { margin-top:28px; padding-top:18px; border-top:1px solid var(--line); color:var(--soft); font-size:.78rem; line-height:1.6; }
+    [hidden] { display:none!important; }
+    @media(max-width:760px){ main{width:min(100% - 28px,1180px);padding-top:42px}.metrics{grid-template-columns:1fr 1fr}.panel-head{display:block}.panel-head label{margin-top:18px}.areas{grid-template-columns:1fr 1fr}.areas .area:last-child{grid-column:1/-1} }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">CÁPSULASDEV · CALIDAD</p>
+    <h1>Qué debemos explicar mejor.</h1>
+    <p class="intro">Este informe resume la respuesta más reciente de cada perfil por cápsula. Prioriza los módulos con más solicitudes de mejora y muestra qué parte conviene revisar.</p>
+    <p class="meta" id="generated-at"></p>
+    <section class="metrics" aria-label="Resumen del feedback">
+      <article class="metric"><span>RESPUESTAS</span><strong id="metric-total">0</strong><small>respuestas vigentes</small></article>
+      <article class="metric"><span>CLARIDAD</span><strong id="metric-clear">—</strong><small>marcadas como claras</small></article>
+      <article class="metric"><span>CÁPSULAS</span><strong id="metric-modules">0</strong><small>con alguna respuesta</small></article>
+      <article class="metric"><span>PRIORIDAD</span><strong id="metric-priority">—</strong><small>área más señalada</small></article>
+    </section>
+    <section class="panel" aria-labelledby="areas-title">
+      <div class="panel-head"><div><p class="eyebrow">SEÑALES</p><h2 id="areas-title">Áreas que necesitan atención</h2></div></div>
+      <div class="areas" id="areas"></div>
+    </section>
+    <section class="panel" aria-labelledby="modules-title">
+      <div class="panel-head"><div><p class="eyebrow">POR CÁPSULA</p><h2 id="modules-title">Dónde concentrar la próxima corrección</h2></div><label>Filtrar por ruta<select id="route-filter"><option value="">Todas las rutas</option></select></label></div>
+      <div class="table-wrap"><table><thead><tr><th>Ruta</th><th>Cápsula</th><th>Respuestas</th><th>Piden mejora</th><th>Qué revisar</th></tr></thead><tbody id="module-rows"></tbody></table></div>
+      <p id="empty" hidden>Todavía no hay respuestas para este filtro. El panel se llenará cuando las personas respondan después de ejecutar ejercicios.</p>
+    </section>
+    <p class="privacy">Informe local y agregado. No contiene correos, identificadores de cuenta, borradores ni código. El archivo no se publica automáticamente.</p>
+  </main>
+  <script id="feedback-data" type="application/json">__CAPSULASDEV_FEEDBACK_DATA__</script>
+  <script>
+    (()=>{
+      "use strict";
+      const routeNames={"html-css":"HTML y CSS",javascript:"JavaScript",python:"Python",sql:"SQL",git:"Git y GitHub",apis:"APIs",terminal:"Terminal",regex:"Expresiones regulares",ia:"Inteligencia artificial","datos-python":"Datos con Python",nodejs:"Node.js",typescript:"TypeScript",react:"React",json:"JSON",markdown:"Markdown y documentación",accesibilidad:"Accesibilidad web",testing:"Pruebas automatizadas",docker:"Docker",mongodb:"MongoDB"};
+      const areaNames={explicacion:"Explicación",mision:"Misión",resultado:"Resultado o error",pistas:"Pistas",otro:"Otro aspecto"};
+      let source={}; try{source=JSON.parse(document.querySelector("#feedback-data").textContent)}catch{}
+      const groups=(Array.isArray(source.groups)?source.groups:[]).map(item=>({route:String(item.route||""),module:Number(item.module),value:item.value,area:item.area||null,count:Number(item.count)})).filter(item=>routeNames[item.route]&&Number.isInteger(item.module)&&item.module>=0&&["claro","mejorar"].includes(item.value)&&Number.isInteger(item.count)&&item.count>0&&(item.area===null||areaNames[item.area]));
+      const total=groups.reduce((sum,item)=>sum+item.count,0), clear=groups.filter(item=>item.value==="claro").reduce((sum,item)=>sum+item.count,0);
+      const modules=new Set(groups.map(item=>item.route+":"+item.module));
+      const areaTotals=Object.fromEntries(Object.keys(areaNames).map(area=>[area,groups.filter(item=>item.value==="mejorar"&&item.area===area).reduce((sum,item)=>sum+item.count,0)]));
+      const topArea=Object.entries(areaTotals).sort((a,b)=>b[1]-a[1])[0];
+      document.querySelector("#generated-at").textContent=source.generatedAt?"Generado: "+new Date(source.generatedAt).toLocaleString("es-CL"):"Fecha de generación no disponible";
+      document.querySelector("#metric-total").textContent=String(total);
+      document.querySelector("#metric-clear").textContent=total?Math.round(clear/total*100)+"%":"—";
+      document.querySelector("#metric-modules").textContent=String(modules.size);
+      document.querySelector("#metric-priority").textContent=topArea&&topArea[1]?areaNames[topArea[0]]:"—";
+      const areas=document.querySelector("#areas");
+      Object.entries(areaNames).forEach(([key,label])=>{const card=document.createElement("div"),strong=document.createElement("strong"),span=document.createElement("span");card.className="area";strong.textContent=String(areaTotals[key]);span.textContent=label;card.append(strong,span);areas.append(card)});
+      const routes=[...new Set(groups.map(item=>item.route))].sort((a,b)=>routeNames[a].localeCompare(routeNames[b],"es")), filter=document.querySelector("#route-filter");
+      routes.forEach(route=>{const option=document.createElement("option");option.value=route;option.textContent=routeNames[route];filter.append(option)});
+      function render(){
+        const selected=filter.value, grouped=new Map();
+        groups.filter(item=>!selected||item.route===selected).forEach(item=>{const key=item.route+":"+item.module, row=grouped.get(key)||{route:item.route,module:item.module,total:0,improve:0,areas:{}};row.total+=item.count;if(item.value==="mejorar"){row.improve+=item.count;if(item.area)row.areas[item.area]=(row.areas[item.area]||0)+item.count}grouped.set(key,row)});
+        const rows=[...grouped.values()].sort((a,b)=>(b.improve/b.total)-(a.improve/a.total)||b.total-a.total||routeNames[a.route].localeCompare(routeNames[b.route],"es")||a.module-b.module), body=document.querySelector("#module-rows");body.replaceChildren();
+        rows.forEach(row=>{const tr=document.createElement("tr"), values=[routeNames[row.route],"Cápsula "+(row.module+1),String(row.total),Math.round(row.improve/row.total*100)+"%",Object.entries(row.areas).sort((a,b)=>b[1]-a[1]).map(([area,count])=>areaNames[area]+" ("+count+")").join(", ")||"—"];values.forEach((value,index)=>{const td=document.createElement("td");td.textContent=value;if(index===3){td.className="rate"+(row.improve/row.total>=.5?" high":"")}tr.append(td)});body.append(tr)});
+        document.querySelector(".table-wrap").hidden=rows.length===0;document.querySelector("#empty").hidden=rows.length>0;
+      }
+      filter.addEventListener("change",render);render();
+    })();
+  </script>
+</body>
+</html>

@@ -32,10 +32,29 @@ tareas crearon archivos 7z cifrados y verificados en OneDrive. La prueba
 programada terminó con código `0`, regresó al estado `Ready` y dejó la próxima
 ejecución para las 03:00.
 
-Resultado final: 26 de 26 suites aprobadas. Incluye los contrastes con PGlite,
+Resultado de esa entrega: 26 de 26 suites aprobadas. Incluye los contrastes con PGlite,
 TypeScript, React, jsdom, CommonMark, Node y `node:assert`; los contrastes de
 Python usaron sus salidas registradas porque CPython no estaba disponible para
 esas tres suites en esta ejecución.
+
+## Panel de feedback y progreso guiado
+
+`feedback-panel.test.mjs` carga el informe con datos agregados conocidos y
+comprueba totales, porcentaje de claridad, área prioritaria, orden por cápsula y
+filtro por ruta. También analiza el script PowerShell y genera un HTML temporal
+desde un archivo de prueba. La consulta real a producción se ejecutó correctamente
+sin seleccionar identificadores de usuario.
+
+`accounts-ui.test.mjs` cubre ahora la vista de progreso: estado sin itinerario,
+seis pasos de Desarrollo web, próximo curso, avance después del primer ejercicio
+y enlaces compatibles con revisión. La vista se comprobó en escritorio y a
+390 × 844 px. En móvil, el contenido ocupó 375 px dentro de una ventana de 390 px
+y `scrollWidth` se mantuvo en 375 px, sin desbordamiento horizontal. Las tarjetas,
+el progreso, el llamado a continuar y las etapas conservaron una jerarquía clara.
+
+El informe real también se generó con la conexión de producción. Mostró cero
+respuestas, el estado esperado mientras ninguna cuenta haya enviado feedback.
+La entrega completa queda cubierta por 27 suites.
 
 # Historial de revisiones
 

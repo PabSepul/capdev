@@ -26,7 +26,7 @@ Docker, MongoDB y feedback quedaron activas. El commit `30de716` es el punto
 público anterior a esta entrega.
 
 La calidad queda automatizada en `.github/workflows/quality.yml`, que ejecuta
-las 26 suites con Node 22, Python 3.12 y las dependencias de contraste. Se añadió
+las suites con Node 22, Python 3.12 y las dependencias de contraste. Se añadió
 una página 404 coherente con el sitio y se corrigieron textos visibles que aún
 usaban la marca anterior, además de precisar que Python ejecuta el subconjunto
 educativo disponible en la plataforma.
@@ -51,6 +51,29 @@ y su confirmación local. El usuario autorizó aplicar la migración y publicar 
 
 Las 26 suites pasaron en una corrida completa el 13 de septiembre. También
 pasaron `node --check` sobre los controladores modificados y `git diff --check`.
+
+### Entrega local posterior: panel de calidad y metas de aprendizaje
+
+`Mi cuenta` transforma el resumen numérico en una guía: presenta la meta actual,
+el próximo ejercicio o mini examen, el porcentaje total del itinerario, las
+etapas completadas y las rutas comenzadas fuera de ese recorrido. Si todavía no
+hay itinerario, conduce a elegir uno. Los enlaces conservan el modo revisión y
+la interfaz usa el estado existente, sin cambiar identificadores ni progreso.
+
+El panel de feedback se genera con
+`scripts/Generar-Panel-Feedback.ps1`. Consulta producción con las credenciales
+DPAPI ya configuradas, agrupa la respuesta vigente por ruta, cápsula y área, y
+escribe un HTML autocontenido en `%LOCALAPPDATA%\CapsulasDev\reports`. El informe
+no exporta correos, UUID, borradores ni código y no forma parte del sitio público.
+Incluye claridad general, cobertura, prioridad, distribución por área, filtro por
+ruta y una tabla ordenada por porcentaje de solicitudes de mejora.
+
+El primer informe real se generó correctamente el 13 de septiembre y mostró cero
+respuestas, coherente con que todavía no hay feedback enviado por cuentas. La
+vista de progreso se revisó en escritorio y a 390 × 844 px; no presentó
+desbordamiento horizontal (`innerWidth` 390 px, `scrollWidth` y body 375 px).
+Las 27 suites pasan. El usuario autorizó publicar esta entrega el 13 de
+septiembre de 2026.
 
 ### Repositorio principal desde el 11 de septiembre de 2026
 

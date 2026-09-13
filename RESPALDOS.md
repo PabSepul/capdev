@@ -32,6 +32,21 @@ resultado correcto.
 Estado comprobado el 13 de septiembre de 2026: tarea activa a las 03:00, ejecución
 manual desde el Programador terminada con código `0` y archivo cifrado nuevo en OneDrive.
 
+## Panel privado de feedback
+
+Para actualizar el informe de calidad desde producción:
+
+```powershell
+.\scripts\Generar-Panel-Feedback.ps1
+```
+
+El comando reutiliza la conexión protegida con DPAPI y crea un HTML autocontenido
+en `%LOCALAPPDATA%\CapsulasDev\reports`. La consulta agrupa por ruta, cápsula,
+respuesta y área; el informe no contiene correos, identificadores, borradores ni
+código. Muestra claridad general, área más señalada, filtros por ruta y una tabla
+ordenada por porcentaje de solicitudes de mejora. Cada ejecución crea una copia
+con fecha para que un informe anterior no se sobrescriba.
+
 ## Comprobación periódica
 
 Descarga un archivo desde OneDrive y comprueba su cifrado:

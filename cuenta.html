@@ -51,7 +51,7 @@
   <link rel="icon" href="favicon.svg?v=20260902-bmw1" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=20260909-profile3">
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
-  <link rel="stylesheet" href="account.css?v=20260909-profile3">
+  <link rel="stylesheet" href="account.css?v=20260914-progress1">
   <link rel="stylesheet" href="experience.css?v=20260912-experience1">
 </head>
 <body class="experience-page">
@@ -104,8 +104,26 @@
         <button id="account-enroll-submit" type="button">Activar mi perfil</button>
       </div>
       <div id="account-data" hidden>
-        <section class="account-card"><h2>Tu aprendizaje</h2><p id="account-summary"></p><ul id="account-routes"></ul><a href="index.html#rutas">Explorar todas las rutas</a>
-          <p>El progreso se guarda automáticamente mientras aprendes y se recupera al volver a abrir la plataforma.</p>
+        <section class="account-card account-learning-card"><div class="account-learning-heading"><div><p class="account-card-eyebrow">TU RECORRIDO</p><h2>Tu aprendizaje</h2></div><p id="account-summary"></p></div>
+          <div class="account-goal" id="account-goal">
+            <p class="account-card-eyebrow">META ACTUAL</p>
+            <h3 id="account-goal-title">Preparando tu próximo paso…</h3>
+            <p id="account-goal-copy"></p>
+            <div class="account-goal-progress" id="account-goal-progress" role="progressbar" aria-label="Avance del itinerario" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+            <p class="account-goal-progress-copy" id="account-goal-progress-copy"></p>
+            <a class="account-primary-link" id="account-next-step" href="index.html#itinerarios">Elegir un itinerario →</a>
+          </div>
+          <section class="account-itinerary" id="account-itinerary" aria-labelledby="account-itinerary-title" hidden>
+            <div><p class="account-card-eyebrow">ITINERARIO</p><h3 id="account-itinerary-title"></h3></div>
+            <ol id="account-itinerary-steps"></ol>
+          </section>
+          <section class="account-other-progress" aria-labelledby="account-other-title">
+            <h3 id="account-other-title">Otras rutas que comenzaste</h3>
+            <ul id="account-routes"></ul>
+            <p id="account-empty-routes" hidden>Aún no comenzaste otras rutas. Puedes explorarlas cuando quieras.</p>
+            <a href="index.html#rutas">Explorar todas las rutas →</a>
+          </section>
+          <p class="account-save-note">El progreso se guarda automáticamente mientras aprendes y se recupera al volver a abrir la plataforma.</p>
         </section>
         <section class="account-card"><h2>Tu perfil</h2><label for="account-alias">Nombre o alias (opcional)</label><input id="account-alias" maxlength="60" autocomplete="nickname"><button id="account-save-alias" type="button">Guardar nombre</button></section>
         <section class="account-card" id="account-conflict-section" hidden><h2>Borradores con versiones distintas</h2><p>Dos dispositivos guardaron cambios diferentes. Revisa el código antes de elegir la versión que quieres continuar.</p><ul id="account-conflicts"></ul></section>
@@ -127,10 +145,11 @@
   </footer>
 
   <script src="learning-state.js?v=20260912-experience1"></script>
+  <script src="learning-experience.js?v=20260912-experience1"></script>
   <script src="account-config.js?v=20260909-profile3"></script>
   <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
-  <script src="account.js?v=20260912-experience1"></script>
+  <script src="account.js?v=20260914-progress1"></script>
   <script src="site.js?v=20260903-review1"></script>
 </body>
 </html>

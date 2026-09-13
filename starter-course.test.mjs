@@ -472,8 +472,10 @@ for (const page of pages) {
   assert.match(html, /id="starter-preview"[^>]*sandbox=""/);
   assert.match(html, /publicHosts\.includes\(window\.location\.hostname\)/);
 }
-assert.match(assetVersions.get("account.js"), /\?v=20260912-/, "account.js: renovar la URL tras agregar preferencias y feedback");
-for (const file of ["account-config.js", "account.css", "catalog.js", "styles.css"]) {
+for (const file of ["account.js", "account.css"]) {
+  assert.match(assetVersions.get(file), /\?v=20260914-/, `${file}: renovar la URL tras mejorar la vista de progreso`);
+}
+for (const file of ["account-config.js", "catalog.js", "styles.css"]) {
   assert.match(assetVersions.get(file), /\?v=20260909-/, `${file}: conserva la versión de su último cambio`);
 }
 /* Toda vista previa se arma con srcdoc desde starter-course.js. El sandbox vacío ya
