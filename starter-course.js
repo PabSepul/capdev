@@ -579,6 +579,7 @@
     renderValidations();
     if (course.kind === "sql") globalThis.SQLGuide?.renderLesson(index);
     globalThis.LearningGuidance?.render(courseId, index);
+    globalThis.LearningExperience?.setModule(courseId, index, { title: module.shortTitle || module.title });
     runModule(false);
   }
 
@@ -708,6 +709,7 @@
       error: Boolean(result.error),
       ms: Date.now() - moduleOpenedAt
     });
+    globalThis.LearningExperience?.showFeedback();
   }
 
   elements.run.addEventListener("click", () => runModule(true));

@@ -59,6 +59,13 @@
 .experience-page .route-strip :is(strong,small) { color: var(--ink-soft); }
 .experience-page .route-strip span { font-size: .74rem; }
 .experience-page .route-strip button:hover:not(:disabled) { background: var(--purple-soft); }
+.experience-page .route-orientation { width: min(var(--content),calc(100% - 56px)); margin: 18px auto 0; padding: 17px 20px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
+.experience-page .route-orientation > div:first-child { min-width: 0; }
+.experience-page .route-orientation span { display: block; color: var(--purple-dark); font-size: .59rem; font-weight: 700; letter-spacing: .075em; }
+.experience-page .route-orientation strong { display: block; margin-top: 5px; font-size: .86rem; }
+.experience-page .route-orientation p { margin: 5px 0 0; color: var(--ink-soft); font-size: .73rem; line-height: 1.6; }
+.experience-page .route-orientation a { color: var(--ink); font-size: .7rem; font-weight: 700; text-underline-offset: 4px; white-space: nowrap; }
+.experience-page .route-orientation-links { display: flex; align-items: center; gap: 15px; }
 .experience-page :is(.projects-section,.starter-modules,.starter-lab-section) { padding: 40px max(28px, calc((100% - var(--content)) / 2)); background: var(--surface); }
 .experience-page .starter-modules { padding-bottom: 16px; }
 .experience-page .starter-lab-section { padding-top: 24px; }
@@ -114,6 +121,15 @@
 .experience-page .validation-panel li { font-size: .79rem; line-height: 1.7; }
 .experience-page .starter-preview-panel { border-radius: 10px; overflow: hidden; }
 .experience-page .lab-success { border-radius: 9px; }
+.experience-page .exercise-feedback { margin-top: 16px; padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+.experience-page .exercise-feedback > div:first-child > span { display: block; color: var(--purple-dark); font-size: .57rem; font-weight: 700; letter-spacing: .075em; }
+.experience-page .exercise-feedback h4 { margin: 6px 0; font-size: .88rem; line-height: 1.45; }
+.experience-page .exercise-feedback p { margin: 0; color: var(--ink-soft); font-size: .7rem; line-height: 1.65; }
+.experience-page .exercise-feedback-actions, .experience-page .exercise-feedback-areas > div { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.experience-page .exercise-feedback button { min-height: 42px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--ink); font: 700 .68rem Inter,sans-serif; cursor: pointer; }
+.experience-page .exercise-feedback button:hover, .experience-page .exercise-feedback button.is-selected { border-color: var(--purple); background: var(--purple-soft); }
+.experience-page .exercise-feedback-areas { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.experience-page .exercise-feedback-status { margin-top: 12px !important; color: var(--success-dark) !important; }
 .experience-page .starter-progress { padding: 16px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
 .experience-page :is(.starter-learning-note,.starter-exam-progress) { font-size: .78rem; }
 .experience-page :is(.checkpoint-panel,.exam-panel,.exam-question,.python-finish,.method-grid article,.final-cta) { border-radius: 12px; }
@@ -187,6 +203,7 @@
   .experience-page .account-benefits { grid-template-columns: 1fr; }
   .experience-page .account-access { padding: 28px; order: -1; }
   .experience-page > .account-status, .experience-page .course-breadcrumb { width: calc(100% - 40px); }
+  .experience-page .route-orientation { width: calc(100% - 40px); align-items: flex-start; }
   .experience-page section[id], .experience-page article[id] { scroll-margin-top: 140px; }
 }
 @media (max-width: 520px) {
@@ -203,6 +220,8 @@
   .experience-page .code-input { padding: 14px; }
   .experience-page .code-input textarea { font-size: .82rem; }
   .experience-page .account-card { padding: 22px; }
+  .experience-page .route-orientation { flex-direction: column; }
+  .experience-page .route-orientation-links { width: 100%; justify-content: space-between; flex-wrap: wrap; }
   .experience-page .account-access, .experience-page .account-welcome { padding: 24px; }
   .experience-page footer { padding: 24px 20px; }
   .experience-page .footer-inner { flex-direction: column; align-items: start; }

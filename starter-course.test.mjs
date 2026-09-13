@@ -419,7 +419,7 @@ for (const page of pages) {
   }
   /* Toda ruta tiene que estar enlazada desde la portada: una página publicada
      a la que no se llega es una página que nadie va a encontrar. */
-  if (page !== "index.html") {
+  if (page !== "index.html" && page !== "404.html") {
     assert.ok(inicio.includes('href="' + page + '"'), page + ": la portada no enlaza esta ruta");
   }
 
@@ -472,8 +472,9 @@ for (const page of pages) {
   assert.match(html, /id="starter-preview"[^>]*sandbox=""/);
   assert.match(html, /publicHosts\.includes\(window\.location\.hostname\)/);
 }
-for (const file of ["account.js", "account-config.js", "account.css", "catalog.js", "styles.css"]) {
-  assert.match(assetVersions.get(file), /\?v=20260909-/, `${file}: renovar la URL tras cambiar el contrato de Mi cuenta`);
+assert.match(assetVersions.get("account.js"), /\?v=20260912-/, "account.js: renovar la URL tras agregar preferencias y feedback");
+for (const file of ["account-config.js", "account.css", "catalog.js", "styles.css"]) {
+  assert.match(assetVersions.get(file), /\?v=20260909-/, `${file}: conserva la versión de su último cambio`);
 }
 /* Toda vista previa se arma con srcdoc desde starter-course.js. El sandbox vacío ya
    impide ejecutar scripts; la CSP es la segunda barrera y tiene que estar en todas,

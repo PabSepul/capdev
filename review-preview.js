@@ -17,7 +17,7 @@
   document.documentElement.classList.remove("is-maintenance");
   document.documentElement.dataset.review = reviewValue;
   const pageTitle = document.querySelector('meta[property="og:title"]');
-  document.title = (pageTitle?.content || "Código Cero") + " · Revisión";
+  document.title = (pageTitle?.content || "CápsulasDev") + " · Revisión";
   let robots = document.querySelector('meta[name="robots"]');
   if (!robots) { robots = document.createElement("meta"); robots.name = "robots"; document.head.append(robots); }
   robots.content = "noindex, nofollow";

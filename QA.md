@@ -1,4 +1,43 @@
-# Revisión local del 7 de septiembre de 2026
+# Revisión de calidad de CápsulasDev
+
+## Entrega local del 13 de septiembre de 2026
+
+La entrega agrega itinerarios, orientación contextual y feedback estructurado a
+las 19 rutas. El estado local y la sincronización remota se prueban por separado:
+selección de itinerario, cambio de selección, feedback claro, feedback con área
+de mejora, invitado sin cuenta, cuenta activa, repetición idempotente y mezcla de
+estado remoto. También se prueba la sincronización real embebida para Docker y
+MongoDB, rutas que antes quedaban fuera de la función SQL.
+
+`learning-experience.test.mjs` monta la portada y una ruta real con jsdom. Exige
+los tres itinerarios, conservación del parámetro de revisión, reanudación del
+avance, orientación de ruta y feedback que solo aparece después de ejecutar.
+`backup-scripts.test.mjs` analiza los cuatro scripts de PowerShell y exige DPAPI,
+dump de `public` y `auth`, comprobación con `pg_restore`, cifrado AES con cabeceras
+ocultas, verificación, limpieza de la contraseña del entorno, retención y control
+de ruta antes de borrar el dump.
+
+La revisión manual en el navegador integrado confirmó la portada en un ancho
+estrecho y el laboratorio en escritorio. En Python y JavaScript el bloque de
+feedback apareció después de una ejecución incompleta, mostró la orientación
+del primer criterio pendiente y guardó una respuesta de mejora sin recoger el
+código. La selección «Python y datos» cambió el estado de la portada y mostró
+«paso 1 de 5» en la ruta de Python; JavaScript se presentó como exploración libre.
+
+La migración de Supabase se aplicó a producción el 13 de septiembre antes de
+publicar. Una consulta posterior confirmó la columna `itinerary` y que
+`learning_sync` contiene las reglas de Docker, MongoDB y feedback. El respaldo
+también quedó operativo: una ejecución directa y otra desde el Programador de
+tareas crearon archivos 7z cifrados y verificados en OneDrive. La prueba
+programada terminó con código `0`, regresó al estado `Ready` y dejó la próxima
+ejecución para las 03:00.
+
+Resultado final: 26 de 26 suites aprobadas. Incluye los contrastes con PGlite,
+TypeScript, React, jsdom, CommonMark, Node y `node:assert`; los contrastes de
+Python usaron sus salidas registradas porque CPython no estaba disponible para
+esas tres suites en esta ejecución.
+
+# Historial de revisiones
 
 ## Despliegue verificado el 8 de septiembre de 2026
 

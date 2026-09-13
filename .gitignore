@@ -1,0 +1,6 @@
+# Secretos locales y resultados de respaldo
+.backup-secrets.json
+*.dump
+*.7z
+backup-*.log
+

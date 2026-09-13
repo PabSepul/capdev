@@ -1,6 +1,56 @@
-# Traspaso del proyecto Código Cero / intenta.cl
+# Traspaso y continuidad de CápsulasDev
 
-Estado al 12 de septiembre de 2026. Base inicial: `adf9e2b`.
+Estado al 13 de septiembre de 2026. Base inicial: `adf9e2b`.
+
+### Entrega de itinerarios, feedback, calidad y respaldos
+
+Después de una prueba informal positiva con varias personas adultas, se mantuvo
+la dirección visual y se añadieron tres itinerarios opcionales en la portada:
+Desarrollo web, Python y datos, y Herramientas profesionales. Cada uno muestra
+orden, avance y próximo paso sin bloquear la exploración libre. La selección se
+guarda localmente y, cuando existe una cuenta, se sincroniza con el perfil.
+
+Los laboratorios de las 19 rutas muestran orientación según el itinerario. Tras
+ejecutar un ejercicio aparece una pregunta breve sobre su claridad; si necesita
+mejoras, la persona puede indicar explicación, misión, resultado, pistas u otro
+aspecto. Son datos cerrados: no incluyen texto libre ni el código escrito. El
+feedback de visitantes queda en el dispositivo y el de cuentas entra en la cola
+de sincronización existente.
+
+Se corrigió `learning_sync`: Docker y MongoDB ya forman parte de las rutas
+admitidas y se agregaron las operaciones `preference` y `feedback`. La migración
+incremental está en
+`supabase/migrations/202609120001_learning_experience.sql`. Se aplicó a producción
+el 13 de septiembre y se comprobó que la columna `itinerary` y la función con
+Docker, MongoDB y feedback quedaron activas. El commit `30de716` es el punto
+público anterior a esta entrega.
+
+La calidad queda automatizada en `.github/workflows/quality.yml`, que ejecuta
+las 26 suites con Node 22, Python 3.12 y las dependencias de contraste. Se añadió
+una página 404 coherente con el sitio y se corrigieron textos visibles que aún
+usaban la marca anterior, además de precisar que Python ejecuta el subconjunto
+educativo disponible en la plataforma.
+
+Los scripts de `scripts/` preparan, crean, verifican, cifran y programan un
+respaldo diario de los esquemas `public` y `auth` de Supabase en OneDrive. Las
+contraseñas se protegen con DPAPI fuera del repositorio, el dump temporal se
+crea fuera de OneDrive y se elimina solo después de verificar el archivo cifrado.
+La retención predeterminada es de 30 días. Ver `RESPALDOS.md`.
+
+La configuración quedó protegida con DPAPI y la tarea de Windows se activó el
+13 de septiembre a las 03:00. El primer respaldo automático de prueba terminó
+con código `0` y creó `capsulasdev-20260913-180834.7z` en OneDrive, con 19154
+bytes. La próxima ejecución quedó programada para el 14 de septiembre a las
+03:00. Un primer intento inmediatamente después de cambiar la contraseña falló
+por propagación; el script eliminó el dump vacío y el reintento fue correcto.
+
+La revisión local cubrió la portada estrecha, la selección de itinerario, la
+orientación de Python y JavaScript, la aparición del feedback después de ejecutar
+y su confirmación local. El usuario autorizó aplicar la migración y publicar el
+13 de septiembre; la migración quedó confirmada antes de preparar el commit.
+
+Las 26 suites pasaron en una corrida completa el 13 de septiembre. También
+pasaron `node --check` sobre los controladores modificados y `git diff --check`.
 
 ### Repositorio principal desde el 11 de septiembre de 2026
 

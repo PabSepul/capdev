@@ -20,6 +20,9 @@
   const ESQUEMA = 1;
   const MAX_BORRADOR = 30000;
   const MAX_EVENTOS = 400;
+  const ITINERARIOS = ["web", "python-datos", "herramientas"];
+  const RESPUESTAS_FEEDBACK = ["claro", "mejorar"];
+  const AREAS_FEEDBACK = ["explicacion", "mision", "resultado", "pistas", "otro"];
   let account = null;
   try {
     const selected = localStorage.getItem("capsulasdev.active-user");
@@ -82,7 +85,7 @@
   }
 
   function rutaVacia() {
-    return { completados: [], examenes: [], activo: null, borradores: {}, intentos: {}, actualizado: 0 };
+    return { completados: [], examenes: [], activo: null, borradores: {}, intentos: {}, feedback: {}, actualizado: 0 };
   }
 
   /* Limpia lo que venga de fuera: un documento importado o editado a mano no
@@ -106,6 +109,14 @@
         limpio.intentos[clave] = Math.min(veces, 99999);
       }
     }
+    for (const [clave, respuesta] of Object.entries(crudo.feedback && typeof crudo.feedback === "object" ? crudo.feedback : {})) {
+      if (!/^\d+$/.test(clave) || Number(clave) >= route.count || !respuesta || typeof respuesta !== "object") continue;
+      if (!RESPUESTAS_FEEDBACK.includes(respuesta.valor)) continue;
+      const area = AREAS_FEEDBACK.includes(respuesta.area) ? respuesta.area : null;
+      const actualizado = Number.isFinite(respuesta.actualizado) && respuesta.actualizado > 0
+        ? Math.min(respuesta.actualizado, Date.now() + 60000) : 0;
+      limpio.feedback[clave] = { valor: respuesta.valor, area, actualizado };
+    }
     limpio.actualizado = Number.isFinite(crudo.actualizado) && crudo.actualizado > 0 && crudo.actualizado <= Date.now() + 60000
       ? crudo.actualizado : 0;
     return limpio;
@@ -118,6 +129,7 @@
         ? crudo.instalacion : identificador(),
       creado: typeof crudo?.creado === "string" ? crudo.creado : ahora(),
       actualizado: typeof crudo?.actualizado === "string" ? crudo.actualizado : ahora(),
+      itinerario: ITINERARIOS.includes(crudo?.itinerario) ? crudo.itinerario : null,
       rutas: {}
     };
     for (const route of routes) {
@@ -284,6 +296,33 @@
     }
   }
 
+  function seleccionarItinerario(id) {
+    if (id !== null && !ITINERARIOS.includes(id)) return false;
+    const documento = perfil();
+    if (documento.itinerario === id) return true;
+    documento.itinerario = id;
+    guardar();
+    return true;
+  }
+
+  function registrarFeedback(id, indice, valor, area = null) {
+    const route = routeFor(id);
+    if (!route || !Number.isInteger(indice) || indice < 0 || indice >= route.count) return false;
+    if (!RESPUESTAS_FEEDBACK.includes(valor)) return false;
+    if (area !== null && !AREAS_FEEDBACK.includes(area)) return false;
+    const estado = estadoDe(id);
+    estado.feedback[String(indice)] = { valor, area, actualizado: Date.now() };
+    guardar();
+    return true;
+  }
+
+  function feedback(id, indice) {
+    const route = routeFor(id);
+    if (!route || !Number.isInteger(indice) || indice < 0 || indice >= route.count) return null;
+    const respuesta = estadoDe(id).feedback[String(indice)];
+    return respuesta ? { ...respuesta } : null;
+  }
+
   function progress(id) {
     const route = routeFor(id);
     if (!route) return null;
@@ -374,7 +413,7 @@
       try { documento = JSON.parse(texto); }
       catch { return { ok: false, error: "El texto no es JSON válido." }; }
       if (!documento || typeof documento !== "object" || documento.formato !== "codigo-cero/avance") {
-        return { ok: false, error: "Este archivo no es una exportación de Código Cero." };
+        return { ok: false, error: "Este archivo no es una exportación de CápsulasDev." };
       }
       if (!Number.isInteger(documento.esquema) || documento.esquema < 1) {
         return { ok: false, error: "Al archivo le falta el número de esquema." };
@@ -409,8 +448,9 @@
     return perfil();
   }
 
-  function combinarRemoto(rutas) {
+  function combinarRemoto(rutas, perfilRemoto = null) {
     const documento = perfil();
+    if (ITINERARIOS.includes(perfilRemoto?.itinerary)) documento.itinerario = perfilRemoto.itinerary;
     for (const route of routes) {
       const incoming = rutas?.[route.id];
       if (!incoming) continue;
@@ -419,6 +459,9 @@
       local.completados = [...new Set([...local.completados, ...remote.completados])].sort((a,b) => a-b);
       local.examenes = [...new Set([...local.examenes, ...remote.examenes])].sort((a,b) => a-b);
       for (const [key, count] of Object.entries(remote.intentos)) local.intentos[key] = Math.max(local.intentos[key] || 0, count);
+      for (const [key, respuesta] of Object.entries(remote.feedback)) {
+        if (!local.feedback[key] || respuesta.actualizado >= local.feedback[key].actualizado) local.feedback[key] = respuesta;
+      }
       // Los borradores se aplican solo al entrar en la cuenta, antes de abrir un editor.
     }
     guardar();
@@ -431,6 +474,8 @@
     storageAvailable: () => available,
     perfil, refrescar, completados, examenes, completar, aprobarExamen,
     registrarIntento, atascos, bitacora,
+    itinerarios: ITINERARIOS.slice(), itinerario: () => perfil().itinerario,
+    seleccionarItinerario, feedback, registrarFeedback,
     exportar, importar, borrar, esquema,
     usarCuenta, cuenta: () => account, combinarRemoto,
     resumen: () => resumen(perfil())

@@ -1,22 +1,19 @@
-# Código Cero
+# CápsulasDev
 
-Para futuras mejoras de contenido, consultar el [estándar de actualización de cursos](ESTANDAR-CURSOS.md):
-plantilla por módulo, adaptación a las 16 rutas restantes, verificación y prompt reutilizable.
-
-Plataforma educativa estática en español. Estado local actualizado el 7 de septiembre de 2026.
-La identidad educativa sigue siendo Código Cero. El código está preparado para
-capsulasdev.com; GitHub Pages aún debe completar el cambio desde intenta.cl.
+Plataforma educativa estática en español. Estado actualizado el 13 de septiembre de 2026.
+El sitio se publica en `capsulasdev.com` desde el repositorio `PabSepul/capdev`.
+La pantalla pública de mantenimiento continúa activa hasta que se autorice su apertura.
 
 ## Perfiles y sincronización automática
 
 Mi cuenta asocia el progreso a un perfil privado mediante un código por correo.
-Los ejercicios, exámenes, intentos y borradores se sincronizan automáticamente;
+Los ejercicios, exámenes, intentos, borradores, itinerarios y feedback estructurado se sincronizan automáticamente;
 una copia local queda solo para recuperación del modo invitado y exportaciones.
 El lanzamiento inicial es para mayores de 18 años y conserva la pantalla de
 mantenimiento mientras se decide la apertura pública.
 
 Ver [CUENTAS.md](CUENTAS.md) para arquitectura, SQL, configuración, DNS y verificación.
-Hay 22 páginas y 24 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
+Hay 23 páginas y 26 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
 y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 
 ## Catálogo actual
@@ -44,6 +41,9 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | MongoDB | 12 módulos | 3 | 3 |
 
 Hay 256 ejercicios con progreso y 64 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
+La portada ofrece tres itinerarios: Desarrollo web, Python y datos, y Herramientas profesionales.
+Cada ruta muestra su posición y el siguiente paso del itinerario elegido. Después de ejecutar un ejercicio,
+la persona puede indicar si fue claro y señalar qué parte conviene revisar, sin enviar texto libre ni código.
 Las tres rutas pendientes del mapa —Markdown, accesibilidad y pruebas automatizadas— ya están desarrolladas.
 
 Cada módulo tiene explicación, conceptos, ejemplo, misión, tres pistas y tres comprobaciones.
@@ -128,7 +128,8 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 - `ts-lab.js` y `typescript-course.js`: verificador de tipos y los 12 módulos de TypeScript.
 - `react-lab.js` y `react-course.js`: transformación de JSX, React mínimo y los 12 módulos de React.
 - `json-lab.js` y `json-course.js`: analizador de JSON, validador de esquemas y los 12 módulos de la ruta.
-- `learning-state.js`, `catalog.js`: continuidad, borradores y avance de las diecisiete rutas en portada.
+- `learning-state.js`, `catalog.js`, `learning-experience.js`: continuidad, borradores, avance,
+  itinerarios y feedback de las diecinueve rutas.
 - `site.js`, `styles.css`, `learning-review.css`: tema, comportamiento y estilos compartidos.
 - El avance requiere un perfil y se guarda automáticamente; no hay panel de respaldo ni restauración manual en la portada.
 - `analizar-avance.mjs`: lee los respaldos del piloto y dice dónde se traba la gente.
@@ -168,75 +169,28 @@ para enseñar mejor, y era el que se descartaba.
 La migración desde las claves anteriores ocurre en la primera lectura y **no
 borra nada**: si algo saliera mal, el avance viejo sigue donde estaba.
 
-El panel de la portada permite generar un respaldo, restaurarlo en otro
-navegador y borrar todo. La importación se valida con el motor de la ruta JSON:
-el mismo que enseña a escribir un esquema es el que revisa el archivo, así que
-un documento roto responde con línea, columna y qué se esperaba.
+La portada ya no expone el panel manual de respaldo y restauración. Con una
+cuenta activa, el avance y los borradores se sincronizan automáticamente; la
+exportación operativa se realiza desde la base de datos mediante el procedimiento
+cifrado descrito en `RESPALDOS.md`.
 
 Python usa ids de proyecto 1–20; las otras rutas usan índices desde 0.
 No limpiar el almacenamiento del usuario para hacer pruebas; usar un origen
 local de QA separado.
 
-## Cómo correr un piloto
+## Revisión con personas usuarias
 
-No hay cuentas ni servidor, así que el piloto funciona con archivos.
+El usuario probó la plataforma con varios amigos adultos y recibió una evaluación positiva de la claridad y facilidad de uso. Esta observación es cualitativa: sirve para sostener la dirección actual, pero las respuestas estructuradas de cada cápsula permiten detectar problemas concretos a medida que aumente el uso.
 
-**1. Antes de empezar.** Pídele a cada persona que use el mismo navegador durante
-toda la prueba: el avance vive ahí. Si cambia de equipo, que restaure su respaldo
-antes de seguir.
+La portada ofrece tres itinerarios sin bloquear la exploración libre. La elección se conserva localmente y, con una cuenta activa, viaja por la misma cola de sincronización que el progreso. Después de ejecutar un ejercicio aparece una pregunta opcional con respuestas cerradas. No se envía texto libre ni el código del borrador.
 
-**2. Al terminar cada sesión.** En la portada, dentro de «Tu avance», pulsa
-**Descargar archivo**. Se guarda como `codigo-cero-<instalación>-<fecha>.json`.
-Ese archivo es lo que te manda. Si su navegador no permite descargas, el botón
-**Copiar** deja el mismo contenido en el portapapeles.
-
-**3. Para leerlos.** Junta todos los archivos en una carpeta y ejecuta:
-
-```powershell
-node analizar-avance.mjs C:\ruta\a\la\carpeta
-```
-
-El informe dice hasta dónde llegó cada persona, qué módulos costaron más, **cuál
-de las tres comprobaciones falla** en cada uno —que es donde está el concepto que
-no llega—, cuántos intentos fallaron por un error de ejecución en vez de por la
-validación, y cuánto tiempo tomó resolver cada ejercicio.
-
-Un archivo repetido de la misma persona no cuenta dos veces: manda el más
-reciente. Los archivos que no sean respaldos se descartan diciendo por qué.
-
-**Qué contiene y qué no.** El respaldo lleva ejercicios completados, exámenes
-aprobados, borradores de código, el conteo de intentos por módulo y el registro
-de las últimas 400 ejecuciones. **No lleva nombre ni correo**, porque el sitio no
-los pide, y el registro de intentos **no guarda el código escrito**: solo qué
-comprobaciones pasaron, si hubo error y cuánto se tardó. Los borradores sí
-contienen código, y el panel lo advierte antes de exportar.
-
-**Qué no te va a decir.** Con cinco personas esto no es estadística. Un módulo
-con muchos intentos puede ser difícil, estar mal explicado o tener una
-comprobación demasiado estricta: hay que abrirlo y mirarlo. El informe lo repite
-al final para que el número no se lea como conclusión.
-
+`analizar-avance.mjs` continúa disponible para revisar exportaciones del piloto. Las operaciones de feedback también quedan en `learning_operations`, asociadas a la cuenta que las envió y protegidas por RLS.
 ## Verificación
 
-La verificación completa tiene veintiuna suites. Estas dieciséis usan Node.js, Python y los archivos del repositorio:
+La verificación completa tiene 26 suites. Para ejecutarlas todas desde PowerShell:
 
 ```powershell
-node starter-course.test.mjs
-node course-expansion.test.mjs
-node routes-git-apis.test.mjs
-node terminal-route.test.mjs
-node routes-regex-ia.test.mjs
-node route-datos-python.test.mjs
-node route-nodejs.test.mjs
-node route-json.test.mjs
-node route-markdown.test.mjs
-node route-testing.test.mjs
-node python-runtime.test.mjs
-node python-checkpoints.test.mjs
-node sql-guide.test.mjs
-node learning-state.test.mjs
-node analisis-avance.test.mjs
-node review-preview.test.mjs
+Get-ChildItem -Filter *.test.mjs | Sort-Object Name | ForEach-Object { node $_.FullName; if ($LASTEXITCODE -ne 0) { throw "Falló $($_.Name)" } }
 ```
 
 Cada prueba de ruta resuelve sus doce módulos por el camino real de la página: monta un DOM falso, ejecuta
@@ -254,7 +208,9 @@ el DOM real para comprobar etiquetas y asociaciones de la ruta de accesibilidad.
 
 ```powershell
 $contentQaDir = Join-Path ([IO.Path]::GetTempPath()) 'capsulasdev-content-qa'
-npm install --prefix $contentQaDir --ignore-scripts --no-audit --no-fund typescript@5.9.3 react@19.2.8 react-dom@19.2.8 @types/react @types/react-dom jsdom@26.1.0
+npm install --prefix $contentQaDir --ignore-scripts --no-audit --no-fund typescript@5.9.3 react@19.2.8 react-dom@19.2.8 @types/react @types/react-dom jsdom@26.1.0 @electric-sql/pglite@0.3.10
+$env:CONTENT_QA_MODULES = Join-Path $contentQaDir 'node_modules'
+$env:ACCOUNT_QA_MODULES = Join-Path $contentQaDir 'node_modules'
 node route-typescript.test.mjs
 node route-react.test.mjs
 node route-accessibility.test.mjs
@@ -263,18 +219,19 @@ node route-accessibility.test.mjs
 Las tres admiten CONTENT_QA_MODULES apuntando a un node_modules con esas herramientas. Solo TypeScript
 y React admiten CONTENT_QA_SKIP=1 para omitir el contraste a sabiendas. Omitirlo no cuenta como contraste
 nativo aprobado. La comparación de Node también es obligatoria y cierra sus servidores antes de terminar.
+`.github/workflows/quality.yml` repite las 26 suites en cada push y pull request.
 
 Para una vista local: `python -m http.server 4174 --bind 127.0.0.1`.
 Ver `QA.md` para el alcance de la revisión y `HANDOFF.md` para continuidad operativa.
 
 ## Mantenimiento y publicación
 
-La configuración pública conserva mantenimiento en intenta.cl y www.intenta.cl, incluso en rutas directas.
+La configuración pública conserva mantenimiento en capsulasdev.com y www.capsulasdev.com, incluso en rutas directas.
 El HTML comienza con `is-maintenance` y mantiene esa pantalla sin JavaScript.
 No retirar mantenimiento sin autorización expresa.
 
-- Revisión publicada: https://intenta.cl/?revision=septiembre-2026
-- Salida de revisión: https://intenta.cl/?maintenance
+- Revisión publicada: https://capsulasdev.com/?revision=septiembre-2026
+- Salida de revisión: https://capsulasdev.com/?maintenance
 
 `review-preview.js` conserva la revisión en sessionStorage; los enlaces internos propagan el parámetro.
 Mantenimiento y revisión declaran noindex, nofollow. El enlace no autentica ni protege archivos privados:

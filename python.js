@@ -1522,6 +1522,7 @@ function renderProject() {
   positionText.textContent = "Proyecto " + project.id + " de " + TOTAL_PROJECTS;
   renderProjectList();
   renderCheckpoint();
+  globalThis.LearningExperience?.setModule("python", project.id - 1, { title: project.shortTitle || project.title });
   globalThis.LearningState?.save("python", project.id - 1, projectCode.value);
 }
 
@@ -1602,6 +1603,7 @@ function runActiveProject() {
     error: executionError,
     ms: Date.now() - projectOpenedAt
   });
+  globalThis.LearningExperience?.showFeedback();
 }
 
 function resetActiveProject() {

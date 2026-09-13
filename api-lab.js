@@ -181,7 +181,7 @@
     }
     if (ruta === "/") {
       return respuesta(200, {
-        mensaje: "API de Código Cero",
+        mensaje: "API de CápsulasDev",
         recursos: ["/cursos", "/cursos/{id}", "/estudiantes", "/estudiantes/{id}"],
         autenticacion: "Bearer " + TOKEN + " para crear, modificar o borrar"
       });

@@ -18,7 +18,7 @@ function open(page, hostname, search, saved = new Map(), blocked = false) {
     }};
   const html = read(page+'.html');
   assert.match(html, /<html[^>]*class="is-maintenance"/, 'sin JavaScript se conserva mantenimiento');
-  assert.match(html, /review-preview\.js\?v=20260903-review1/);
+  assert.match(html, /review-preview\.js\?v=20260912-brand1/);
   vm.runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)[1],context);
   vm.runInNewContext(preview,context);
   return {classes,root,metas};

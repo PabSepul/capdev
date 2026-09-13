@@ -27,7 +27,7 @@
         || new URLSearchParams(window.location.search).has("maintenance");
       if (showMaintenance) {
         document.documentElement.classList.add("is-maintenance");
-        document.title = "Código Cero — Estamos preparando algo nuevo";
+        document.title = "CápsulasDev — Estamos preparando algo nuevo";
         const robots = document.createElement("meta");
         robots.name = "robots";
         robots.content = "noindex, nofollow";
@@ -44,7 +44,7 @@
       }
     })();
   </script>
-  <script src="review-preview.js?v=20260903-review1"></script>
+  <script src="review-preview.js?v=20260912-brand1"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -52,12 +52,12 @@
   <link rel="stylesheet" href="styles.css?v=20260909-profile3">
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
   <link rel="stylesheet" href="account.css?v=20260909-profile3">
-  <link rel="stylesheet" href="home.css?v=20260909-home1">
+  <link rel="stylesheet" href="home.css?v=20260912-experience1">
 </head>
 <body class="home-page">
   <section class="maintenance-screen" aria-labelledby="maintenance-title">
     <div class="maintenance-shell">
-      <div class="maintenance-brand"><span aria-hidden="true">&gt;_</span> Código Cero</div>
+      <div class="maintenance-brand"><span aria-hidden="true">&gt;_</span> CápsulasDev</div>
       <p class="maintenance-kicker">Actualización en curso</p>
       <h1 id="maintenance-title">Estamos preparando la siguiente etapa.</h1>
       <p>Estamos preparando nuevas rutas, ejercicios y mejores explicaciones para aprender paso a paso.</p>
@@ -75,7 +75,7 @@
     </a>
     <nav aria-label="Navegación principal">
       <a href="#rutas">Explorar rutas</a>
-      <a href="#como-aprender">Cómo funciona</a>
+      <a href="#itinerarios">Itinerarios</a>
       <a href="#preguntas">Dudas frecuentes</a>
     </nav>
     <div class="header-actions">
@@ -113,6 +113,14 @@
           <a href="python.html"><span class="start-symbol" aria-hidden="true">&gt;_</span><span><strong>Mi primer programa</strong><small>Empieza con Python</small></span><span aria-hidden="true">↗</span></a>
           <a href="html-css.html"><span class="start-symbol" aria-hidden="true">&lt;/&gt;</span><span><strong>Mi primera página web</strong><small>Empieza con HTML y CSS</small></span><span aria-hidden="true">↗</span></a>
           <a href="sql.html"><span class="start-symbol" aria-hidden="true">▤</span><span><strong>Respuestas con datos</strong><small>Empieza con SQL</small></span><span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <section class="learning-paths" id="itinerarios" aria-labelledby="itineraries-title">
+        <div class="home-section-heading"><div><p class="home-kicker">UNA META, PASO A PASO</p><h2 id="itineraries-title">Elige un itinerario para saber qué sigue.</h2><p>Las rutas continúan abiertas. El itinerario solo organiza el camino según lo que quieres crear.</p></div><p class="itinerary-status" id="itinerary-status" role="status" tabindex="-1">Elige un itinerario para recibir orientación entre rutas.</p></div>
+        <div class="itinerary-grid">
+          <article class="itinerary-card" data-itinerary="web"><div><span>01</span><p>DESARROLLO WEB</p></div><h3>Construye una aplicación web</h3><p>Empieza por la estructura de una página y avanza hasta componentes con datos.</p><ol><li><a href="html-css.html">HTML y CSS</a></li><li><a href="javascript.html">JavaScript</a></li><li><a href="git.html">Git y GitHub</a></li><li><a href="apis.html">APIs</a></li><li><a href="typescript.html">TypeScript</a></li><li><a href="react.html">React</a></li></ol><small data-itinerary-progress></small><div><button type="button" data-choose-itinerary aria-pressed="false">Elegir este itinerario</button><a href="html-css.html" data-itinerary-resume>Comenzar itinerario →</a></div></article>
+          <article class="itinerary-card" data-itinerary="python-datos"><div><span>02</span><p>PYTHON Y DATOS</p></div><h3>Convierte datos en respuestas</h3><p>Programa procesos, consulta información y crea reportes reproducibles.</p><ol><li><a href="python.html">Python</a></li><li><a href="sql.html">SQL</a></li><li><a href="datos-python.html">Datos con Python</a></li><li><a href="apis.html">APIs</a></li><li><a href="mongodb.html">MongoDB</a></li></ol><small data-itinerary-progress></small><div><button type="button" data-choose-itinerary aria-pressed="false">Elegir este itinerario</button><a href="python.html" data-itinerary-resume>Comenzar itinerario →</a></div></article>
+          <article class="itinerary-card" data-itinerary="herramientas"><div><span>03</span><p>HERRAMIENTAS PROFESIONALES</p></div><h3>Organiza y publica tu trabajo</h3><p>Practica el flujo que acompaña a un proyecto desde la terminal hasta sus pruebas.</p><ol><li><a href="terminal.html">Terminal</a></li><li><a href="git.html">Git y GitHub</a></li><li><a href="nodejs.html">Node.js</a></li><li><a href="docker.html">Docker</a></li><li><a href="testing.html">Pruebas automatizadas</a></li></ol><small data-itinerary-progress></small><div><button type="button" data-choose-itinerary aria-pressed="false">Elegir este itinerario</button><a href="terminal.html" data-itinerary-resume>Comenzar itinerario →</a></div></article>
         </div>
       </section>
       <section class="home-catalog" id="rutas" aria-labelledby="routes-title">
@@ -167,11 +175,12 @@
     </div>
   </footer>
 
-  <script src="learning-state.js?v=20260910-newtech1"></script>
+  <script src="learning-state.js?v=20260912-experience1"></script>
   <script src="account-config.js?v=20260909-profile3"></script>
   <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
-  <script src="account.js?v=20260909-offline1"></script>
+  <script src="account.js?v=20260912-experience1"></script>
+  <script src="learning-experience.js?v=20260912-experience1"></script>
   <script src="json-lab.js?v=20260907-json1"></script>
   <script src="course-logos.js?v=20260911-newtech2"></script>
   <script src="catalog.js?v=20260909-profile3"></script>

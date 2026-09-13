@@ -17,7 +17,7 @@
       const showMaintenance = publicHosts.includes(window.location.hostname) || new URLSearchParams(window.location.search).has("maintenance");
       if (showMaintenance) {
         document.documentElement.classList.add("is-maintenance");
-        document.title = "Código Cero — Estamos preparando algo nuevo";
+        document.title = "CápsulasDev — Estamos preparando algo nuevo";
         const robots = document.createElement("meta"); robots.name = "robots"; robots.content = "noindex, nofollow"; document.head.append(robots);
       } else {
         document.documentElement.classList.remove("is-maintenance");
@@ -27,7 +27,7 @@
       catch { document.documentElement.dataset.theme = preferred; }
     })();
   </script>
-  <script src="review-preview.js?v=20260903-review1"></script>
+  <script src="review-preview.js?v=20260912-brand1"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -35,11 +35,11 @@
   <link rel="stylesheet" href="styles.css?v=20260909-profile3">
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
   <link rel="stylesheet" href="account.css?v=20260909-profile3">
-  <link rel="stylesheet" href="experience.css?v=20260909-experience1">
+  <link rel="stylesheet" href="experience.css?v=20260912-experience1">
   <link rel="stylesheet" href="course-learning.css?v=20260910-htmlcss3">
 </head>
 <body class="course-page starter-page experience-page" data-course="javascript">
-  <section class="maintenance-screen" aria-labelledby="maintenance-title"><div class="maintenance-shell"><div class="maintenance-brand"><span aria-hidden="true">&gt;_</span> Código Cero</div><p class="maintenance-kicker">Actualización en curso</p><h1 id="maintenance-title">Estamos preparando la siguiente etapa.</h1><p>Nuevas rutas y ejercicios están en construcción.</p><div class="maintenance-progress" aria-hidden="true"><span></span></div><small>Volvemos pronto.</small></div></section>
+  <section class="maintenance-screen" aria-labelledby="maintenance-title"><div class="maintenance-shell"><div class="maintenance-brand"><span aria-hidden="true">&gt;_</span> CápsulasDev</div><p class="maintenance-kicker">Actualización en curso</p><h1 id="maintenance-title">Estamos preparando la siguiente etapa.</h1><p>Nuevas rutas y ejercicios están en construcción.</p><div class="maintenance-progress" aria-hidden="true"><span></span></div><small>Volvemos pronto.</small></div></section>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="CápsulasDev, volver a la portada"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a>
@@ -95,11 +95,12 @@
   </main>
   <footer><div class="footer-inner"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a><p>Programación clara para dar el primer paso.</p><p><a href="privacidad.html">Privacidad</a></p>
       <p class="footer-meta">Hecho para aprender · <span data-current-year></span></p></div></footer>
-  <script src="learning-state.js?v=20260910-newtech1"></script>
+  <script src="learning-state.js?v=20260912-experience1"></script>
   <script src="account-config.js?v=20260909-profile3"></script>
   <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
-  <script src="account.js?v=20260909-offline1"></script>
+  <script src="account.js?v=20260912-experience1"></script>
+  <script src="learning-experience.js?v=20260912-experience1"></script>
   <script src="site.js?v=20260903-review1"></script>
   <script src="starter-runtime.js?v=20260907-react1"></script>
   <script src="base-courses.js?v=20260907-csp1"></script>
@@ -107,6 +108,6 @@
   <script src="learning-guidance.js?v=20260906-expansion1"></script>
   <script src="course-expansion.js?v=20260906-expansion1"></script>
   <script src="javascript-learning.js?v=20260910-javascript1"></script>
-  <script src="starter-course.js?v=20260910-newtech1"></script>
+  <script src="starter-course.js?v=20260912-experience1"></script>
 </body>
 </html>

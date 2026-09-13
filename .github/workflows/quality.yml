@@ -1,0 +1,38 @@
+name: Calidad
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Preparar motores de contraste
+        run: npm install --prefix "$RUNNER_TEMP/capsulasdev-qa" --ignore-scripts --no-audit --no-fund typescript@5.9.3 react@19.2.8 react-dom@19.2.8 @types/react @types/react-dom jsdom@26.1.0 @electric-sql/pglite@0.3.10
+      - name: Ejecutar todas las suites
+        env:
+          CONTENT_QA_MODULES: ${{ runner.temp }}/capsulasdev-qa/node_modules
+          ACCOUNT_QA_MODULES: ${{ runner.temp }}/capsulasdev-qa/node_modules
+        run: |
+          failed=0
+          for test in *.test.mjs; do
+            echo "::group::$test"
+            node "$test" || failed=1
+            echo "::endgroup::"
+          done
+          exit "$failed"
+

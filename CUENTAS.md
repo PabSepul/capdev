@@ -22,8 +22,10 @@ El usuario aprobó esta política el 9 de septiembre de 2026:
   Contar desde la creación del respaldo, no desde su descarga o restauración.
   Revisar también las copias de prueba y las papeleras al retirar archivos: mover
   un archivo a la papelera no completa su eliminación. No se ha ejecutado limpieza.
-- El responsable del sitio realiza el proceso manualmente. No hay tareas
-  automáticas de respaldo ni de eliminación configuradas.
+- `scripts/Respaldar-Supabase.ps1` automatiza el dump, la comprobación, el cifrado
+  y la retención. `scripts/Programar-Respaldo.ps1` mantiene activa una tarea diaria
+  de Windows a las 03:00. Se probó el recorrido completo desde el Programador de
+  tareas el 13 de septiembre: resultado `0` y archivo cifrado nuevo en OneDrive.
 - Subir únicamente el archivo `.7z` cifrado a OneDrive personal, carpeta
   `CapsulasDev-Respaldos`. Guardar la contraseña por separado en el gestor de
   contraseñas. No subir el `.dump` ni el SQL de restauración sin cifrar.
@@ -37,6 +39,11 @@ El usuario confirmó `Everything is Ok` y código 0 al comprobar el archivo loca
 y posteriormente la copia descargada de OneDrive. Para probarlo se utiliza
 `7z t ruta-del-archivo.7z`, dejando que solicite la contraseña; no pasarla como
 argumento ni usar `-p` vacío en esa comprobación.
+
+Automatización vigente: `capsulasdev-20260913-180834.7z`, 19154 bytes, creado
+por la tarea `CapsulasDev - Respaldo diario`. El dump temporal se genera en
+`%LOCALAPPDATA%\CapsulasDev\backup-work`, fuera de OneDrive, y se borra después
+de verificar el 7z. La próxima ejecución quedó programada para las 03:00.
 
 Restauración de ensayo confirmada por el usuario en el proyecto separado
 `capsulasdev-prueba-restauracion`: migración del repositorio aplicada primero;
@@ -60,6 +67,11 @@ la retención acordada, el proceso manual, OneDrive cifrado y la diferencia entr
 borrado activo y caducidad de respaldos. Falta concretar el registro operativo de
 bajas antes de una restauración en producción; no hay reconciliación automática.
 El usuario autorizó publicar esta actualización del aviso el 9 de septiembre.
+
+El procedimiento automatizado y su comprobación periódica están en
+[`RESPALDOS.md`](RESPALDOS.md). La contraseña de PostgreSQL y la del archivo se
+protegen con DPAPI fuera del repositorio. La automatización no resuelve todavía
+la reconciliación de cuentas eliminadas al restaurar una copia anterior.
 
 La documentación de Resend consultada el 9 de septiembre aclara que São Paulo es
 la región de envío: mensajes y registros se almacenan en Estados Unidos. Declara

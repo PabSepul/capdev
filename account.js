@@ -14,7 +14,7 @@
     return;
   }
   const uuid = () => crypto.randomUUID();
-  const original = Object.fromEntries(["save","removeDraft","completar","aprobarExamen","registrarIntento"].map(k => [k,state[k].bind(state)]));
+  const original = Object.fromEntries(["save","removeDraft","completar","aprobarExamen","registrarIntento","seleccionarItinerario","registrarFeedback"].map(k => [k,state[k].bind(state)]));
   let owner = state.cuenta(), queue = null, client = null, snapshot = null, busy = false, timer = null;
   let ready = false, epoch = 0, message = "Crea tu perfil para sincronizar el avance automáticamente.", subscribed = false, loggingOut = false;
   let bases = {}, syncing = false;
@@ -89,9 +89,20 @@
     const event=state.bitacora().eventos.at(-1);
     enqueue({kind:"attempt",route:r,module:m,v:event.v,ok:event.ok,error:event.e,ms:event.ms});
   });
+  state.seleccionarItinerario = guard((id) => {
+    const before=state.itinerario();
+    const saved=original.seleccionarItinerario(id);
+    if (saved && before!==id && queue && validScope()) enqueue({kind:"preference",itinerary:id});
+    return saved;
+  });
+  state.registrarFeedback = guard((r,m,value,area=null) => {
+    const saved=original.registrarFeedback(r,m,value,area);
+    if (saved && queue && validScope()) enqueue({kind:"feedback",route:r,module:m,value,area});
+    return saved;
+  });
   function apply(snapshotData) {
     snapshot=snapshotData;
-    state.combinarRemoto(snapshot.routes);
+    state.combinarRemoto(snapshot.routes,snapshot.profile);
     const pending=queue.entries().map(x=>x.op);
     for (const d of snapshot.drafts) {
       const slot=d.route+":"+d.module;

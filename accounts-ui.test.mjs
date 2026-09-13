@@ -46,6 +46,10 @@ await eventually(()=>pending().length===0);
 assert.equal(requests.at(-1).token,'Bearer test-token-A');
 assert.deepEqual(requests.at(-1).ops.map(x=>x.kind).sort(),['attempt','complete']);
 assert.equal(w.document.querySelector('#account-routes').textContent.includes('Python'),true);
+w.LearningState.seleccionarItinerario('web');
+w.LearningState.registrarFeedback('python',0,'claro',null);
+await eventually(()=>pending().length===0);
+assert.deepEqual(requests.at(-1).ops.map(x=>x.kind).sort(),['feedback','preference']);
 // Se cambia la cuenta mientras una respuesta anterior está en vuelo.
 let release;holds=new Promise(resolve=>release=resolve);
 w.LearningState.completar('python',2);w.dispatchEvent(new w.Event('online'));
@@ -80,6 +84,10 @@ guest.LearningState.save('python',0,'print("sin perfil")');
 assert.equal(guest.LearningState.progress('python').completed,0,'sin perfil no se guarda un ejercicio');
 assert.equal(guest.LearningState.bitacora().eventos.length,0,'sin perfil no se registra un intento');
 assert.equal(guest.LearningState.session('python').drafts[0],undefined,'sin perfil no se guarda un borrador');
+guest.LearningState.seleccionarItinerario('herramientas');
+guest.LearningState.registrarFeedback('python',0,'mejorar','pistas');
+assert.equal(guest.LearningState.itinerario(),'herramientas','la orientación local no exige una cuenta');
+assert.equal(guest.LearningState.feedback('python',0).area,'pistas','el feedback queda en el dispositivo hasta iniciar sesión');
 guest.close();
 
 // Recarga de una cuenta previamente verificada: fallar al cargar Auth o el perfil

@@ -1,73 +1,9 @@
--- CápsulasDev: ejecutar una vez en un proyecto Supabase nuevo.
--- Las escrituras pasan por RPC: el cliente nunca elige el propietario.
 begin;
-create table public.learning_profiles (
-  user_id uuid primary key references auth.users(id) on delete cascade,
-  alias text not null default '' check (char_length(alias) <= 60),
-  itinerary text check (itinerary is null or itinerary in ('web','python-datos','herramientas')),
-  privacy_version text not null,
-  adult_confirmed_at timestamptz not null default now(),
-  created_at timestamptz not null default now()
-);
-create table public.learning_routes (
-  user_id uuid references auth.users(id) on delete cascade,
-  route text not null,
-  state jsonb not null default '{"completados":[],"examenes":[],"intentos":{}}',
-  primary key(user_id, route)
-);
-create table public.learning_operations (
-  user_id uuid references auth.users(id) on delete cascade,
-  id uuid not null,
-  kind text not null,
-  payload jsonb not null,
-  received_at timestamptz not null default clock_timestamp(),
-  primary key(user_id, id)
-);
-create table public.learning_drafts (
-  user_id uuid references auth.users(id) on delete cascade,
-  route text not null,
-  module integer not null,
-  version uuid not null,
-  code text,
-  primary key(user_id, route, module)
-);
-create table public.learning_draft_conflicts (
-  user_id uuid references auth.users(id) on delete cascade,
-  version uuid not null,
-  route text not null,
-  module integer not null,
-  code text,
-  created_at timestamptz not null default now(),
-  primary key(user_id, version)
-);
-alter table public.learning_profiles enable row level security;
-alter table public.learning_routes enable row level security;
-alter table public.learning_operations enable row level security;
-alter table public.learning_drafts enable row level security;
-alter table public.learning_draft_conflicts enable row level security;
-revoke all on public.learning_profiles, public.learning_routes, public.learning_operations,
-  public.learning_drafts, public.learning_draft_conflicts from anon, authenticated;
-grant select on public.learning_profiles, public.learning_routes, public.learning_operations,
-  public.learning_drafts, public.learning_draft_conflicts to authenticated;
-create policy own_profile on public.learning_profiles for select to authenticated using (user_id = (select auth.uid()));
-create policy own_routes on public.learning_routes for select to authenticated using (user_id = (select auth.uid()));
-create policy own_operations on public.learning_operations for select to authenticated using (user_id = (select auth.uid()));
-create policy own_drafts on public.learning_drafts for select to authenticated using (user_id = (select auth.uid()));
-create policy own_conflicts on public.learning_draft_conflicts for select to authenticated using (user_id = (select auth.uid()));
+alter table public.learning_profiles add column if not exists itinerary text;
+alter table public.learning_profiles drop constraint if exists learning_profiles_itinerary_check;
+alter table public.learning_profiles add constraint learning_profiles_itinerary_check check (itinerary is null or itinerary in ('web','python-datos','herramientas'));
 
-create function public.learning_enroll(p_alias text, p_adult boolean, p_privacy text)
-returns void language plpgsql security definer set search_path = '' as $$
-begin
-  if auth.uid() is null then raise exception 'Sesión requerida'; end if;
-  if p_adult is distinct from true or p_privacy is distinct from '2026-09-07' then
-    raise exception 'Confirma la mayoría de edad y el aviso de privacidad';
-  end if;
-  insert into public.learning_profiles(user_id, alias, privacy_version)
-  values (auth.uid(), trim(coalesce(p_alias,'')), p_privacy)
-  on conflict(user_id) do update set alias = excluded.alias;
-end $$;
-
-create function public.learning_sync(p_operations jsonb default '[]')
+create or replace function public.learning_sync(p_operations jsonb default '[]')
 returns jsonb language plpgsql security definer set search_path = '' as $$
 declare
   uid uuid := auth.uid(); op jsonb; rid text; idx integer; n integer; offset_id integer; selected_itinerary text;
@@ -165,14 +101,7 @@ begin
   return result;
 end $$;
 
-create function public.learning_export() returns jsonb language plpgsql security definer set search_path = '' as $$
-begin
-  if auth.uid() is null then raise exception 'Sesión requerida'; end if;
-  return jsonb_build_object('format','capsulasdev/account-v1','exported_at',now(),
-    'state',public.learning_sync('[]'),
-    'operations',coalesce((select jsonb_agg(jsonb_build_object('operation',payload,'received_at',received_at))
-      from public.learning_operations where user_id=auth.uid()),'[]'));
-end $$;
-revoke all on function public.learning_enroll(text,boolean,text), public.learning_sync(jsonb), public.learning_export() from public, anon;
-grant execute on function public.learning_enroll(text,boolean,text), public.learning_sync(jsonb), public.learning_export() to authenticated;
+revoke all on function public.learning_sync(jsonb) from public, anon;
+grant execute on function public.learning_sync(jsonb) to authenticated;
 commit;
+

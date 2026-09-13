@@ -383,5 +383,23 @@ for (const id of ['markdown', 'accesibilidad', 'testing']) {
   assert.equal(state.progress('json').started, false, 'el avance de otra ruta sigue independiente');
 }
 
+/* ---------- itinerarios y feedback estructurado ---------- */
+{
+  const { state } = setup();
+  assert.equal(state.itinerario(), null);
+  assert.equal(state.seleccionarItinerario('python-datos'), true);
+  assert.equal(state.itinerario(), 'python-datos');
+  assert.equal(state.seleccionarItinerario('inventado'), false);
+  assert.equal(state.registrarFeedback('python', 0, 'mejorar', 'explicacion'), true);
+  assert.deepEqual(JSON.parse(JSON.stringify(state.feedback('python', 0))).valor, 'mejorar');
+  assert.equal(state.feedback('python', 0).area, 'explicacion');
+  assert.equal(state.registrarFeedback('python', 99, 'claro'), false);
+  assert.equal(state.registrarFeedback('python', 0, 'texto libre'), false);
+  const restored = setup().state;
+  assert.equal(restored.importar(state.exportar()).ok, true);
+  assert.equal(restored.itinerario(), 'python-datos');
+  assert.equal(restored.feedback('python', 0).area, 'explicacion');
+}
+
 console.log(`Continuidad: ${routes.length} rutas en un documento con esquema, migración desde las claves anteriores,`
   + ` borradores, exámenes, registro de intentos, panel de respaldo, datos corruptos, cuota y catálogo: OK`);
