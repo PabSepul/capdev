@@ -28,7 +28,8 @@ w.supabase={createClient(url,key,options){
     return {data:{accepted:p_operations.map(x=>x.id),routes:savedRoutes,drafts:[],conflicts:[],profile:{alias:'Ada'}},error:null};
   }};
 }};
-const eventually=async predicate=>{for(let i=0;i<100;i++){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,10));}assert.fail('No se completó el flujo asíncrono');};
+// La cola agrupa cambios durante 1,2 s; se deja margen para runners compartidos.
+const eventually=async predicate=>{for(let i=0;i<300;i++){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,10));}assert.fail('No se completó el flujo asíncrono');};
 w.eval(read('account.js'));
 await eventually(()=>w.document.querySelector('[data-account-status]').textContent.startsWith('Avance guardado automáticamente'));
 assert.equal(w.document.querySelector('#account-data').hidden,false);
