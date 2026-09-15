@@ -164,7 +164,7 @@
     const nextLink=control("#account-next-step"), itinerary=control("#account-itinerary"), steps=control("#account-itinerary-steps");
     const routeList=control("#account-routes"), emptyRoutes=control("#account-empty-routes");
     const capiImage=control("#account-capi-image"), capiCopy=control("#account-capi-copy");
-    const setCapi=(pose,message)=>{ capiImage.src="assets/capi-"+pose+".svg"; capiCopy.textContent=message; };
+    const setCapi=(pose,message)=>{ capiImage.src="assets/capi-"+pose+".svg?v=20260914-capi3"; capiCopy.textContent=message; };
     routeList.replaceChildren(); steps.replaceChildren();
     if (!path) {
       title.textContent="Elige una meta para ordenar tus rutas";

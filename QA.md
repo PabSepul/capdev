@@ -70,6 +70,19 @@ del body, sin desbordamiento. Capi se mantiene como apoyo secundario: no tapa el
 editor, no cambia el orden de foco y su texto comunica la misma información que
 la ilustración.
 
+La ampliación posterior exige 19 mensajes específicos, una nota en el punto de
+control, guía en el mini examen y celebración de cierre. Se prueban los estados
+pendiente, aprobado y por repasar, incluyendo el cambio entre las poses de
+reflexión y celebración. La revisión real no mostró errores de consola ni
+desbordamiento en las vistas de escritorio y móvil.
+
+Las poses de reflexión y orientación incluyen ahora un grupo verificable para
+los dos brazos. La prueba también exige el contorno claro de la interrogación.
+Ese contorno se limita al símbolo: otra aserción impide aplicarlo a los brazos.
+En navegador se comprobó el resultado a tamaño pequeño en la orientación y la
+ayuda gradual: ambos brazos se distinguen y la interrogación permanece legible
+sobre el fondo oscuro.
+
 # Historial de revisiones
 
 ## Despliegue verificado el 8 de septiembre de 2026

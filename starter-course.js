@@ -447,6 +447,7 @@
     examReviewed = false;
     elements.examResult.textContent = "";
     elements.examResult.className = "exam-result";
+    globalThis.LearningExperience?.showExamResult();
     elements.exam.hidden = false;
     renderExam();
     elements.examTitle.focus?.({ preventScroll: true });
@@ -464,6 +465,7 @@
     if (examAnswers.size !== exam.questions.length) {
       elements.examResult.textContent = `Responde las ${exam.questions.length} preguntas antes de revisar.`;
       elements.examResult.className = "exam-result is-pending";
+      globalThis.LearningExperience?.showExamResult({ pending: true });
       return;
     }
     const result = globalThis.StarterExams.gradeExam(courseId, exam.levelId, examAnswers);
@@ -481,6 +483,7 @@
         + (approvedExams.has(exam.levelId) ? " Tu aprobación anterior se conserva." : "");
       elements.examResult.className = "exam-result is-failed";
     }
+    globalThis.LearningExperience?.showExamResult(result);
     renderLevels();
     renderProgress();
     renderCheckpoint();

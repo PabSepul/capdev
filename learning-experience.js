@@ -25,6 +25,27 @@
     }
   ];
   const routeById = new Map(state.routes.map(route => [route.id, route]));
+  const routeTips = Object.freeze({
+    "python": "Aquí una instrucción pequeña puede convertirse en un programa completo.",
+    "html-css": "Aquí verás cómo el contenido y el estilo construyen una interfaz juntos.",
+    "javascript": "Prueba cada cambio y observa cómo los datos hacen que la página responda.",
+    "sql": "Lee la consulta como una pregunta: cada cláusula precisa la respuesta.",
+    "git": "Haz cambios pequeños y descríbelos bien: así será más fácil volver y comparar.",
+    "apis": "Sigue el viaje de la petición a la respuesta antes de cambiar el código.",
+    "terminal": "Lee primero la ruta y después el comando: sabrás dónde ocurrirá cada acción.",
+    "regex": "Construye el patrón por partes y comprueba qué texto acepta en cada paso.",
+    "ia": "Compara la entrada, el proceso y la salida antes de evaluar una respuesta.",
+    "datos-python": "Observa una fila primero; después aplica la transformación al conjunto.",
+    "nodejs": "Distingue qué dato entra, qué procesa el servidor y qué resultado devuelve.",
+    "typescript": "Los tipos describen tu intención y te ayudan a detectar inconsistencias antes.",
+    "react": "Piensa cada componente como una pieza con datos de entrada y una responsabilidad.",
+    "json": "Revisa llaves, comas y tipos: la estructura hace que el dato sea previsible.",
+    "markdown": "Empieza por la jerarquía del contenido y añade formato solo cuando ayude a leer.",
+    "accesibilidad": "Comprueba que la información siga clara con teclado, texto y buen contraste.",
+    "testing": "Una buena prueba explica el comportamiento esperado con un caso concreto.",
+    "docker": "Separa imagen, contenedor y datos persistentes para entender qué estás cambiando.",
+    "mongodb": "Mira primero la forma del documento y después decide cómo consultarlo."
+  });
   const selectedPath = () => paths.find(path => path.id === state.itinerario()) || null;
   const reviewLink = href => {
     const review = document.documentElement?.dataset?.review;
@@ -33,7 +54,7 @@
     return path + "?revision=" + encodeURIComponent(review) + (hash ? "#" + hash : "");
   };
   const routeLink = id => reviewLink(routeById.get(id)?.path || (id + ".html"));
-  const capiAsset = pose => `assets/capi-${pose}.svg`;
+  const capiAsset = pose => `assets/capi-${pose}.svg?v=20260914-capi3`;
   const capiImage = (pose, alt, className = "capi-character") =>
     `<img class="${className}" src="${capiAsset(pose)}" alt="${alt || ""}">`;
 
@@ -48,6 +69,21 @@
       if (header.querySelector(".capi-hint-character")) return;
       header.insertAdjacentHTML("afterbegin", capiImage("thinking", "", "capi-character capi-hint-character"));
       header.classList.add("has-capi");
+    });
+  }
+
+  function decorateAssessments() {
+    const checkpoint = document.querySelector(".checkpoint-copy");
+    if (checkpoint && typeof checkpoint.querySelector === "function" && typeof checkpoint.insertAdjacentHTML === "function" && !checkpoint.querySelector(".capi-checkpoint-note")) {
+      checkpoint.insertAdjacentHTML("beforeend", `<div class="capi-checkpoint-note">${capiImage("celebrate", "", "capi-character")}<span>Completaste los ejercicios del nivel. Ahora comprueba lo que puedes explicar y aplicar.</span></div>`);
+    }
+    const examCopy = document.querySelector(".exam-head > div:first-child");
+    if (examCopy && typeof examCopy.querySelector === "function" && typeof examCopy.insertAdjacentHTML === "function" && !examCopy.querySelector(".capi-exam-guide")) {
+      examCopy.insertAdjacentHTML("afterbegin", `<div class="capi-exam-guide">${capiImage("thinking", "", "capi-character")}<span>Capi te acompaña: lee cada opción con calma.</span></div>`);
+    }
+    document.querySelectorAll(".python-finish > span:first-child").forEach(icon => {
+      if (typeof icon.querySelector !== "function" || icon.querySelector(".capi-finish-character")) return;
+      icon.innerHTML = capiImage("celebrate", "", "capi-character capi-finish-character");
     });
   }
 
@@ -112,19 +148,20 @@
       breadcrumb.insertAdjacentElement("afterend", panel);
     }
     const path = selectedPath();
+    const routeTip = routeTips[routeId] || "Avanza con una idea a la vez y comprueba cada cambio.";
     if (!path) {
-      panel.innerHTML = `<div class="route-orientation-main">${capiImage("thinking", "", "capi-character capi-orientation-character")}<div><span>ORIENTACIÓN DE CAPI</span><strong>¿Quieres saber qué estudiar después?</strong><p>Elige un itinerario para conectar esta ruta con un objetivo.</p></div></div><a href="${reviewLink("index.html#itinerarios")}">Ver itinerarios →</a>`;
+      panel.innerHTML = `<div class="route-orientation-main">${capiImage("thinking", "", "capi-character capi-orientation-character")}<div><span>ORIENTACIÓN DE CAPI</span><strong>¿Quieres saber qué estudiar después?</strong><p>${routeTip} Elige un itinerario para conectar esta ruta con un objetivo.</p></div></div><a href="${reviewLink("index.html#itinerarios")}">Ver itinerarios →</a>`;
       return;
     }
     const position = path.routes.indexOf(routeId);
     if (position < 0) {
-      panel.innerHTML = `<div class="route-orientation-main">${capiImage("guide", "", "capi-character capi-orientation-character")}<div><span>CAPI · EXPLORACIÓN LIBRE</span><strong>${path.name} sigue guardado</strong><p>Esta ruta no cambia el avance de tu itinerario. Puedes explorarla y regresar cuando quieras.</p></div></div><a href="${reviewLink("index.html#itinerarios")}">Volver al itinerario →</a>`;
+      panel.innerHTML = `<div class="route-orientation-main">${capiImage("guide", "", "capi-character capi-orientation-character")}<div><span>CAPI · EXPLORACIÓN LIBRE</span><strong>${path.name} sigue guardado</strong><p>${routeTip} Esta ruta no cambia el avance de tu itinerario.</p></div></div><a href="${reviewLink("index.html#itinerarios")}">Volver al itinerario →</a>`;
       return;
     }
     const previous = path.routes[position - 1];
     const next = path.routes[position + 1];
     const nextCopy = next ? `Después continúa con ${routeById.get(next).name}.` : "Esta es la última ruta del itinerario.";
-    panel.innerHTML = `<div class="route-orientation-main">${capiImage(next ? "guide" : "celebrate", "", "capi-character capi-orientation-character")}<div><span>CAPI · ${path.name.toUpperCase()} · PASO ${position + 1} DE ${path.routes.length}</span><strong>${routeById.get(routeId).name}</strong><p>${nextCopy}</p></div></div><div class="route-orientation-links">${previous ? `<a href="${routeLink(previous)}">← ${routeById.get(previous).name}</a>` : ""}${next ? `<a href="${routeLink(next)}">${routeById.get(next).name} →</a>` : `<a href="${reviewLink("index.html#itinerarios")}">Ver avance →</a>`}</div>`;
+    panel.innerHTML = `<div class="route-orientation-main">${capiImage(next ? "guide" : "celebrate", "", "capi-character capi-orientation-character")}<div><span>CAPI · ${path.name.toUpperCase()} · PASO ${position + 1} DE ${path.routes.length}</span><strong>${routeById.get(routeId).name}</strong><p>${routeTip} ${nextCopy}</p></div></div><div class="route-orientation-links">${previous ? `<a href="${routeLink(previous)}">← ${routeById.get(previous).name}</a>` : ""}${next ? `<a href="${routeLink(next)}">${routeById.get(next).name} →</a>` : `<a href="${reviewLink("index.html#itinerarios")}">Ver avance →</a>`}</div>`;
   }
 
   let active = null;
@@ -202,11 +239,31 @@
     panel.hidden = false;
   }
 
+  function showExamResult(outcome = {}) {
+    const guide = document.querySelector(".capi-exam-guide");
+    if (!guide || typeof guide.querySelector !== "function") return;
+    const character = guide.querySelector("img");
+    const copy = guide.querySelector("span");
+    if (!character || !copy) return;
+    let pose = "thinking";
+    let message = "Capi te acompaña: lee cada opción con calma.";
+    if (outcome.pending) message = "Todavía falta una respuesta. Revisa las preguntas antes de continuar.";
+    else if (outcome.passed === true) {
+      pose = "celebrate";
+      message = `¡Nivel aprobado! Resolviste ${outcome.correct} de ${outcome.total} preguntas.`;
+    } else if (outcome.passed === false) {
+      message = `Este intento tuvo ${outcome.correct} de ${outcome.total}. Revisa las explicaciones y vuelve a probar.`;
+    }
+    character.src = capiAsset(pose);
+    copy.textContent = message;
+  }
+
   document.querySelector("#itinerarios")?.addEventListener("click", choose);
   decorateHome();
   decorateHints();
+  decorateAssessments();
   renderHome();
   renderOrientation();
-  globalThis.addEventListener?.("pageshow", () => { state.refrescar?.(); decorateHome(); decorateHints(); renderHome(); renderOrientation(); });
-  globalThis.LearningExperience = Object.freeze({ paths, setModule, showFeedback });
+  globalThis.addEventListener?.("pageshow", () => { state.refrescar?.(); decorateHome(); decorateHints(); decorateAssessments(); renderHome(); renderOrientation(); });
+  globalThis.LearningExperience = Object.freeze({ paths, routeTips, setModule, showFeedback, showExamResult });
 })();

@@ -11,6 +11,15 @@ const read = file => fs.readFileSync(new URL(file, import.meta.url), "utf8");
 for (const pose of ["welcome", "thinking", "guide", "celebrate"]) {
   assert.ok(fs.existsSync(new URL(`./assets/capi-${pose}.svg`, import.meta.url)), `falta la pose ${pose} de Capi`);
 }
+const thinkingCapi = read("assets/capi-thinking.svg");
+const guideCapi = read("assets/capi-guide.svg");
+assert.match(thinkingCapi, /id="capi-arms"/, "Capi pensando conserva sus dos brazos visibles");
+assert.match(guideCapi, /id="capi-arms"/, "Capi orientando conserva sus dos brazos visibles");
+assert.match(thinkingCapi, /id="capi-question"[\s\S]*stroke="#f9faf6" stroke-width="10"/, "la interrogación tiene un contorno claro para el modo oscuro");
+const thinkingArms = thinkingCapi.match(/<g id="capi-arms">([\s\S]*?)<\/g>/)?.[1] || "";
+const guideArms = guideCapi.match(/<g id="capi-arms">([\s\S]*?)<\/g>/)?.[1] || "";
+assert.doesNotMatch(thinkingArms, /stroke="#f9faf6"/, "el contorno claro se limita a la interrogación");
+assert.doesNotMatch(guideArms, /stroke="#f9faf6"/, "los brazos de orientación no tienen contorno claro");
 
 {
   const window = new JSDOM(read("index.html"), { url: "https://capsulasdev.com/?revision=septiembre-2026", runScripts: "outside-only" }).window;
@@ -35,20 +44,31 @@ for (const pose of ["welcome", "thinking", "guide", "celebrate"]) {
   window.eval(read("learning-state.js"));
   window.LearningState.seleccionarItinerario("python-datos");
   window.eval(read("learning-experience.js"));
+  assert.equal(Object.keys(window.LearningExperience.routeTips).length, 19, "cada ruta tiene orientación propia de Capi");
   const orientation = window.document.querySelector("#route-orientation");
   assert.match(orientation.textContent, /PASO 1 DE 5/);
   assert.match(orientation.textContent, /Después continúa con SQL/);
-  assert.match(orientation.querySelector("img").src, /capi-guide\.svg$/);
+  assert.match(orientation.textContent, /instrucción pequeña puede convertirse/);
+  assert.match(orientation.querySelector("img").src, /capi-guide\.svg\?v=20260914-capi3$/);
   assert.equal(window.document.querySelectorAll(".capi-hint-character").length, 1, "Capi acompaña las pistas sin duplicarse");
+  assert.equal(window.document.querySelectorAll(".capi-checkpoint-note").length, 1, "Capi aparece en el punto de control");
+  assert.equal(window.document.querySelectorAll(".capi-exam-guide").length, 1, "Capi acompaña el mini examen");
+  assert.equal(window.document.querySelectorAll(".capi-finish-character").length, 1, "Capi celebra el cierre de ruta");
+  window.LearningExperience.showExamResult({ passed: true, correct: 5, total: 5 });
+  assert.match(window.document.querySelector(".capi-exam-guide img").src, /capi-celebrate\.svg\?v=20260914-capi3$/);
+  assert.match(window.document.querySelector(".capi-exam-guide span").textContent, /5 de 5/);
+  window.LearningExperience.showExamResult({ passed: false, correct: 2, total: 5 });
+  assert.match(window.document.querySelector(".capi-exam-guide img").src, /capi-thinking\.svg\?v=20260914-capi3$/);
+  assert.match(window.document.querySelector(".capi-exam-guide span").textContent, /vuelve a probar/);
   window.LearningExperience.setModule("python", 0, { title: "Tu primer mensaje" });
   const feedback = window.document.querySelector("#exercise-feedback");
   assert.equal(feedback.hidden, true, "la pregunta aparece después de interactuar con el ejercicio");
   window.LearningExperience.showFeedback({ passed: false, error: true });
   assert.equal(feedback.hidden, false);
-  assert.match(feedback.querySelector(".capi-feedback-character").src, /capi-thinking\.svg$/);
+  assert.match(feedback.querySelector(".capi-feedback-character").src, /capi-thinking\.svg\?v=20260914-capi3$/);
   assert.match(feedback.querySelector(".capi-coach-message").textContent, /error con calma/);
   window.LearningExperience.showFeedback({ passed: true, error: false });
-  assert.match(feedback.querySelector(".capi-feedback-character").src, /capi-celebrate\.svg$/);
+  assert.match(feedback.querySelector(".capi-feedback-character").src, /capi-celebrate\.svg\?v=20260914-capi3$/);
   assert.match(feedback.querySelector(".capi-coach-message").textContent, /Buen avance/);
   feedback.querySelector('[data-feedback-value="mejorar"]').click();
   assert.equal(feedback.querySelector(".exercise-feedback-areas").hidden, false);

@@ -129,7 +129,8 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 - `react-lab.js` y `react-course.js`: transformación de JSX, React mínimo y los 12 módulos de React.
 - `json-lab.js` y `json-course.js`: analizador de JSON, validador de esquemas y los 12 módulos de la ruta.
 - `learning-state.js`, `catalog.js`, `learning-experience.js`: continuidad, borradores, avance,
-  itinerarios, feedback y apariciones contextuales de Capi en las diecinueve rutas.
+  itinerarios, feedback, orientación propia de cada tecnología y apariciones
+  contextuales de Capi en las diecinueve rutas y sus mini exámenes.
 - `assets/capi-*.svg`: cuatro poses vectoriales de Capi para bienvenida, reflexión,
   orientación y celebración. Conservan contraste y nitidez desde tamaños pequeños.
 - `site.js`, `styles.css`, `learning-review.css`: tema, comportamiento y estilos compartidos.

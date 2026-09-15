@@ -75,7 +75,7 @@ desbordamiento horizontal (`innerWidth` 390 px, `scrollWidth` y body 375 px).
 Las 27 suites pasan. El usuario autorizó publicar esta entrega el 13 de
 septiembre de 2026.
 
-### Entrega local posterior: Capi
+### Entrega publicada: Capi
 
 Se incorporó a Capi como acompañante visual con cuatro SVG propios: bienvenida,
 reflexión, orientación y celebración. Se presenta en la portada y aparece de
@@ -89,6 +89,32 @@ las 19 rutas sin duplicar marcado. La portada y Mi cuenta conservan una versión
 visible aun si JavaScript tarda en iniciar. Las 27 suites pasan y la revisión
 visual cubrió claro, oscuro, escritorio y 390 px sin desbordamiento. El usuario
 autorizó publicar esta entrega el 14 de septiembre de 2026.
+
+### Última entrega publicada: Capi por tecnología y evaluaciones
+
+Capi ofrece ahora una orientación breve y distinta en cada una de las 19 rutas:
+por ejemplo, estructura antes que formato en Markdown, forma del documento antes
+de consultar en MongoDB y separación entre imagen, contenedor y datos en Docker.
+El texto específico se combina con el siguiente paso del itinerario.
+
+También acompaña los puntos de control, los mini exámenes y el cierre de ruta.
+Durante un examen invita a leer con calma, avisa si falta una respuesta, celebra
+la aprobación con el resultado y orienta a repasar cuando no se alcanza el mínimo.
+Las apariciones se insertan desde el componente compartido y degradan sin errores
+si una página o un doble de DOM no incluye alguno de esos bloques.
+
+Las 27 suites pasan. La revisión visual cubrió punto de control, examen y cierre
+en escritorio y móvil, sin desbordamiento ni errores de consola. El usuario
+autorizó publicar esta segunda tanda el 14 de septiembre de 2026.
+
+En la misma entrega se corrigieron las poses pequeñas de reflexión y
+orientación: ambos brazos se dibujan por delante del cuerpo para que sigan
+visibles dentro de las tarjetas. La interrogación de la pose reflexiva incorpora
+un contorno claro que conserva el contraste en modo oscuro; los brazos mantienen
+su color original sin contorno. Los recursos llevan la versión
+`20260914-capi3` para evitar que el navegador reutilice los SVG anteriores. La
+revisión visual cubrió orientación y ayuda gradual en claro, oscuro, escritorio
+y móvil.
 
 ### Repositorio principal desde el 11 de septiembre de 2026
 

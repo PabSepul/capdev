@@ -1301,6 +1301,7 @@ function openExam(levelId) {
   examReviewed = false;
   examResult.textContent = "";
   examResult.className = "exam-result";
+  globalThis.LearningExperience?.showExamResult();
   examPanel.hidden = false;
   renderExam();
   examTitle.focus?.({ preventScroll: true });
@@ -1319,6 +1320,7 @@ function submitExam() {
   if (examAnswers.size < exam.questions.length) {
     examResult.textContent = "Responde las " + exam.questions.length + " preguntas antes de revisar.";
     examResult.className = "exam-result is-pending";
+    globalThis.LearningExperience?.showExamResult({ pending: true });
     return;
   }
   const result = gradeExam(examLevelId, examAnswers);
@@ -1337,6 +1339,7 @@ function submitExam() {
       + " para aprobar. Revisa las explicaciones y vuelve a intentarlo.";
     examResult.className = "exam-result is-failed";
   }
+  globalThis.LearningExperience?.showExamResult(result);
   renderLevelTabs();
   renderProgress();
   renderCheckpoint();

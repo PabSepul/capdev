@@ -34,7 +34,7 @@ w.eval(read('account.js'));
 await eventually(()=>w.document.querySelector('[data-account-status]').textContent.startsWith('Avance guardado automáticamente'));
 assert.equal(w.document.querySelector('#account-data').hidden,false);
 assert.match(w.document.querySelector('#account-goal-title').textContent,/Elige una meta/);
-assert.match(w.document.querySelector('#account-capi-image').src,/capi-thinking\.svg$/);
+assert.match(w.document.querySelector('#account-capi-image').src,/capi-thinking\.svg\?v=20260914-capi3$/);
 const verifiedStorage=Object.fromEntries(Object.keys(w.localStorage).map(k=>[k,w.localStorage.getItem(k)]));
 online=false;
 w.LearningState.completar('python',1);
@@ -56,7 +56,7 @@ assert.deepEqual(requests.at(-1).ops.map(x=>x.kind).sort(),['feedback','preferen
 assert.equal(w.document.querySelector('#account-itinerary-title').textContent,'Desarrollo web');
 assert.equal(w.document.querySelectorAll('#account-itinerary-steps li').length,6);
 assert.match(w.document.querySelector('#account-goal-title').textContent,/Empieza con HTML y CSS/);
-assert.match(w.document.querySelector('#account-capi-image').src,/capi-guide\.svg$/);
+assert.match(w.document.querySelector('#account-capi-image').src,/capi-guide\.svg\?v=20260914-capi3$/);
 assert.match(w.document.querySelector('#account-capi-copy').textContent,/paso a paso/);
 w.LearningState.completar('html-css',0);
 await eventually(()=>pending().length===0);

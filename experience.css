@@ -140,6 +140,12 @@
 .experience-page .exercise-feedback-areas { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
 .experience-page .exercise-feedback-status { margin-top: 12px !important; color: var(--success-dark) !important; }
 .experience-page .starter-progress { padding: 16px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
+.experience-page .capi-checkpoint-note { display: flex; align-items: center; gap: 11px; max-width: 620px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.16); color: var(--on-dark-muted); font-size: .7rem; line-height: 1.6; }
+.experience-page .capi-checkpoint-note .capi-character { flex: 0 0 auto; width: 42px; height: 48px; }
+.experience-page .capi-exam-guide { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: var(--purple-dark); font-size: .69rem; font-weight: 700; line-height: 1.5; }
+.experience-page .capi-exam-guide .capi-character { flex: 0 0 auto; width: 44px; height: 50px; }
+.experience-page .python-finish > span:first-child { flex-basis: 72px; width: 72px; height: 78px; border-radius: 0; background: transparent; }
+.experience-page .capi-finish-character { width: 72px; height: 78px; }
 .experience-page :is(.starter-learning-note,.starter-exam-progress) { font-size: .78rem; }
 .experience-page :is(.checkpoint-panel,.exam-panel,.exam-question,.python-finish,.method-grid article,.final-cta) { border-radius: 12px; }
 .experience-page .exam-option { border-radius: 8px; }
@@ -241,6 +247,9 @@
   .experience-page .account-goal .account-primary-link { margin-top: 16px; }
   .experience-page .hint-box > div.has-capi { display: grid; grid-template-columns: auto 1fr; }
   .experience-page .hint-box > div.has-capi button { grid-column: 1 / -1; width: 100%; }
+  .experience-page .capi-checkpoint-note { align-items: flex-start; }
+  .experience-page .python-finish > span:first-child { flex-basis: 58px; width: 58px; height: 66px; }
+  .experience-page .capi-finish-character { width: 58px; height: 66px; }
   .experience-page .account-access, .experience-page .account-welcome { padding: 24px; }
   .experience-page footer { padding: 24px 20px; }
   .experience-page .footer-inner { flex-direction: column; align-items: start; }
