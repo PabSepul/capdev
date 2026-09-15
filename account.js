@@ -163,12 +163,15 @@
     const meter=control("#account-goal-progress"), meterFill=meter.querySelector("span"), meterCopy=control("#account-goal-progress-copy");
     const nextLink=control("#account-next-step"), itinerary=control("#account-itinerary"), steps=control("#account-itinerary-steps");
     const routeList=control("#account-routes"), emptyRoutes=control("#account-empty-routes");
+    const capiImage=control("#account-capi-image"), capiCopy=control("#account-capi-copy");
+    const setCapi=(pose,message)=>{ capiImage.src="assets/capi-"+pose+".svg"; capiCopy.textContent=message; };
     routeList.replaceChildren(); steps.replaceChildren();
     if (!path) {
       title.textContent="Elige una meta para ordenar tus rutas";
       copy.textContent="Te mostraremos qué estudiar ahora y cómo se conecta con lo que viene después.";
       meter.hidden=true; meterCopy.hidden=true; itinerary.hidden=true;
       nextLink.href=reviewHref("index.html#itinerarios"); nextLink.textContent="Elegir un itinerario →";
+      setCapi("thinking","Elige una meta y organizamos el camino.");
     } else {
       const progress=path.routes.map(id=>state.progress(id));
       const completed=progress.reduce((sum,item)=>sum+item.completed,0);
@@ -186,10 +189,12 @@
         title.textContent=pendingExam ? "Cierra el nivel con su mini examen" : (next.started ? "Continúa con "+next.name : "Empieza con "+next.name);
         copy.textContent=pendingExam ? "Ya completaste los ejercicios del nivel "+pendingLevel+" de "+next.name+". Comprueba lo aprendido para abrir el siguiente." : "Tu próximo ejercicio es el "+(next.active+1)+" de "+next.count+" en "+next.name+".";
         nextLink.href=reviewHref(next.href); nextLink.textContent=pendingExam ? "Ir al mini examen →" : "Continuar aprendiendo →";
+        setCapi("guide",pendingExam ? "Cierra este nivel y continuamos." : "Vamos paso a paso. Ya sé qué sigue.");
       } else {
         title.textContent="Completaste tu itinerario";
         copy.textContent="Terminaste todas sus rutas y mini exámenes. Puedes repetir una ruta o elegir una meta diferente.";
         nextLink.href=reviewHref("index.html#itinerarios"); nextLink.textContent="Elegir otra meta →";
+        setCapi("celebrate","¡Completaste el recorrido que elegiste!");
       }
       progress.forEach((route,index)=>{
         const item=document.createElement("li"), link=document.createElement("a"), marker=document.createElement("span"), detail=document.createElement("span");

@@ -56,6 +56,20 @@ El informe real también se generó con la conexión de producción. Mostró cer
 respuestas, el estado esperado mientras ninguna cuenta haya enviado feedback.
 La entrega completa queda cubierta por 27 suites.
 
+## Capi, acompañamiento contextual
+
+La mascota usa cuatro SVG propios y aparece en la portada, la orientación de las
+19 rutas, la ayuda gradual, el resultado de cada ejecución y la meta de Mi cuenta.
+Las pruebas comprueban que no se duplique, que todas las poses existan y que pase
+de reflexión a celebración según el resultado. También verifican la pose adecuada
+cuando una cuenta aún no tiene itinerario y cuando ya conoce su siguiente paso.
+
+La revisión visual cubrió portada y Python en claro y oscuro, además de la tarjeta
+de progreso. A 390 px, Python y Mi cuenta conservaron `scrollWidth` igual al ancho
+del body, sin desbordamiento. Capi se mantiene como apoyo secundario: no tapa el
+editor, no cambia el orden de foco y su texto comunica la misma información que
+la ilustración.
+
 # Historial de revisiones
 
 ## Despliegue verificado el 8 de septiembre de 2026

@@ -46,6 +46,10 @@
 .home-page .button-secondary:hover { background: var(--home-tint); }
 .home-page .home-text-link { font-size: .82rem; text-underline-offset: 5px; display: inline-flex; gap: 12px; align-items: center; }
 .home-page .hero-footnote { display: flex; flex-wrap: wrap; gap: 10px; color: var(--home-muted); margin: 22px 0 0; font-size: .7rem; line-height: 1.8; }
+.home-page .home-capi-intro { display: flex; align-items: center; gap: 14px; max-width: 430px; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--home-line); }
+.home-page .home-capi-intro .capi-character { flex: 0 0 auto; width: 62px; height: 70px; object-fit: contain; }
+.home-page .home-capi-intro p { display: grid; gap: 4px; margin: 0; color: var(--home-muted); font-size: .72rem; line-height: 1.6; }
+.home-page .home-capi-intro strong { color: var(--home-ink); font-size: .76rem; }
 .home-page .capsule-preview { position: relative; background: #edf2e2; border: 1px solid #d9e2cc; border-radius: 17px; padding: 25px; box-shadow: 0 15px 0 -8px #e5e9dd; color: #20362f; }
 .home-page .capsule-top { display: flex; align-items: center; justify-content: space-between; }
 .home-page .capsule-label { font-size: .6rem; letter-spacing: .13em; font-weight: 700; }

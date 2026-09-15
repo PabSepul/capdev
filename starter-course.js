@@ -709,7 +709,7 @@
       error: Boolean(result.error),
       ms: Date.now() - moduleOpenedAt
     });
-    globalThis.LearningExperience?.showFeedback();
+    globalThis.LearningExperience?.showFeedback({ passed, error: Boolean(result.error) });
   }
 
   elements.run.addEventListener("click", () => runModule(true));

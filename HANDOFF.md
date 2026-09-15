@@ -75,6 +75,21 @@ desbordamiento horizontal (`innerWidth` 390 px, `scrollWidth` y body 375 px).
 Las 27 suites pasan. El usuario autorizó publicar esta entrega el 13 de
 septiembre de 2026.
 
+### Entrega local posterior: Capi
+
+Se incorporó a Capi como acompañante visual con cuatro SVG propios: bienvenida,
+reflexión, orientación y celebración. Se presenta en la portada y aparece de
+forma contextual en la orientación de ruta, la cabecera de pistas, el feedback
+posterior a una ejecución y la meta de Mi cuenta. Una misión correcta cambia a
+la pose de celebración; un error usa reflexión y una comprobación incompleta usa
+orientación. Capi no flota sobre el contenido ni interrumpe el editor.
+
+La integración está centralizada en `learning-experience.js`, por lo que cubre
+las 19 rutas sin duplicar marcado. La portada y Mi cuenta conservan una versión
+visible aun si JavaScript tarda en iniciar. Las 27 suites pasan y la revisión
+visual cubrió claro, oscuro, escritorio y 390 px sin desbordamiento. El usuario
+autorizó publicar esta entrega el 14 de septiembre de 2026.
+
 ### Repositorio principal desde el 11 de septiembre de 2026
 
 El proyecto se trasladó a `https://github.com/PabSepul/capdev` con un historial

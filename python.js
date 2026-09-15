@@ -1603,7 +1603,7 @@ function runActiveProject() {
     error: executionError,
     ms: Date.now() - projectOpenedAt
   });
-  globalThis.LearningExperience?.showFeedback();
+  globalThis.LearningExperience?.showFeedback({ passed: isValid, error: executionError });
 }
 
 function resetActiveProject() {

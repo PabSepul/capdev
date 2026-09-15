@@ -33,6 +33,23 @@
     return path + "?revision=" + encodeURIComponent(review) + (hash ? "#" + hash : "");
   };
   const routeLink = id => reviewLink(routeById.get(id)?.path || (id + ".html"));
+  const capiAsset = pose => `assets/capi-${pose}.svg`;
+  const capiImage = (pose, alt, className = "capi-character") =>
+    `<img class="${className}" src="${capiAsset(pose)}" alt="${alt || ""}">`;
+
+  function decorateHome() {
+    const anchor = document.querySelector(".home-hero .hero-footnote");
+    if (!anchor || document.querySelector(".home-capi-intro")) return;
+    anchor.insertAdjacentHTML("afterend", `<aside class="home-capi-intro" aria-label="Presentación de Capi">${capiImage("welcome", "Capi, la mascota de CápsulasDev, saludando")}<p><strong>Hola, soy Capi.</strong><span>Te acompañaré cuando necesites una pista o quieras saber qué sigue.</span></p></aside>`);
+  }
+
+  function decorateHints() {
+    document.querySelectorAll(".hint-box > div:first-child").forEach(header => {
+      if (header.querySelector(".capi-hint-character")) return;
+      header.insertAdjacentHTML("afterbegin", capiImage("thinking", "", "capi-character capi-hint-character"));
+      header.classList.add("has-capi");
+    });
+  }
 
   function nextRoute(path) {
     return path.routes.find(id => !state.progress(id)?.done) || path.routes.at(-1);
@@ -96,18 +113,18 @@
     }
     const path = selectedPath();
     if (!path) {
-      panel.innerHTML = `<div><span>ORIENTACIÓN</span><strong>¿Quieres saber qué estudiar después?</strong><p>Elige un itinerario para conectar esta ruta con un objetivo.</p></div><a href="${reviewLink("index.html#itinerarios")}">Ver itinerarios →</a>`;
+      panel.innerHTML = `<div class="route-orientation-main">${capiImage("thinking", "", "capi-character capi-orientation-character")}<div><span>ORIENTACIÓN DE CAPI</span><strong>¿Quieres saber qué estudiar después?</strong><p>Elige un itinerario para conectar esta ruta con un objetivo.</p></div></div><a href="${reviewLink("index.html#itinerarios")}">Ver itinerarios →</a>`;
       return;
     }
     const position = path.routes.indexOf(routeId);
     if (position < 0) {
-      panel.innerHTML = `<div><span>EXPLORACIÓN LIBRE</span><strong>${path.name} sigue guardado</strong><p>Esta ruta no cambia el avance de tu itinerario. Puedes explorarla y regresar cuando quieras.</p></div><a href="${reviewLink("index.html#itinerarios")}">Volver al itinerario →</a>`;
+      panel.innerHTML = `<div class="route-orientation-main">${capiImage("guide", "", "capi-character capi-orientation-character")}<div><span>CAPI · EXPLORACIÓN LIBRE</span><strong>${path.name} sigue guardado</strong><p>Esta ruta no cambia el avance de tu itinerario. Puedes explorarla y regresar cuando quieras.</p></div></div><a href="${reviewLink("index.html#itinerarios")}">Volver al itinerario →</a>`;
       return;
     }
     const previous = path.routes[position - 1];
     const next = path.routes[position + 1];
     const nextCopy = next ? `Después continúa con ${routeById.get(next).name}.` : "Esta es la última ruta del itinerario.";
-    panel.innerHTML = `<div><span>${path.name.toUpperCase()} · PASO ${position + 1} DE ${path.routes.length}</span><strong>${routeById.get(routeId).name}</strong><p>${nextCopy}</p></div><div class="route-orientation-links">${previous ? `<a href="${routeLink(previous)}">← ${routeById.get(previous).name}</a>` : ""}${next ? `<a href="${routeLink(next)}">${routeById.get(next).name} →</a>` : `<a href="${reviewLink("index.html#itinerarios")}">Ver avance →</a>`}</div>`;
+    panel.innerHTML = `<div class="route-orientation-main">${capiImage(next ? "guide" : "celebrate", "", "capi-character capi-orientation-character")}<div><span>CAPI · ${path.name.toUpperCase()} · PASO ${position + 1} DE ${path.routes.length}</span><strong>${routeById.get(routeId).name}</strong><p>${nextCopy}</p></div></div><div class="route-orientation-links">${previous ? `<a href="${routeLink(previous)}">← ${routeById.get(previous).name}</a>` : ""}${next ? `<a href="${routeLink(next)}">${routeById.get(next).name} →</a>` : `<a href="${reviewLink("index.html#itinerarios")}">Ver avance →</a>`}</div>`;
   }
 
   let active = null;
@@ -121,7 +138,7 @@
     panel.id = "exercise-feedback";
     panel.className = "exercise-feedback";
     panel.hidden = true;
-    panel.innerHTML = `<div><span>AYÚDANOS A MEJORAR</span><h4 id="exercise-feedback-title">¿Esta cápsula fue clara?</h4><p>Tu respuesta no incluye el código que escribiste.</p></div><div class="exercise-feedback-actions"><button type="button" data-feedback-value="claro">Sí, quedó claro</button><button type="button" data-feedback-value="mejorar">Necesita más claridad</button></div><div class="exercise-feedback-areas" hidden><p>¿Qué deberíamos revisar?</p><div><button type="button" data-feedback-area="explicacion">Explicación</button><button type="button" data-feedback-area="mision">Misión</button><button type="button" data-feedback-area="resultado">Resultado o error</button><button type="button" data-feedback-area="pistas">Pistas</button><button type="button" data-feedback-area="otro">Otro aspecto</button></div></div><p class="exercise-feedback-status" role="status" tabindex="-1"></p>`;
+    panel.innerHTML = `<div class="exercise-feedback-intro">${capiImage("guide", "", "capi-character capi-feedback-character")}<div><span>CAPI TE ACOMPAÑA</span><strong class="capi-coach-message">Revisemos cómo resultó este intento.</strong><h4 id="exercise-feedback-title">¿Esta cápsula fue clara?</h4><p>Tu respuesta no incluye el código que escribiste.</p></div></div><div class="exercise-feedback-actions"><button type="button" data-feedback-value="claro">Sí, quedó claro</button><button type="button" data-feedback-value="mejorar">Necesita más claridad</button></div><div class="exercise-feedback-areas" hidden><p>¿Qué deberíamos revisar?</p><div><button type="button" data-feedback-area="explicacion">Explicación</button><button type="button" data-feedback-area="mision">Misión</button><button type="button" data-feedback-area="resultado">Resultado o error</button><button type="button" data-feedback-area="pistas">Pistas</button><button type="button" data-feedback-area="otro">Otro aspecto</button></div></div><p class="exercise-feedback-status" role="status" tabindex="-1"></p>`;
     anchor.insertAdjacentElement("afterend", panel);
     panel.addEventListener("click", event => {
       const valueButton = event.target.closest("[data-feedback-value]");
@@ -170,14 +187,26 @@
     panel.hidden = !state.feedback(route, index);
   }
 
-  function showFeedback() {
+  function showFeedback(outcome = {}) {
     const panel = feedbackPanel();
-    if (panel && active) panel.hidden = false;
+    if (!panel || !active) return;
+    const pose = outcome.passed ? "celebrate" : outcome.error ? "thinking" : "guide";
+    const message = outcome.passed
+      ? "¡Buen avance! Tu solución cumple la misión."
+      : outcome.error
+        ? "Revisemos el error con calma. La consola señala dónde empezar."
+        : "Tu código ya se ejecuta. Revisa el primer criterio pendiente.";
+    const character = panel.querySelector(".capi-feedback-character");
+    if (character) character.src = capiAsset(pose);
+    panel.querySelector(".capi-coach-message").textContent = message;
+    panel.hidden = false;
   }
 
   document.querySelector("#itinerarios")?.addEventListener("click", choose);
+  decorateHome();
+  decorateHints();
   renderHome();
   renderOrientation();
-  globalThis.addEventListener?.("pageshow", () => { state.refrescar?.(); renderHome(); renderOrientation(); });
+  globalThis.addEventListener?.("pageshow", () => { state.refrescar?.(); decorateHome(); decorateHints(); renderHome(); renderOrientation(); });
   globalThis.LearningExperience = Object.freeze({ paths, setModule, showFeedback });
 })();

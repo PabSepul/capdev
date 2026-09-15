@@ -129,7 +129,9 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 - `react-lab.js` y `react-course.js`: transformación de JSX, React mínimo y los 12 módulos de React.
 - `json-lab.js` y `json-course.js`: analizador de JSON, validador de esquemas y los 12 módulos de la ruta.
 - `learning-state.js`, `catalog.js`, `learning-experience.js`: continuidad, borradores, avance,
-  itinerarios y feedback de las diecinueve rutas.
+  itinerarios, feedback y apariciones contextuales de Capi en las diecinueve rutas.
+- `assets/capi-*.svg`: cuatro poses vectoriales de Capi para bienvenida, reflexión,
+  orientación y celebración. Conservan contraste y nitidez desde tamaños pequeños.
 - `site.js`, `styles.css`, `learning-review.css`: tema, comportamiento y estilos compartidos.
 - El avance requiere un perfil y se guarda automáticamente; no hay panel de respaldo ni restauración manual en la portada.
 - `analizar-avance.mjs`: lee los respaldos del piloto y dice dónde se traba la gente.
