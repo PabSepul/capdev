@@ -2,7 +2,23 @@
 
 Estado al 15 de septiembre de 2026. Base inicial: `adf9e2b`.
 
-### Entrega local: plan semanal, continuación y repaso
+### Entrega local: sesiones de estudio y pausa
+
+La meta semanal se divide ahora en sesiones concretas: dos para el ritmo de una
+hora, tres para el ritmo constante y cuatro para el intensivo. Cada tarjeta
+distingue lo completado, la sesión actual y lo que queda después. La persona
+puede pausar la semana y retomarla sin alterar ejercicios, exámenes ni el
+contador; el siguiente paso permanece visible.
+
+La pausa usa el mismo perfil y la misma operación idempotente `weekly-plan`. La
+migración incremental `202609150002_weekly_sessions.sql` añade
+`weekly_paused` y valida que el cliente solo envíe un booleano. Está probada con
+PGlite y se aplicó a Supabase el 15 de septiembre de 2026; la verificación remota
+confirmó la columna y el uso dentro de `learning_sync`. La revisión local cubrió estado
+activo y pausado, escritorio y 390 × 844 px; no hubo desbordamiento horizontal.
+El usuario autorizó publicar esta segunda entrega el 15 de septiembre de 2026.
+
+### Entrega publicada: plan semanal, continuación y repaso
 
 Sobre el onboarding publicado en `c3e99db`, se preparó una segunda capa de
 orientación. Al aceptar la recomendación, el tiempo disponible se convierte en
@@ -27,8 +43,9 @@ las cuatro columnas y la nueva operación dentro de `learning_sync`.
 
 Las 28 suites pasan. La revisión real cubrió onboarding, portada en escritorio,
 modo oscuro y 390 × 844 px; a 390 px `innerWidth` fue 390 y tanto el documento
-como el body midieron 375 px, sin desbordamiento horizontal. El usuario autorizó
-publicar esta entrega el 15 de septiembre de 2026.
+como el body midieron 375 px, sin desbordamiento horizontal. Publicada en
+`2ed9353`; GitHub Actions `35046199716` y Pages `35046198608` terminaron
+correctamente. Los archivos públicos se comprobaron en `capsulasdev.com`.
 
 ### Entrega de itinerarios, feedback, calidad y respaldos
 

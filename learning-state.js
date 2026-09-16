@@ -139,7 +139,7 @@
       creado: typeof crudo?.creado === "string" ? crudo.creado : ahora(),
       actualizado: typeof crudo?.actualizado === "string" ? crudo.actualizado : ahora(),
       itinerario: ITINERARIOS.includes(crudo?.itinerario) ? crudo.itinerario : null,
-      planSemanal: { ritmo, objetivo, semana, base },
+      planSemanal: { ritmo, objetivo, semana, base, pausada: crudo?.planSemanal?.pausada === true },
       rutas: {}
     };
     for (const route of routes) {
@@ -333,7 +333,8 @@
       ritmo,
       objetivo: RITMOS[ritmo],
       semana: inicioSemana(),
-      base: resumen(documento).modulos
+      base: resumen(documento).modulos,
+      pausada: false
     };
     guardar();
     return true;
@@ -360,8 +361,38 @@
       completados: Math.min(completados, plan.objetivo),
       restantes: Math.max(0, plan.objetivo - completados),
       porcentaje: Math.min(100, Math.round(completados / plan.objetivo * 100)),
-      renovada
+      renovada,
+      pausada: plan.pausada === true
     };
+  }
+
+  function pausarPlanSemanal(pausada = true) {
+    const documento = perfil();
+    if (!documento.planSemanal?.ritmo) return false;
+    documento.planSemanal.pausada = Boolean(pausada);
+    guardar();
+    return true;
+  }
+
+  function sesionesSemana() {
+    const plan = metaSemanal();
+    if (!plan) return [];
+    const tamanos = plan.ritmo === "light" ? [2, 1]
+      : plan.ritmo === "focused" ? [3, 3, 3, 3] : [2, 2, 3];
+    let acumulado = 0;
+    return tamanos.map((cantidad, indice) => {
+      const inicio = acumulado;
+      acumulado += cantidad;
+      const hechas = Math.min(cantidad, Math.max(0, plan.completados - inicio));
+      return {
+        numero: indice + 1,
+        cantidad,
+        hechas,
+        completa: hechas === cantidad,
+        actual: !plan.pausada && hechas < cantidad && plan.completados >= inicio,
+        pendiente: plan.completados < inicio
+      };
+    });
   }
 
   function recomendacionesRepaso(limite = 3) {
@@ -537,7 +568,8 @@
         ritmo: perfilRemoto.weekly_pace,
         objetivo: Number.isInteger(perfilRemoto.weekly_target) ? perfilRemoto.weekly_target : RITMOS[perfilRemoto.weekly_pace],
         semana: /^\d{4}-\d{2}-\d{2}$/.test(perfilRemoto.weekly_started_on || "") ? perfilRemoto.weekly_started_on : inicioSemana(),
-        base: Number.isInteger(perfilRemoto.weekly_baseline) && perfilRemoto.weekly_baseline >= 0 ? perfilRemoto.weekly_baseline : resumen(documento).modulos
+        base: Number.isInteger(perfilRemoto.weekly_baseline) && perfilRemoto.weekly_baseline >= 0 ? perfilRemoto.weekly_baseline : resumen(documento).modulos,
+        pausada: perfilRemoto.weekly_paused === true
       };
     }
     for (const route of routes) {
@@ -564,7 +596,7 @@
     perfil, refrescar, completados, examenes, completar, aprobarExamen,
     registrarIntento, atascos, bitacora,
     itinerarios: ITINERARIOS.slice(), itinerario: () => perfil().itinerario,
-    seleccionarItinerario, definirPlanSemanal, metaSemanal, recomendacionesRepaso, feedback, registrarFeedback,
+    seleccionarItinerario, definirPlanSemanal, metaSemanal, pausarPlanSemanal, sesionesSemana, recomendacionesRepaso, feedback, registrarFeedback,
     exportar, importar, borrar, esquema,
     usarCuenta, cuenta: () => account, combinarRemoto,
     resumen: () => resumen(perfil())

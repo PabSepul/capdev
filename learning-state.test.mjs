@@ -415,6 +415,13 @@ for (const id of ['markdown', 'accesibilidad', 'testing']) {
   plan = state.metaSemanal();
   assert.equal(plan.completados, 2, 'solo cuenta lo completado desde que empezó la semana');
   assert.equal(plan.restantes, 5);
+  assert.deepEqual(Array.from(state.sesionesSemana(), item => item.cantidad), [2, 2, 3]);
+  assert.equal(state.sesionesSemana()[0].completa, true);
+  assert.equal(state.sesionesSemana()[1].actual, true);
+  assert.equal(state.pausarPlanSemanal(true), true);
+  assert.equal(state.metaSemanal().pausada, true);
+  assert.equal(state.sesionesSemana().some(item => item.actual), false);
+  assert.equal(state.pausarPlanSemanal(false), true);
   for (let i = 0; i < 3; i += 1) state.registrarIntento('python', 4, {validaciones:[true,false,false],aprobado:false,error:false,ms:100});
   for (let i = 0; i < 2; i += 1) state.registrarIntento('sql', 0, {validaciones:[true,true,false],aprobado:false,error:false,ms:100});
   state.completar('sql', 0);

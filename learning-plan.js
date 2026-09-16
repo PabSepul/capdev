@@ -65,12 +65,31 @@
     weekly.hidden = !plan;
     if (plan) {
       document.querySelector("#weekly-home-value").textContent = `${plan.completados} / ${plan.objetivo} cápsulas`;
-      document.querySelector("#weekly-home-copy").textContent = plan.restantes
+      document.querySelector("#weekly-home-copy").textContent = plan.pausada
+        ? "El plan está en pausa. Tu avance y el próximo paso siguen guardados."
+        : plan.restantes
         ? `Te faltan ${plan.restantes} para completar tu meta. Cada ejercicio terminado cuenta.`
         : "Meta cumplida. Puedes repasar o avanzar a tu propio ritmo.";
       const meter = document.querySelector("#weekly-home-meter");
       meter.setAttribute("aria-valuenow", String(plan.porcentaje));
       meter.querySelector("span").style.width = `${plan.porcentaje}%`;
+      const sessions = document.querySelector("#weekly-sessions");
+      sessions.replaceChildren();
+      for (const session of state.sesionesSemana()) {
+        const item = document.createElement("li");
+        const label = document.createElement("strong");
+        const detail = document.createElement("span");
+        item.className = session.completa ? "is-complete" : session.actual ? "is-current" : "is-pending";
+        label.textContent = `Sesión ${session.numero} · ${session.cantidad} ${session.cantidad === 1 ? "cápsula" : "cápsulas"}`;
+        detail.textContent = session.completa ? "Completada ✓"
+          : session.actual ? `Ahora: ${step.route.name}`
+          : "Para después";
+        item.append(label, detail);
+        sessions.append(item);
+      }
+      const pause = document.querySelector("#weekly-toggle-pause");
+      pause.textContent = plan.pausada ? "Retomar mi semana" : "Pausar por hoy";
+      pause.setAttribute("aria-pressed", String(plan.pausada));
     }
 
     const review = document.querySelector("#review-home");
@@ -120,6 +139,11 @@
     const button = event.target.closest("[data-weekly-pace]");
     if (!button || !state.definirPlanSemanal(button.dataset.weeklyPace)) return;
     renderAccount();
+  });
+  document.querySelector("#weekly-toggle-pause")?.addEventListener("click", () => {
+    const plan = state.metaSemanal();
+    if (!plan || !state.pausarPlanSemanal(!plan.pausada)) return;
+    render();
   });
 
   function render() { renderHome(); renderAccount(); }

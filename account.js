@@ -14,7 +14,7 @@
     return;
   }
   const uuid = () => crypto.randomUUID();
-  const original = Object.fromEntries(["save","removeDraft","completar","aprobarExamen","registrarIntento","seleccionarItinerario","definirPlanSemanal","metaSemanal","registrarFeedback"].map(k => [k,state[k].bind(state)]));
+  const original = Object.fromEntries(["save","removeDraft","completar","aprobarExamen","registrarIntento","seleccionarItinerario","definirPlanSemanal","metaSemanal","pausarPlanSemanal","registrarFeedback"].map(k => [k,state[k].bind(state)]));
   let owner = state.cuenta(), queue = null, client = null, snapshot = null, busy = false, timer = null;
   let ready = false, epoch = 0, message = "Crea tu perfil para sincronizar el avance automáticamente.", subscribed = false, loggingOut = false;
   let bases = {}, syncing = false;
@@ -95,7 +95,7 @@
     if (saved && before!==id && queue && validScope()) enqueue({kind:"preference",itinerary:id});
     return saved;
   });
-  const enqueueWeeklyPlan = plan => enqueue({kind:"weekly-plan",pace:plan.ritmo,target:plan.objetivo,week:plan.semana,baseline:plan.base});
+  const enqueueWeeklyPlan = plan => enqueue({kind:"weekly-plan",pace:plan.ritmo,target:plan.objetivo,week:plan.semana,baseline:plan.base,paused:plan.pausada});
   state.definirPlanSemanal = guard((pace) => {
     const saved=original.definirPlanSemanal(pace);
     const plan=original.metaSemanal();
@@ -106,6 +106,12 @@
     const plan=original.metaSemanal();
     if (plan?.renovada && queue && validScope()) enqueueWeeklyPlan(plan);
     return plan;
+  });
+  state.pausarPlanSemanal = guard((paused) => {
+    const saved=original.pausarPlanSemanal(paused);
+    const plan=original.metaSemanal();
+    if (saved && plan && queue && validScope()) enqueueWeeklyPlan(plan);
+    return saved;
   });
   state.registrarFeedback = guard((r,m,value,area=null) => {
     const saved=original.registrarFeedback(r,m,value,area);

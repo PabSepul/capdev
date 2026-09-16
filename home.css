@@ -167,6 +167,13 @@
 .home-page .weekly-home > div:first-child { display: flex; justify-content: space-between; gap: 14px; color: var(--home-ink); font-size: .8rem; }
 .home-page .weekly-home > div:first-child span { color: var(--home-muted); }
 .home-page .weekly-home p { grid-column: 2; margin: 0; font-size: .74rem; }
+.home-page .weekly-sessions { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.home-page .weekly-sessions li { display: grid; gap: 5px; padding: 13px; border: 1px solid var(--home-line); border-radius: 8px; background: var(--home-paper); }
+.home-page .weekly-sessions strong { color: var(--home-ink); font-size: .72rem; }
+.home-page .weekly-sessions span { color: var(--home-muted); font-size: .67rem; }
+.home-page .weekly-sessions .is-current { border-color: var(--home-ink); }
+.home-page .weekly-sessions .is-complete { background: var(--home-accent); }
+.home-page .weekly-pause { grid-column: 1 / -1; justify-self: start; padding: 0; border: 0; background: transparent; color: var(--home-ink); font: 700 .72rem/1.4 Inter, sans-serif; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .home-page .weekly-meter { height: 8px; overflow: hidden; border-radius: 999px; background: var(--home-line); }
 .home-page .weekly-meter span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--home-accent); transition: width .3s ease; }
 .home-page .review-home { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(180px, .55fr) 1fr; gap: 24px; padding-top: 20px; border-top: 1px solid var(--home-line); }
@@ -201,6 +208,8 @@
   .home-page .continue-learning > .button { justify-self: start; }
   .home-page .weekly-home, .home-page .review-home { grid-column: 1; grid-template-columns: 1fr; }
   .home-page .weekly-home p { grid-column: 1; }
+  .home-page .weekly-sessions { grid-column: 1; grid-template-columns: 1fr; }
+  .home-page .weekly-pause { grid-column: 1; }
   .home-page .review-home li { grid-template-columns: 1fr; gap: 3px; }
   .home-page .technology-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-page .itinerary-grid { grid-template-columns: 1fr; }
