@@ -40,6 +40,8 @@ function prepare(url = "https://capsulasdev.com/") {
   accept.addEventListener("click", event => event.preventDefault(), { capture: true });
   accept.click();
   assert.equal(window.LearningState.itinerario(), "web");
+  assert.equal(window.LearningState.metaSemanal().ritmo, "steady");
+  assert.equal(window.LearningState.metaSemanal().objetivo, 7);
   window.close();
 }
 

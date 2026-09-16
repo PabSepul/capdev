@@ -401,5 +401,29 @@ for (const id of ['markdown', 'accesibilidad', 'testing']) {
   assert.equal(restored.feedback('python', 0).area, 'explicacion');
 }
 
+/* ---------- meta semanal y repaso basado en intentos ---------- */
+{
+  const { state } = setup();
+  assert.equal(state.metaSemanal(), null, 'la meta es opcional');
+  assert.equal(state.definirPlanSemanal('steady'), true);
+  assert.equal(state.definirPlanSemanal('imposible'), false);
+  let plan = state.metaSemanal();
+  assert.equal(plan.objetivo, 7);
+  assert.equal(plan.completados, 0);
+  state.completar('python', 1);
+  state.completar('python', 2);
+  plan = state.metaSemanal();
+  assert.equal(plan.completados, 2, 'solo cuenta lo completado desde que empezó la semana');
+  assert.equal(plan.restantes, 5);
+  for (let i = 0; i < 3; i += 1) state.registrarIntento('python', 4, {validaciones:[true,false,false],aprobado:false,error:false,ms:100});
+  for (let i = 0; i < 2; i += 1) state.registrarIntento('sql', 0, {validaciones:[true,true,false],aprobado:false,error:false,ms:100});
+  state.completar('sql', 0);
+  const repaso = state.recomendacionesRepaso(2);
+  assert.equal(repaso[0].ruta, 'python', 'prioriza el bloqueo que todavía no se supera');
+  assert.equal(repaso[0].numero, 5);
+  assert.match(repaso[0].motivo, /Retómalo/);
+  assert.equal(repaso[1].superado, true);
+}
+
 console.log(`Continuidad: ${routes.length} rutas en un documento con esquema, migración desde las claves anteriores,`
   + ` borradores, exámenes, registro de intentos, panel de respaldo, datos corruptos, cuota y catálogo: OK`);

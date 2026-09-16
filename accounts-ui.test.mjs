@@ -31,6 +31,7 @@ w.supabase={createClient(url,key,options){
 // La cola agrupa cambios durante 1,2 s; se deja margen para runners compartidos.
 const eventually=async predicate=>{for(let i=0;i<300;i++){if(predicate())return;await new Promise(resolve=>setTimeout(resolve,10));}assert.fail('No se completó el flujo asíncrono');};
 w.eval(read('account.js'));
+w.eval(read('learning-plan.js'));
 await eventually(()=>w.document.querySelector('[data-account-status]').textContent.startsWith('Avance guardado automáticamente'));
 assert.equal(w.document.querySelector('#account-data').hidden,false);
 assert.match(w.document.querySelector('#account-goal-title').textContent,/Elige una meta/);
@@ -59,6 +60,10 @@ assert.equal(w.document.querySelectorAll('#account-itinerary-steps li').length,6
 assert.match(w.document.querySelector('#account-goal-title').textContent,/Empieza con HTML y CSS/);
 assert.match(w.document.querySelector('#account-capi-image').src,/capi-guide\.svg\?v=20260914-capi3$/);
 assert.match(w.document.querySelector('#account-capi-copy').textContent,/paso a paso/);
+w.LearningState.definirPlanSemanal('steady');
+await eventually(()=>pending().length===0);
+assert.deepEqual(requests.at(-1).ops.map(x=>x.kind),['weekly-plan']);
+assert.match(w.document.querySelector('#account-weekly-title').textContent,/7 cápsulas/);
 w.LearningState.completar('html-css',0);
 await eventually(()=>pending().length===0);
 assert.match(w.document.querySelector('#account-goal-copy').textContent,/ejercicio es el 2 de 16/);

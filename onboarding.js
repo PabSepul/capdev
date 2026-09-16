@@ -199,6 +199,7 @@
       render();
     } else if (accept) {
       state.seleccionarItinerario(accept.dataset.onboardingAccept);
+      state.definirPlanSemanal(answers.time || "steady");
     } else if (event.target.closest("[data-onboarding-close]") || event.target === dialog) close();
   });
   dialog.addEventListener("cancel", event => { event.preventDefault(); close(); });

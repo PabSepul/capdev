@@ -2,6 +2,34 @@
 
 Estado al 15 de septiembre de 2026. Base inicial: `adf9e2b`.
 
+### Entrega local: plan semanal, continuación y repaso
+
+Sobre el onboarding publicado en `c3e99db`, se preparó una segunda capa de
+orientación. Al aceptar la recomendación, el tiempo disponible se convierte en
+una meta de 3, 7 o 12 cápsulas por semana. La portada muestra el avance desde el
+inicio de la semana y señala el módulo o mini examen exacto que corresponde
+retomar dentro del itinerario. `Mi cuenta` permite cambiar el ritmo cuando sea
+necesario.
+
+El repaso recomendado usa únicamente los contadores y eventos de intentos que
+ya guarda la plataforma. Prioriza una cápsula pendiente que haya requerido
+varios intentos y después una ya superada que convenga reforzar; no analiza ni
+conserva el código escrito. La interfaz vive en `learning-plan.js` y reutiliza a
+Capi, el modo revisión y los enlaces de ruta existentes.
+
+La meta semanal se conserva en el perfil local sin cambiar el esquema de las
+rutas. Para cuentas se añadió la migración incremental
+`supabase/migrations/202609150001_weekly_learning_plan.sql`, que valida ritmo,
+meta, lunes de inicio y línea base, y admite la operación idempotente
+`weekly-plan`. La migración se probó con PostgreSQL real mediante PGlite y se
+aplicó a Supabase el 15 de septiembre de 2026. La verificación remota confirmó
+las cuatro columnas y la nueva operación dentro de `learning_sync`.
+
+Las 28 suites pasan. La revisión real cubrió onboarding, portada en escritorio,
+modo oscuro y 390 × 844 px; a 390 px `innerWidth` fue 390 y tanto el documento
+como el body midieron 375 px, sin desbordamiento horizontal. El usuario autorizó
+publicar esta entrega el 15 de septiembre de 2026.
+
 ### Entrega de itinerarios, feedback, calidad y respaldos
 
 Después de una prueba informal positiva con varias personas adultas, se mantuvo
@@ -116,7 +144,7 @@ su color original sin contorno. Los recursos llevan la versión
 revisión visual cubrió orientación y ayuda gradual en claro, oscuro, escritorio
 y móvil.
 
-### Entrega local posterior: onboarding personalizado
+### Entrega publicada: onboarding personalizado
 
 El botón «Empezar desde cero» abre ahora una conversación guiada por Capi. Hace
 cuatro preguntas, una por pantalla: aspiración, motivo de estudio, experiencia
@@ -135,7 +163,8 @@ incluye «Revisar mi objetivo con Capi», que vuelve a abrir la conversación.
 ritmo, curva, selección explícita y acceso desde Mi cuenta. Las 28 suites pasan.
 La revisión visual cubrió claro y oscuro, escritorio y móvil; se verificaron el
 avance, el botón anterior, el cierre con restauración del foco y el resultado.
-Esta entrega permanece local y aún no ha sido autorizada para publicación.
+Publicada en `c3e99db`; las 28 suites y el despliegue de GitHub Pages terminaron
+correctamente.
 
 ### Repositorio principal desde el 11 de septiembre de 2026
 

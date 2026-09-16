@@ -51,7 +51,7 @@
   <link rel="icon" href="favicon.svg?v=20260902-bmw1" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=20260909-profile3">
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
-  <link rel="stylesheet" href="account.css?v=20260914-progress1">
+  <link rel="stylesheet" href="account.css?v=20260915-plan1">
   <link rel="stylesheet" href="experience.css?v=20260914-capi2">
   <link rel="stylesheet" href="onboarding.css?v=20260915-onboarding1">
 </head>
@@ -116,6 +116,11 @@
             <a class="account-primary-link" id="account-next-step" href="index.html#itinerarios">Elegir un itinerario →</a>
             <a class="account-onboarding-link" href="index.html?onboarding=1">Revisar mi objetivo con Capi</a>
           </div>
+          <section class="account-weekly" id="account-weekly" aria-labelledby="account-weekly-title">
+            <div><p class="account-card-eyebrow">TU SEMANA</p><h3 id="account-weekly-title">Elige un ritmo sostenible</h3><p id="account-weekly-copy">Capi convertirá el tiempo que tienes en una meta breve.</p></div>
+            <div class="account-weekly-meter" id="account-weekly-meter" role="progressbar" aria-label="Avance semanal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><span></span></div>
+            <div class="account-weekly-actions" aria-label="Ritmo semanal"><button type="button" data-weekly-pace="light">1 hora · 3 cápsulas</button><button type="button" data-weekly-pace="steady">2–3 horas · 7 cápsulas</button><button type="button" data-weekly-pace="focused">4–6 horas · 12 cápsulas</button></div>
+          </section>
           <section class="account-itinerary" id="account-itinerary" aria-labelledby="account-itinerary-title" hidden>
             <div><p class="account-card-eyebrow">ITINERARIO</p><h3 id="account-itinerary-title"></h3></div>
             <ol id="account-itinerary-steps"></ol>
@@ -147,12 +152,13 @@
     </div>
   </footer>
 
-  <script src="learning-state.js?v=20260912-experience1"></script>
+  <script src="learning-state.js?v=20260915-plan1"></script>
   <script src="learning-experience.js?v=20260914-capi3"></script>
   <script src="account-config.js?v=20260909-profile3"></script>
   <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
-  <script src="account.js?v=20260914-capi3"></script>
+  <script src="account.js?v=20260915-plan1"></script>
+  <script src="learning-plan.js?v=20260915-plan1"></script>
   <script src="site.js?v=20260903-review1"></script>
 </body>
 </html>

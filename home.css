@@ -155,10 +155,27 @@
 .home-page footer { background: var(--home-paper); border-top: 1px solid var(--home-line); color: var(--home-muted); padding: 28px max(40px, calc((100% - 1180px) / 2)); }
 .home-page .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding: 0; }
 .home-page .footer-inner p { font-size: .72rem; }
-.home-page .continue-learning { margin: 26px 0 0; border: 1px solid var(--home-line); border-radius: 12px; background: var(--home-tint); }
+.home-page .continue-learning { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 30px; align-items: center; margin: 26px 0 0; padding: clamp(22px, 4vw, 36px); border: 1px solid var(--home-line); border-radius: 12px; background: var(--home-tint); }
+.home-page .continue-learning[hidden] { display: none; }
+.home-page .continue-main { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.home-page .continue-main .capi-character { flex: 0 0 auto; width: 62px; height: 62px; }
 .home-page .continue-learning .home-kicker { margin-bottom: 8px; }
 .home-page .continue-learning h2 { font-size: 1.35rem; margin: 0 0 10px; }
 .home-page .continue-learning p { color: var(--home-muted); }
+.home-page .weekly-home { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(170px, .55fr) minmax(180px, 1fr); gap: 8px 24px; align-items: center; padding-top: 20px; border-top: 1px solid var(--home-line); }
+.home-page .weekly-home[hidden], .home-page .review-home[hidden] { display: none; }
+.home-page .weekly-home > div:first-child { display: flex; justify-content: space-between; gap: 14px; color: var(--home-ink); font-size: .8rem; }
+.home-page .weekly-home > div:first-child span { color: var(--home-muted); }
+.home-page .weekly-home p { grid-column: 2; margin: 0; font-size: .74rem; }
+.home-page .weekly-meter { height: 8px; overflow: hidden; border-radius: 999px; background: var(--home-line); }
+.home-page .weekly-meter span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--home-accent); transition: width .3s ease; }
+.home-page .review-home { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(180px, .55fr) 1fr; gap: 24px; padding-top: 20px; border-top: 1px solid var(--home-line); }
+.home-page .review-home > div > span { color: var(--home-ink); font: 700 .66rem/1 "Cascadia Code", Consolas, monospace; letter-spacing: .1em; }
+.home-page .review-home h3 { margin: 8px 0 0; font-size: 1rem; }
+.home-page .review-home ul { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.home-page .review-home li { display: grid; grid-template-columns: minmax(150px, .55fr) 1fr; gap: 14px; align-items: baseline; }
+.home-page .review-home li a { color: var(--home-ink); font-weight: 700; }
+.home-page .review-home li span { color: var(--home-muted); font-size: .74rem; }
 .home-page a:focus-visible, .home-page button:focus-visible, .home-page input:focus-visible, .home-page summary:focus-visible { outline: 3px solid #77994c; outline-offset: 4px; }
 @media (max-width: 1100px) {
   .home-page .site-header { gap: 20px; }
@@ -180,6 +197,11 @@
   .home-page .capsule-preview { max-width: 530px; width: 100%; justify-self: center; }
   .home-page .capsule-decoration { right: 12px; top: -18px; width: 45px; height: 45px; font-size: 1.15rem; }
   .home-page .capsule-top { padding-right: 45px; }
+  .home-page .continue-learning { grid-template-columns: 1fr; }
+  .home-page .continue-learning > .button { justify-self: start; }
+  .home-page .weekly-home, .home-page .review-home { grid-column: 1; grid-template-columns: 1fr; }
+  .home-page .weekly-home p { grid-column: 1; }
+  .home-page .review-home li { grid-template-columns: 1fr; gap: 3px; }
   .home-page .technology-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-page .itinerary-grid { grid-template-columns: 1fr; }
   .home-page .itinerary-card > p { min-height: 0; }

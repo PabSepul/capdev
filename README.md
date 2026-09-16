@@ -131,6 +131,9 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 - `learning-state.js`, `catalog.js`, `learning-experience.js`: continuidad, borradores, avance,
   itinerarios, feedback, orientación propia de cada tecnología y apariciones
   contextuales de Capi en las diecinueve rutas y sus mini exámenes.
+- `learning-plan.js`: convierte el tiempo disponible en una meta semanal, indica
+  el módulo o examen exacto que sigue y propone repasos a partir de intentos
+  reales, sin leer ni guardar el código de los ejercicios.
 - `onboarding.js` y `onboarding.css`: conversación inicial de cuatro preguntas,
   recomendación de itinerario, ritmo semanal y curva de aprendizaje con acceso
   para repetirla desde Mi cuenta.

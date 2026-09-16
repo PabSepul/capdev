@@ -21,6 +21,7 @@
   const MAX_BORRADOR = 30000;
   const MAX_EVENTOS = 400;
   const ITINERARIOS = ["web", "python-datos", "herramientas"];
+  const RITMOS = Object.freeze({ light: 3, steady: 7, focused: 12 });
   const RESPUESTAS_FEEDBACK = ["claro", "mejorar"];
   const AREAS_FEEDBACK = ["explicacion", "mision", "resultado", "pistas", "otro"];
   let account = null;
@@ -123,6 +124,14 @@
   }
 
   function sanearPerfil(crudo) {
+    const ritmo = Object.prototype.hasOwnProperty.call(RITMOS, crudo?.planSemanal?.ritmo)
+      ? crudo.planSemanal.ritmo : null;
+    const objetivo = Number.isInteger(crudo?.planSemanal?.objetivo)
+      ? Math.min(Math.max(crudo.planSemanal.objetivo, 1), 20) : (ritmo ? RITMOS[ritmo] : null);
+    const semana = /^\d{4}-\d{2}-\d{2}$/.test(crudo?.planSemanal?.semana || "")
+      ? crudo.planSemanal.semana : null;
+    const base = Number.isInteger(crudo?.planSemanal?.base) && crudo.planSemanal.base >= 0
+      ? Math.min(crudo.planSemanal.base, 100000) : 0;
     const perfil = {
       esquema: ESQUEMA,
       instalacion: typeof crudo?.instalacion === "string" && /^[0-9a-f]{8}$/.test(crudo.instalacion)
@@ -130,6 +139,7 @@
       creado: typeof crudo?.creado === "string" ? crudo.creado : ahora(),
       actualizado: typeof crudo?.actualizado === "string" ? crudo.actualizado : ahora(),
       itinerario: ITINERARIOS.includes(crudo?.itinerario) ? crudo.itinerario : null,
+      planSemanal: { ritmo, objetivo, semana, base },
       rutas: {}
     };
     for (const route of routes) {
@@ -281,6 +291,7 @@
     if (!estado.completados.includes(valor)) {
       estado.completados.push(valor);
       estado.completados.sort((a, b) => a - b);
+      estado.actualizado = Date.now();
       guardar();
     }
   }
@@ -303,6 +314,76 @@
     documento.itinerario = id;
     guardar();
     return true;
+  }
+
+  function inicioSemana(fecha = new Date()) {
+    const local = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
+    const desplazamiento = (local.getDay() + 6) % 7;
+    local.setDate(local.getDate() - desplazamiento);
+    const year = local.getFullYear();
+    const month = String(local.getMonth() + 1).padStart(2, "0");
+    const day = String(local.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function definirPlanSemanal(ritmo) {
+    if (!Object.prototype.hasOwnProperty.call(RITMOS, ritmo)) return false;
+    const documento = perfil();
+    documento.planSemanal = {
+      ritmo,
+      objetivo: RITMOS[ritmo],
+      semana: inicioSemana(),
+      base: resumen(documento).modulos
+    };
+    guardar();
+    return true;
+  }
+
+  function metaSemanal() {
+    const documento = perfil();
+    const plan = documento.planSemanal;
+    if (!plan?.ritmo || !Object.prototype.hasOwnProperty.call(RITMOS, plan.ritmo)) return null;
+    const semana = inicioSemana();
+    let renovada = false;
+    if (plan.semana !== semana) {
+      plan.semana = semana;
+      plan.base = resumen(documento).modulos;
+      renovada = true;
+      guardar();
+    }
+    const completados = Math.max(0, resumen(documento).modulos - plan.base);
+    return {
+      ritmo: plan.ritmo,
+      objetivo: plan.objetivo,
+      semana: plan.semana,
+      base: plan.base,
+      completados: Math.min(completados, plan.objetivo),
+      restantes: Math.max(0, plan.objetivo - completados),
+      porcentaje: Math.min(100, Math.round(completados / plan.objetivo * 100)),
+      renovada
+    };
+  }
+
+  function recomendacionesRepaso(limite = 3) {
+    const ultimos = new Map();
+    for (const evento of bitacora().eventos) {
+      const clave = `${evento.r}:${evento.m}`;
+      ultimos.set(clave, Math.max(ultimos.get(clave) || 0, evento.t || 0));
+    }
+    return atascos(2)
+      .sort((a, b) => Number(a.superado) - Number(b.superado)
+        || b.intentos - a.intentos
+        || (ultimos.get(`${b.ruta}:${b.modulo}`) || 0) - (ultimos.get(`${a.ruta}:${a.modulo}`) || 0))
+      .slice(0, Math.min(Math.max(Number(limite) || 0, 0), 6))
+      .map(item => {
+        const route = routeFor(item.ruta);
+        return {
+          ...item,
+          numero: item.modulo + 1,
+          href: route.path + "#" + route.anchor,
+          motivo: item.superado ? "Refuérzalo: necesitó varios intentos." : "Retómalo: todavía necesita práctica."
+        };
+      });
   }
 
   function registrarFeedback(id, indice, valor, area = null) {
@@ -451,6 +532,14 @@
   function combinarRemoto(rutas, perfilRemoto = null) {
     const documento = perfil();
     if (ITINERARIOS.includes(perfilRemoto?.itinerary)) documento.itinerario = perfilRemoto.itinerary;
+    if (Object.prototype.hasOwnProperty.call(RITMOS, perfilRemoto?.weekly_pace)) {
+      documento.planSemanal = {
+        ritmo: perfilRemoto.weekly_pace,
+        objetivo: Number.isInteger(perfilRemoto.weekly_target) ? perfilRemoto.weekly_target : RITMOS[perfilRemoto.weekly_pace],
+        semana: /^\d{4}-\d{2}-\d{2}$/.test(perfilRemoto.weekly_started_on || "") ? perfilRemoto.weekly_started_on : inicioSemana(),
+        base: Number.isInteger(perfilRemoto.weekly_baseline) && perfilRemoto.weekly_baseline >= 0 ? perfilRemoto.weekly_baseline : resumen(documento).modulos
+      };
+    }
     for (const route of routes) {
       const incoming = rutas?.[route.id];
       if (!incoming) continue;
@@ -475,7 +564,7 @@
     perfil, refrescar, completados, examenes, completar, aprobarExamen,
     registrarIntento, atascos, bitacora,
     itinerarios: ITINERARIOS.slice(), itinerario: () => perfil().itinerario,
-    seleccionarItinerario, feedback, registrarFeedback,
+    seleccionarItinerario, definirPlanSemanal, metaSemanal, recomendacionesRepaso, feedback, registrarFeedback,
     exportar, importar, borrar, esquema,
     usarCuenta, cuenta: () => account, combinarRemoto,
     resumen: () => resumen(perfil())

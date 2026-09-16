@@ -14,7 +14,7 @@
     return;
   }
   const uuid = () => crypto.randomUUID();
-  const original = Object.fromEntries(["save","removeDraft","completar","aprobarExamen","registrarIntento","seleccionarItinerario","registrarFeedback"].map(k => [k,state[k].bind(state)]));
+  const original = Object.fromEntries(["save","removeDraft","completar","aprobarExamen","registrarIntento","seleccionarItinerario","definirPlanSemanal","metaSemanal","registrarFeedback"].map(k => [k,state[k].bind(state)]));
   let owner = state.cuenta(), queue = null, client = null, snapshot = null, busy = false, timer = null;
   let ready = false, epoch = 0, message = "Crea tu perfil para sincronizar el avance automáticamente.", subscribed = false, loggingOut = false;
   let bases = {}, syncing = false;
@@ -94,6 +94,18 @@
     const saved=original.seleccionarItinerario(id);
     if (saved && before!==id && queue && validScope()) enqueue({kind:"preference",itinerary:id});
     return saved;
+  });
+  const enqueueWeeklyPlan = plan => enqueue({kind:"weekly-plan",pace:plan.ritmo,target:plan.objetivo,week:plan.semana,baseline:plan.base});
+  state.definirPlanSemanal = guard((pace) => {
+    const saved=original.definirPlanSemanal(pace);
+    const plan=original.metaSemanal();
+    if (saved && plan && queue && validScope()) enqueueWeeklyPlan(plan);
+    return saved;
+  });
+  state.metaSemanal = guard(() => {
+    const plan=original.metaSemanal();
+    if (plan?.renovada && queue && validScope()) enqueueWeeklyPlan(plan);
+    return plan;
   });
   state.registrarFeedback = guard((r,m,value,area=null) => {
     const saved=original.registrarFeedback(r,m,value,area);
@@ -184,8 +196,8 @@
       meterCopy.textContent=completed+" de "+total+" ejercicios · "+percent+"% del itinerario";
       control("#account-itinerary-title").textContent=path.name;
       if (next) {
-        const pendingLevel=Math.floor(next.completed/4);
-        const pendingExam=next.completed>0 && next.completed%4===0 && next.exams<pendingLevel;
+        const pendingLevel=next.exams+1;
+        const pendingExam=next.completed>=pendingLevel*4;
         title.textContent=pendingExam ? "Cierra el nivel con su mini examen" : (next.started ? "Continúa con "+next.name : "Empieza con "+next.name);
         copy.textContent=pendingExam ? "Ya completaste los ejercicios del nivel "+pendingLevel+" de "+next.name+". Comprueba lo aprendido para abrir el siguiente." : "Tu próximo ejercicio es el "+(next.active+1)+" de "+next.count+" en "+next.name+".";
         nextLink.href=reviewHref(next.href); nextLink.textContent=pendingExam ? "Ir al mini examen →" : "Continuar aprendiendo →";

@@ -473,7 +473,7 @@ for (const page of pages) {
   assert.match(html, /publicHosts\.includes\(window\.location\.hostname\)/);
 }
 for (const file of ["account.js", "account.css"]) {
-  assert.match(assetVersions.get(file), /\?v=20260914-/, `${file}: renovar la URL tras mejorar la vista de progreso`);
+  assert.match(assetVersions.get(file), /\?v=20260915-/, `${file}: renovar la URL tras integrar la meta semanal`);
 }
 for (const file of ["account-config.js", "catalog.js", "styles.css"]) {
   assert.match(assetVersions.get(file), /\?v=20260909-/, `${file}: conserva la versión de su último cambio`);

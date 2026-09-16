@@ -51,8 +51,8 @@
   <link rel="icon" href="favicon.svg?v=20260902-bmw1" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=20260909-profile3">
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
-  <link rel="stylesheet" href="account.css?v=20260914-progress1">
-  <link rel="stylesheet" href="home.css?v=20260914-capi1">
+  <link rel="stylesheet" href="account.css?v=20260915-plan1">
+  <link rel="stylesheet" href="home.css?v=20260915-plan1">
   <link rel="stylesheet" href="onboarding.css?v=20260915-onboarding1">
 </head>
 <body class="home-page">
@@ -91,7 +91,12 @@
   </header>
   <main id="contenido">
     <div class="home-wrap">
-      <section class="continue-learning" id="continue-learning" aria-labelledby="continue-title" hidden><div><p class="home-kicker">Tu espacio de aprendizaje</p><h2 id="continue-title">Continúa donde quedaste</h2><p id="continue-description"></p></div><a class="button button-primary" id="continue-link" href="#rutas">Continuar aprendiendo →</a></section>
+      <section class="continue-learning" id="continue-learning" aria-labelledby="continue-title" hidden>
+        <div class="continue-main"><img class="capi-character" src="assets/capi-guide.svg?v=20260914-capi3" alt=""><div><p class="home-kicker">CAPI · TU PRÓXIMO PASO</p><h2 id="continue-title">Continúa donde quedaste</h2><p id="continue-description"></p></div></div>
+        <a class="button button-primary" id="continue-link" href="#rutas">Continuar aprendiendo →</a>
+        <div class="weekly-home" id="weekly-home" hidden><div><span id="weekly-home-label">Tu meta semanal</span><strong id="weekly-home-value"></strong></div><div class="weekly-meter" id="weekly-home-meter" role="progressbar" aria-label="Avance de la meta semanal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><p id="weekly-home-copy"></p></div>
+        <aside class="review-home" id="review-home" aria-labelledby="review-home-title" hidden><div><span>REPASO RECOMENDADO</span><h3 id="review-home-title">Una cápsula para reforzar</h3></div><ul id="review-home-list"></ul></aside>
+      </section>
       <section class="home-hero" id="inicio" aria-labelledby="landing-title">
         <div class="home-hero-copy">
           <p class="home-kicker"><span class="home-dot" aria-hidden="true"></span> Aprende a tu ritmo. Crea desde el primer día.</p>
@@ -193,17 +198,18 @@
     </div>
   </footer>
 
-  <script src="learning-state.js?v=20260912-experience1"></script>
+  <script src="learning-state.js?v=20260915-plan1"></script>
   <script src="account-config.js?v=20260909-profile3"></script>
   <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
-  <script src="account.js?v=20260914-capi3"></script>
+  <script src="account.js?v=20260915-plan1"></script>
   <script src="learning-experience.js?v=20260914-capi3"></script>
   <script src="onboarding.js?v=20260915-onboarding1"></script>
   <script src="json-lab.js?v=20260907-json1"></script>
   <script src="course-logos.js?v=20260911-newtech2"></script>
   <script src="catalog.js?v=20260909-profile3"></script>
   <script src="home.js?v=20260909-home1"></script>
+  <script src="learning-plan.js?v=20260915-plan1"></script>
   <script src="site.js?v=20260903-review1"></script>
 </body>
 </html>
