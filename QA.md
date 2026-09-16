@@ -83,6 +83,20 @@ En navegador se comprobó el resultado a tamaño pequeño en la orientación y l
 ayuda gradual: ambos brazos se distinguen y la interrogación permanece legible
 sobre el fondo oscuro.
 
+## Onboarding personalizado
+
+`onboarding.test.mjs` abre el diálogo desde «Empezar desde cero», recorre las
+cuatro preguntas y exige que la recomendación incluya itinerario, ritmo semanal,
+duración orientativa y tres etapas. También comprueba que nada se guarde antes
+de la acción final, que la selección use `LearningState` y que Mi cuenta permita
+repetir la orientación. Con esta prueba, la verificación completa suma 28 suites.
+
+La revisión en navegador cubrió el primer paso, navegación hacia atrás y
+resultado en 390 px y 1280 px, tanto en claro como en oscuro. El foco entra en el
+título de cada pregunta y vuelve al botón de origen al cerrar. No se observaron
+desbordamientos en el diálogo; el contenido largo se desplaza dentro de este sin
+perder el control de cierre.
+
 # Historial de revisiones
 
 ## Despliegue verificado el 8 de septiembre de 2026

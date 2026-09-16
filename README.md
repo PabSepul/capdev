@@ -1,6 +1,6 @@
 # CápsulasDev
 
-Plataforma educativa estática en español. Estado actualizado el 13 de septiembre de 2026.
+Plataforma educativa estática en español. Estado actualizado el 15 de septiembre de 2026.
 El sitio se publica en `capsulasdev.com` desde el repositorio `PabSepul/capdev`.
 La pantalla pública de mantenimiento continúa activa hasta que se autorice su apertura.
 
@@ -13,7 +13,7 @@ El lanzamiento inicial es para mayores de 18 años y conserva la pantalla de
 mantenimiento mientras se decide la apertura pública.
 
 Ver [CUENTAS.md](CUENTAS.md) para arquitectura, SQL, configuración, DNS y verificación.
-Hay 23 páginas y 27 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
+Hay 23 páginas y 28 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
 y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 
 ## Catálogo actual
@@ -131,6 +131,9 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 - `learning-state.js`, `catalog.js`, `learning-experience.js`: continuidad, borradores, avance,
   itinerarios, feedback, orientación propia de cada tecnología y apariciones
   contextuales de Capi en las diecinueve rutas y sus mini exámenes.
+- `onboarding.js` y `onboarding.css`: conversación inicial de cuatro preguntas,
+  recomendación de itinerario, ritmo semanal y curva de aprendizaje con acceso
+  para repetirla desde Mi cuenta.
 - `assets/capi-*.svg`: cuatro poses vectoriales de Capi para bienvenida, reflexión,
   orientación y celebración. Conservan contraste y nitidez desde tamaños pequeños.
 - `site.js`, `styles.css`, `learning-review.css`: tema, comportamiento y estilos compartidos.
@@ -192,7 +195,7 @@ La portada ofrece tres itinerarios sin bloquear la exploración libre. La elecci
 `analizar-avance.mjs` continúa disponible para revisar exportaciones del piloto. Las operaciones de feedback también quedan en `learning_operations`, asociadas a la cuenta que las envió y protegidas por RLS.
 ## Verificación
 
-La verificación completa tiene 27 suites. Para ejecutarlas todas desde PowerShell:
+La verificación completa tiene 28 suites. Para ejecutarlas todas desde PowerShell:
 
 ```powershell
 Get-ChildItem -Filter *.test.mjs | Sort-Object Name | ForEach-Object { node $_.FullName; if ($LASTEXITCODE -ne 0) { throw "Falló $($_.Name)" } }
@@ -224,7 +227,7 @@ node route-accessibility.test.mjs
 Las tres admiten CONTENT_QA_MODULES apuntando a un node_modules con esas herramientas. Solo TypeScript
 y React admiten CONTENT_QA_SKIP=1 para omitir el contraste a sabiendas. Omitirlo no cuenta como contraste
 nativo aprobado. La comparación de Node también es obligatoria y cierra sus servidores antes de terminar.
-`.github/workflows/quality.yml` repite las 27 suites en cada push y pull request.
+`.github/workflows/quality.yml` repite las 28 suites en cada push y pull request.
 
 Para una vista local: `python -m http.server 4174 --bind 127.0.0.1`.
 Ver `QA.md` para el alcance de la revisión y `HANDOFF.md` para continuidad operativa.

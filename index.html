@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
   <link rel="stylesheet" href="account.css?v=20260914-progress1">
   <link rel="stylesheet" href="home.css?v=20260914-capi1">
+  <link rel="stylesheet" href="onboarding.css?v=20260915-onboarding1">
 </head>
 <body class="home-page">
   <section class="maintenance-screen" aria-labelledby="maintenance-title">
@@ -96,7 +97,7 @@
           <p class="home-kicker"><span class="home-dot" aria-hidden="true"></span> Aprende a tu ritmo. Crea desde el primer día.</p>
           <h1 id="landing-title">Un pequeño paso.<br>Algo <em>nuevo</em><span class="hero-period">.</span></h1>
           <p class="hero-description">Aprender a programar empieza con una idea sencilla. Entiéndela, pruébala y mira lo que eres capaz de crear.</p>
-          <div class="home-actions"><a class="button button-primary" href="python.html">Empezar desde cero <span aria-hidden="true">↗</span></a><a class="home-text-link" href="#rutas">Explorar las rutas <span aria-hidden="true">↓</span></a></div>
+          <div class="home-actions"><a class="button button-primary" href="python.html" data-onboarding-open>Empezar desde cero <span aria-hidden="true">↗</span></a><a class="home-text-link" href="#rutas">Explorar las rutas <span aria-hidden="true">↓</span></a></div>
           <p class="hero-footnote">En español <span aria-hidden="true">·</span> Sin instalaciones <span aria-hidden="true">·</span> Ejercicios en tu navegador</p>
           <aside class="home-capi-intro" aria-label="Presentación de Capi"><img class="capi-character" src="assets/capi-welcome.svg?v=20260914-capi3" alt="Capi, la mascota de CápsulasDev, saludando"><p><strong>Hola, soy Capi.</strong><span>Te acompañaré cuando necesites una pista o quieras saber qué sigue.</span></p></aside>
         </div>
@@ -167,6 +168,22 @@
     </div>
   </main>
 
+  <dialog class="onboarding-dialog" id="onboarding-dialog" aria-labelledby="onboarding-title">
+    <div class="onboarding-shell">
+      <button class="onboarding-close" type="button" data-onboarding-close aria-label="Cerrar orientación">×</button>
+      <aside class="onboarding-capi" aria-label="Orientación de Capi">
+        <img id="onboarding-capi-image" src="assets/capi-welcome.svg?v=20260914-capi3" alt="">
+        <p class="onboarding-capi-kicker">CAPI TE ORIENTA</p>
+        <p id="onboarding-capi-copy">Conozcamos lo que quieres lograr. No hay respuestas correctas.</p>
+      </aside>
+      <section class="onboarding-conversation">
+        <div class="onboarding-progress-row"><span id="onboarding-step">Pregunta 1 de 4</span><div class="onboarding-progress" role="progressbar" aria-label="Avance de la orientación" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1"><span></span></div></div>
+        <div id="onboarding-view"></div>
+        <button class="onboarding-back" id="onboarding-back" type="button" hidden>← Pregunta anterior</button>
+      </section>
+    </div>
+  </dialog>
+
   <footer>
     <div class="footer-inner">
       <a class="brand footer-brand" href="#inicio"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a>
@@ -182,6 +199,7 @@
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
   <script src="account.js?v=20260914-capi3"></script>
   <script src="learning-experience.js?v=20260914-capi3"></script>
+  <script src="onboarding.js?v=20260915-onboarding1"></script>
   <script src="json-lab.js?v=20260907-json1"></script>
   <script src="course-logos.js?v=20260911-newtech2"></script>
   <script src="catalog.js?v=20260909-profile3"></script>

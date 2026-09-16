@@ -35,6 +35,7 @@ await eventually(()=>w.document.querySelector('[data-account-status]').textConte
 assert.equal(w.document.querySelector('#account-data').hidden,false);
 assert.match(w.document.querySelector('#account-goal-title').textContent,/Elige una meta/);
 assert.match(w.document.querySelector('#account-capi-image').src,/capi-thinking\.svg\?v=20260914-capi3$/);
+assert.match(w.document.querySelector('.account-onboarding-link').href,/index\.html\?onboarding=1$/);
 const verifiedStorage=Object.fromEntries(Object.keys(w.localStorage).map(k=>[k,w.localStorage.getItem(k)]));
 online=false;
 w.LearningState.completar('python',1);

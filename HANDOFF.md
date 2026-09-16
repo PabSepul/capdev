@@ -1,6 +1,6 @@
 # Traspaso y continuidad de CápsulasDev
 
-Estado al 13 de septiembre de 2026. Base inicial: `adf9e2b`.
+Estado al 15 de septiembre de 2026. Base inicial: `adf9e2b`.
 
 ### Entrega de itinerarios, feedback, calidad y respaldos
 
@@ -115,6 +115,27 @@ su color original sin contorno. Los recursos llevan la versión
 `20260914-capi3` para evitar que el navegador reutilice los SVG anteriores. La
 revisión visual cubrió orientación y ayuda gradual en claro, oscuro, escritorio
 y móvil.
+
+### Entrega local posterior: onboarding personalizado
+
+El botón «Empezar desde cero» abre ahora una conversación guiada por Capi. Hace
+cuatro preguntas, una por pantalla: aspiración, motivo de estudio, experiencia
+previa y tiempo semanal disponible. La recomendación pondera las dos primeras
+respuestas y propone uno de los tres itinerarios existentes; la experiencia
+ajusta la explicación del inicio y el tiempo produce un ritmo y una duración
+orientativa. El resultado muestra tres etapas de aprendizaje y el primer curso.
+
+Las respuestas intermedias viven solo mientras el diálogo está abierto. No se
+guardan ni se envían; únicamente se conserva el itinerario cuando la persona
+pulsa «Elegir esta ruta y comenzar», usando `seleccionarItinerario()` y la
+sincronización ya existente. No requiere una migración de Supabase. Mi cuenta
+incluye «Revisar mi objetivo con Capi», que vuelve a abrir la conversación.
+
+`onboarding.test.mjs` recorre las cuatro preguntas, comprueba recomendación,
+ritmo, curva, selección explícita y acceso desde Mi cuenta. Las 28 suites pasan.
+La revisión visual cubrió claro y oscuro, escritorio y móvil; se verificaron el
+avance, el botón anterior, el cierre con restauración del foco y el resultado.
+Esta entrega permanece local y aún no ha sido autorizada para publicación.
 
 ### Repositorio principal desde el 11 de septiembre de 2026
 
