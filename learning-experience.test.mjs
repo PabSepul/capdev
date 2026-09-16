@@ -70,6 +70,31 @@ assert.doesNotMatch(guideArms, /stroke="#f9faf6"/, "los brazos de orientación n
   window.LearningExperience.showFeedback({ passed: true, error: false });
   assert.match(feedback.querySelector(".capi-feedback-character").src, /capi-celebrate\.svg\?v=20260914-capi3$/);
   assert.match(feedback.querySelector(".capi-coach-message").textContent, /Buen avance/);
+  const adaptiveHelp = feedback.querySelector(".capi-adaptive-help");
+  const adaptiveButton = adaptiveHelp.querySelector("[data-adaptive-hint]");
+  const hintButton = window.document.querySelector("#show-hint");
+  let requestedHints = 0;
+  hintButton.addEventListener("click", () => { requestedHints += 1; });
+  window.LearningState.registrarIntento("python", 0, { aprobado: false, error: false });
+  window.LearningExperience.showFeedback({ passed: false, error: false });
+  assert.equal(adaptiveHelp.hidden, true, "el primer intento conserva la orientación general");
+  window.LearningState.registrarIntento("python", 0, { aprobado: false, error: false });
+  window.LearningExperience.showFeedback({ passed: false, error: false });
+  assert.equal(adaptiveHelp.hidden, false, "Capi ofrece ayuda adaptativa desde el segundo intento");
+  assert.match(adaptiveHelp.textContent, /PRIMER APOYO/);
+  assert.match(feedback.querySelector(".capi-coach-message").textContent, /dos intentos/);
+  adaptiveButton.click();
+  assert.equal(requestedHints, 1, "la ayuda adaptativa revela una sola pista por decisión de la persona");
+  window.LearningState.registrarIntento("python", 0, { aprobado: false, error: false });
+  window.LearningExperience.showFeedback({ passed: false, error: false });
+  assert.match(adaptiveHelp.textContent, /SEGUNDO APOYO/);
+  assert.match(adaptiveHelp.textContent, /concepto/);
+  window.LearningState.registrarIntento("python", 0, { aprobado: false, error: true });
+  window.LearningExperience.showFeedback({ passed: false, error: true });
+  assert.match(adaptiveHelp.textContent, /AYUDA CONCRETA/);
+  assert.match(feedback.querySelector(".capi-coach-message").textContent, /ayuda más concreta/);
+  window.LearningExperience.showFeedback({ passed: true, error: false });
+  assert.equal(adaptiveHelp.hidden, true, "la ayuda deja de ocupar espacio al superar la misión");
   feedback.querySelector('[data-feedback-value="mejorar"]').click();
   assert.equal(feedback.querySelector(".exercise-feedback-areas").hidden, false);
   feedback.querySelector('[data-feedback-area="mision"]').click();
@@ -80,4 +105,21 @@ assert.doesNotMatch(guideArms, /stroke="#f9faf6"/, "los brazos de orientación n
   window.close();
 }
 
-console.log("Experiencia: 3 itinerarios, Capi en momentos de ayuda, orientación y feedback estructurado: OK");
+{
+  const window = new JSDOM(read("html-css.html"), { url: "https://capsulasdev.com/html-css.html?revision=septiembre-2026", runScripts: "outside-only" }).window;
+  window.eval(read("learning-state.js"));
+  window.eval(read("learning-experience.js"));
+  window.LearningExperience.setModule("html-css", 0, { title: "Título y párrafo" });
+  window.LearningExperience.showFeedback({ passed: false, error: false });
+  window.LearningExperience.showFeedback({ passed: false, error: false });
+  const feedback = window.document.querySelector("#exercise-feedback");
+  assert.equal(feedback.querySelector(".capi-adaptive-help").hidden, false, "la ayuda también cuenta intentos temporales de visitantes");
+  const starterHint = window.document.querySelector("#starter-show-hint");
+  let requestedHints = 0;
+  starterHint.addEventListener("click", () => { requestedHints += 1; });
+  feedback.querySelector("[data-adaptive-hint]").click();
+  assert.equal(requestedHints, 1, "la misma ayuda adaptativa funciona en las otras 18 rutas");
+  window.close();
+}
+
+console.log("Experiencia: 3 itinerarios, Capi, orientación, feedback y pistas adaptadas a los intentos: OK");

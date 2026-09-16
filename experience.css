@@ -134,6 +134,11 @@
 .experience-page .exercise-feedback .capi-coach-message { display: block; margin-top: 5px; font-size: .78rem; line-height: 1.5; }
 .experience-page .exercise-feedback h4 { margin: 6px 0; font-size: .88rem; line-height: 1.45; }
 .experience-page .exercise-feedback p { margin: 0; color: var(--ink-soft); font-size: .7rem; line-height: 1.65; }
+.experience-page .capi-adaptive-help { margin-top: 16px; padding: 14px 15px; border: 1px solid var(--purple); border-left-width: 4px; border-radius: 8px; background: var(--purple-soft); }
+.experience-page .capi-adaptive-help[hidden] { display: none; }
+.experience-page .capi-adaptive-help .capi-adaptive-kicker { display: block; margin-bottom: 5px; color: var(--purple-dark); font-size: .57rem; font-weight: 800; letter-spacing: .075em; }
+.experience-page .capi-adaptive-help [data-adaptive-hint] { margin-top: 11px; border-color: var(--purple); background: var(--card); }
+.experience-page .capi-adaptive-help [data-adaptive-hint]:disabled { cursor: default; opacity: .72; }
 .experience-page .exercise-feedback-actions, .experience-page .exercise-feedback-areas > div { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
 .experience-page .exercise-feedback button { min-height: 42px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--ink); font: 700 .68rem Inter,sans-serif; cursor: pointer; }
 .experience-page .exercise-feedback button:hover, .experience-page .exercise-feedback button.is-selected { border-color: var(--purple); background: var(--purple-soft); }

@@ -165,6 +165,7 @@
   }
 
   let active = null;
+  const sessionAttempts = new Map();
   function feedbackPanel() {
     let panel = document.querySelector("#exercise-feedback");
     if (panel && typeof panel.querySelector === "function" && panel.querySelector("#exercise-feedback-title")) return panel;
@@ -175,11 +176,21 @@
     panel.id = "exercise-feedback";
     panel.className = "exercise-feedback";
     panel.hidden = true;
-    panel.innerHTML = `<div class="exercise-feedback-intro">${capiImage("guide", "", "capi-character capi-feedback-character")}<div><span>CAPI TE ACOMPAÑA</span><strong class="capi-coach-message">Revisemos cómo resultó este intento.</strong><h4 id="exercise-feedback-title">¿Esta cápsula fue clara?</h4><p>Tu respuesta no incluye el código que escribiste.</p></div></div><div class="exercise-feedback-actions"><button type="button" data-feedback-value="claro">Sí, quedó claro</button><button type="button" data-feedback-value="mejorar">Necesita más claridad</button></div><div class="exercise-feedback-areas" hidden><p>¿Qué deberíamos revisar?</p><div><button type="button" data-feedback-area="explicacion">Explicación</button><button type="button" data-feedback-area="mision">Misión</button><button type="button" data-feedback-area="resultado">Resultado o error</button><button type="button" data-feedback-area="pistas">Pistas</button><button type="button" data-feedback-area="otro">Otro aspecto</button></div></div><p class="exercise-feedback-status" role="status" tabindex="-1"></p>`;
+    panel.innerHTML = `<div class="exercise-feedback-intro">${capiImage("guide", "", "capi-character capi-feedback-character")}<div><span>CAPI TE ACOMPAÑA</span><strong class="capi-coach-message">Revisemos cómo resultó este intento.</strong><h4 id="exercise-feedback-title">¿Esta cápsula fue clara?</h4><p>Tu respuesta no incluye el código que escribiste.</p></div></div><div class="capi-adaptive-help" hidden><span class="capi-adaptive-kicker"></span><p class="capi-adaptive-copy"></p><button type="button" data-adaptive-hint>Abrir una pista</button></div><div class="exercise-feedback-actions"><button type="button" data-feedback-value="claro">Sí, quedó claro</button><button type="button" data-feedback-value="mejorar">Necesita más claridad</button></div><div class="exercise-feedback-areas" hidden><p>¿Qué deberíamos revisar?</p><div><button type="button" data-feedback-area="explicacion">Explicación</button><button type="button" data-feedback-area="mision">Misión</button><button type="button" data-feedback-area="resultado">Resultado o error</button><button type="button" data-feedback-area="pistas">Pistas</button><button type="button" data-feedback-area="otro">Otro aspecto</button></div></div><p class="exercise-feedback-status" role="status" tabindex="-1"></p>`;
     anchor.insertAdjacentElement("afterend", panel);
     panel.addEventListener("click", event => {
       const valueButton = event.target.closest("[data-feedback-value]");
       const areaButton = event.target.closest("[data-feedback-area]");
+      const adaptiveButton = event.target.closest("[data-adaptive-hint]");
+      if (adaptiveButton) {
+        const hintButton = document.querySelector("#show-hint, #starter-show-hint");
+        if (!hintButton || hintButton.disabled) return;
+        hintButton.click();
+        adaptiveButton.textContent = hintButton.disabled ? "Ya viste todas las pistas" : "Abrir la siguiente pista";
+        adaptiveButton.disabled = hintButton.disabled;
+        hintButton.focus();
+        return;
+      }
       if (!active || (!valueButton && !areaButton)) return;
       if (valueButton?.dataset.feedbackValue === "mejorar") {
         panel.querySelector(".exercise-feedback-areas").hidden = false;
@@ -220,22 +231,78 @@
     if (!panel) return;
     panel.querySelector("#exercise-feedback-title").textContent = `¿La cápsula «${active.title}» fue clara?`;
     panel.querySelector(".exercise-feedback-status").textContent = "";
+    panel.querySelector(".capi-adaptive-help").hidden = true;
     paintFeedback(panel);
     panel.hidden = !state.feedback(route, index);
+  }
+
+  function activeAttemptCount() {
+    if (!active) return 0;
+    const key = `${active.route}:${active.index}`;
+    const sessionCount = sessionAttempts.get(key) || 0;
+    if (typeof state.atascos !== "function") return sessionCount;
+    const item = state.atascos(1).find(entry => entry.ruta === active.route && entry.modulo === active.index);
+    return Math.max(item?.intentos || 0, sessionCount);
+  }
+
+  function renderAdaptiveHelp(panel, outcome) {
+    const help = panel.querySelector(".capi-adaptive-help");
+    if (!help) return;
+    const attempts = activeAttemptCount();
+    const hintButton = document.querySelector("#show-hint, #starter-show-hint");
+    help.hidden = Boolean(outcome.passed) || attempts < 2 || !hintButton;
+    if (help.hidden) return;
+
+    const kicker = help.querySelector(".capi-adaptive-kicker");
+    const copy = help.querySelector(".capi-adaptive-copy");
+    const action = help.querySelector("[data-adaptive-hint]");
+    action.disabled = Boolean(hintButton.disabled);
+    if (hintButton.disabled) {
+      kicker.textContent = "PISTAS REVISADAS";
+      copy.textContent = "Ya abriste las tres pistas. Compara una comprobación pendiente a la vez con tu código.";
+      action.textContent = "Ya viste todas las pistas";
+      return;
+    }
+    if (attempts >= 4) {
+      kicker.textContent = "AYUDA CONCRETA";
+      copy.textContent = "Has trabajado varias veces en esta cápsula. Abre la siguiente pista y compárala, línea por línea, con tu código.";
+      action.textContent = "Acercarme a la ayuda concreta";
+      return;
+    }
+    if (attempts === 3) {
+      kicker.textContent = "SEGUNDO APOYO";
+      copy.textContent = "El bloqueo continúa. La siguiente pista explica el concepto que sostiene la solución.";
+      action.textContent = "Abrir la siguiente pista";
+      return;
+    }
+    kicker.textContent = "PRIMER APOYO";
+    copy.textContent = "Ya hiciste dos intentos. Una pista breve puede ayudarte a mirar el problema desde otro ángulo.";
+    action.textContent = "Ver la primera pista";
   }
 
   function showFeedback(outcome = {}) {
     const panel = feedbackPanel();
     if (!panel || !active) return;
+    const key = `${active.route}:${active.index}`;
+    if (outcome.passed) sessionAttempts.delete(key);
+    else sessionAttempts.set(key, Math.min((sessionAttempts.get(key) || 0) + 1, 99999));
     const pose = outcome.passed ? "celebrate" : outcome.error ? "thinking" : "guide";
+    const attempts = activeAttemptCount();
     const message = outcome.passed
       ? "¡Buen avance! Tu solución cumple la misión."
+      : attempts >= 4
+        ? "Tu esfuerzo ya merece una ayuda más concreta. Avancemos una pista a la vez."
+        : attempts === 3
+          ? "Ya aislaste parte del problema. La siguiente pista explica el concepto."
+          : attempts === 2
+            ? "Veo que ya hiciste dos intentos. Probemos una pista breve."
       : outcome.error
         ? "Revisemos el error con calma. La consola señala dónde empezar."
         : "Tu código ya se ejecuta. Revisa el primer criterio pendiente.";
     const character = panel.querySelector(".capi-feedback-character");
     if (character) character.src = capiAsset(pose);
     panel.querySelector(".capi-coach-message").textContent = message;
+    renderAdaptiveHelp(panel, outcome);
     panel.hidden = false;
   }
 

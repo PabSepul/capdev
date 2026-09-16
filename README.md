@@ -130,7 +130,10 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 - `json-lab.js` y `json-course.js`: analizador de JSON, validador de esquemas y los 12 módulos de la ruta.
 - `learning-state.js`, `catalog.js`, `learning-experience.js`: continuidad, borradores, avance,
   itinerarios, feedback, orientación propia de cada tecnología y apariciones
-  contextuales de Capi en las diecinueve rutas y sus mini exámenes.
+  contextuales de Capi en las diecinueve rutas y sus mini exámenes. Después de
+  varios intentos fallidos, Capi ofrece pistas gradualmente más concretas sin
+  abrirlas ni mostrar la solución de forma automática; para visitantes cuenta
+  los intentos solo durante la sesión.
 - `learning-plan.js`: convierte el tiempo disponible en una meta semanal y en
   sesiones concretas, permite pausar y retomar, indica el módulo o examen exacto
   que sigue y propone repasos a partir de intentos reales, sin leer ni guardar

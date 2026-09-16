@@ -2,7 +2,23 @@
 
 Estado al 15 de septiembre de 2026. Base inicial: `adf9e2b`.
 
-### Entrega local: sesiones de estudio y pausa
+### Entrega publicada: pistas adaptadas a los intentos
+
+Capi usa el contador del módulo activo para graduar la ayuda después de una
+ejecución fallida. El primer intento conserva el feedback habitual; en el
+segundo ofrece orientación, en el tercero explica que la siguiente pista
+refuerza el concepto y desde el cuarto acerca la ayuda concreta. La persona
+decide cuándo abrir cada pista y cada acción revela solo una; nunca se muestra
+la solución completa automáticamente.
+
+La lógica vive en `learning-experience.js` y funciona en las 19 rutas mediante
+los controles de pistas existentes de Python y del controlador compartido. No
+añade datos, migraciones ni análisis del código: en cuentas reutiliza el número
+de intentos ya guardado por `learning-state.js`; para visitantes mantiene solo
+un contador temporal durante la sesión. La entrega se publicó en `main` el 15
+de septiembre de 2026.
+
+### Entrega publicada: sesiones de estudio y pausa
 
 La meta semanal se divide ahora en sesiones concretas: dos para el ritmo de una
 hora, tres para el ritmo constante y cuatro para el intensivo. Cada tarjeta
@@ -16,7 +32,9 @@ migración incremental `202609150002_weekly_sessions.sql` añade
 PGlite y se aplicó a Supabase el 15 de septiembre de 2026; la verificación remota
 confirmó la columna y el uso dentro de `learning_sync`. La revisión local cubrió estado
 activo y pausado, escritorio y 390 × 844 px; no hubo desbordamiento horizontal.
-El usuario autorizó publicar esta segunda entrega el 15 de septiembre de 2026.
+Publicada en `d308c01`; GitHub Actions `35046923555` y Pages `35046922997`
+terminaron correctamente. La migración y los archivos públicos se verificaron
+el 15 de septiembre de 2026.
 
 ### Entrega publicada: plan semanal, continuación y repaso
 
