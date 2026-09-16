@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import vm from "node:vm";
 import { execFileSync } from "node:child_process";
+import { ADVANCED_SOLUTIONS } from "./python-advanced-fixtures.mjs";
 
 /* El avance vive en un documento con esquema, no en una clave por ruta.
    Estas aserciones hablaban de lo guardado, y ahí es donde se comprueba. */
@@ -13,12 +14,13 @@ const guardado = (storage, id) =>
 
 /*
   La ruta de Python se ejecuta con el intérprete real de python-runtime.js.
-  Esta prueba resuelve los veinte proyectos, comprueba sus validaciones y
-  verifica los puntos de control, los cinco exámenes y el cierre de la ruta.
+  Esta prueba resuelve los cuarenta proyectos, comprueba sus validaciones y
+  verifica los puntos de control, los diez exámenes y el cierre de la ruta.
 */
 
 const stateSource = fs.readFileSync(new URL("./learning-state.js", import.meta.url), "utf8");
 const runtimeSource = fs.readFileSync(new URL("./python-runtime.js", import.meta.url), "utf8");
+const advancedSource = fs.readFileSync(new URL("./python-advanced-course.js", import.meta.url), "utf8");
 const courseSource = fs.readFileSync(new URL("./python.js", import.meta.url), "utf8");
 
 class FakeElement {
@@ -71,6 +73,7 @@ function createContext() {
   /* python.html carga learning-state.js antes que python.js: es el dueno del avance. */
   vm.runInContext(stateSource, sandbox);
   vm.runInContext(runtimeSource, sandbox);
+  vm.runInContext(advancedSource, sandbox);
   vm.runInContext(courseSource, sandbox);
   return {
     elements,
@@ -104,6 +107,7 @@ const SOLUTIONS = {
   19: 'ventas = {"lunes": 120, "martes": 340, "miercoles": 90}\n\ndef mejor_dia(datos):\n    dia = ""\n    monto = 0\n    for clave, valor in datos.items():\n        if valor > monto:\n            monto = valor\n            dia = clave\n    return f"El mejor día fue {dia} con {monto}"\n\nprint(mejor_dia(ventas))\nprint(sum(ventas.values()))',
   20: 'tareas = [\n    {"nombre": "Leer la guía", "hecha": True},\n    {"nombre": "Practicar", "hecha": False},\n    {"nombre": "Repasar", "hecha": False}\n]\n\ndef resumen(items):\n    hechas = 0\n    for tarea in items:\n        if tarea["hecha"]:\n            hechas += 1\n    porcentaje = int(hechas / len(items) * 100)\n    print(f"Completadas {hechas} de {len(items)} ({porcentaje}%)")\n    for tarea in items:\n        if not tarea["hecha"]:\n            print("-", tarea["nombre"])\n\nresumen(tareas)'
 };
+Object.assign(SOLUTIONS, ADVANCED_SOLUTIONS);
 
 /* Variantes libres: el laboratorio ya no exige copiar la estructura del ejemplo. */
 const FREE_VARIANTS = {
@@ -119,20 +123,20 @@ const data = createContext();
 const levels = data.runJson("COURSE_LEVELS.map((level) => ({ id: level.id, stage: level.stage, title: level.completionTitle, projects: level.projects.map((p) => p.id) }))");
 const exams = data.runJson("LEVEL_EXAMS");
 
-assert.equal(levels.length, 5, "Python debe tener 5 niveles");
-assert.deepEqual(levels.map((level) => level.projects.length), [4, 4, 4, 4, 4], "cada nivel tiene 4 proyectos");
+assert.equal(levels.length, 10, "Python debe tener 10 niveles");
+assert.deepEqual(levels.map((level) => level.projects.length), Array(10).fill(4), "cada nivel tiene 4 proyectos");
 assert.deepEqual(
   levels.flatMap((level) => level.projects),
-  Array.from({ length: 20 }, (_, index) => index + 1),
-  "los proyectos van del 1 al 20 sin saltos"
+  Array.from({ length: 40 }, (_, index) => index + 1),
+  "los proyectos van del 1 al 40 sin saltos"
 );
-assert.equal(new Set(levels.map((level) => level.stage)).size, 5, "cada nivel tiene una etapa distinta");
+assert.equal(new Set(levels.map((level) => level.stage)).size, 10, "cada nivel tiene una etapa distinta");
 for (const level of levels) {
   assert.match(level.title, /^Finalizaste .+ de Python\.$/, `nivel ${level.id} necesita mensaje de cierre`);
 }
 
-assert.equal(exams.length, 5, "debe existir un examen por nivel");
-assert.deepEqual(exams.map((exam) => exam.levelId), [1, 2, 3, 4, 5]);
+assert.equal(exams.length, 10, "debe existir un examen por nivel");
+assert.deepEqual(exams.map((exam) => exam.levelId), Array.from({ length: 10 }, (_, index) => index + 1));
 for (const exam of exams) {
   assert.equal(exam.questions.length, 5, `el examen ${exam.levelId} debe tener 5 preguntas`);
   assert.ok(exam.passing > 0 && exam.passing <= exam.questions.length, `umbral inválido en el examen ${exam.levelId}`);
@@ -149,7 +153,7 @@ for (const exam of exams) {
 
 const lab = createContext();
 const projects = lab.runJson("allProjects().map((p) => ({ id: p.id, checks: p.checks, starter: p.starter, file: p.file }))");
-assert.equal(projects.length, 20);
+assert.equal(projects.length, 40);
 
 function validar(context, projectId, code) {
   context.sandbox.__code = code;
@@ -244,9 +248,9 @@ assert.equal(telemetry.run("LearningState.bitacora().eventos.length"), 4, "el ej
 /* 4. Los niveles se desbloquean al terminar el nivel anterior. */
 
 const gate = createContext();
-assert.equal(gate.run("TOTAL_PROJECTS"), 20);
+assert.equal(gate.run("TOTAL_PROJECTS"), 40);
 assert.equal(gate.run("isLevelUnlocked(1)"), true);
-for (const level of [2, 3, 4, 5]) {
+for (const level of [2, 3, 4, 5, 6, 7, 8, 9, 10]) {
   assert.equal(gate.run("isLevelUnlocked(" + level + ")"), false, `el nivel ${level} comienza bloqueado`);
 }
 assert.equal(gate.elements.get("#level-checkpoint").hidden, true, "el punto de control comienza oculto");
@@ -267,6 +271,8 @@ assert.equal(gate.run("isLevelUnlocked(3)"), true, "el nivel 3 se abre al cerrar
 assert.equal(gate.run("isLevelUnlocked(4)"), false);
 gate.run("[9, 10, 11, 12, 13, 14, 15, 16].forEach((id) => completedProjects.add(id)); renderLevelTabs(); renderProject();");
 assert.equal(gate.run("isLevelUnlocked(5)"), true, "el nivel 5 se abre al cerrar el nivel 4");
+gate.run("Array.from({length: 20}, (_, index) => index + 17).forEach((id) => completedProjects.add(id)); renderLevelTabs(); renderProject();");
+assert.equal(gate.run("isLevelUnlocked(10)"), true, "el nivel 10 se abre al cerrar los primeros 36 proyectos");
 
 /* 5. La navegación no cruza hacia un nivel bloqueado. */
 
@@ -319,17 +325,17 @@ const insuficiente = grade.runJson(
 assert.equal(insuficiente.correct, 3);
 assert.equal(insuficiente.passed, false, "3 de 5 no aprueba");
 
-/* 8. La ruta se cierra con los 20 proyectos y los 5 exámenes. */
+/* 8. La ruta se cierra con los 40 proyectos y los 10 exámenes. */
 
 const finish = createContext();
-finish.run("for (let id = 1; id <= 20; id += 1) completedProjects.add(id); renderProgress();");
-assert.equal(finish.elements.get("#route-progress-text").textContent, "20 de 20");
+finish.run("for (let id = 1; id <= 40; id += 1) completedProjects.add(id); renderProgress();");
+assert.equal(finish.elements.get("#route-progress-text").textContent, "40 de 40");
 assert.equal(finish.elements.get("#course-finish").hidden, true, "sin exámenes la ruta no se cierra");
 
-finish.run("[1, 2, 3, 4].forEach((id) => approvedExams.add(id)); renderProgress();");
+finish.run("[1, 2, 3, 4, 5, 6, 7, 8, 9].forEach((id) => approvedExams.add(id)); renderProgress();");
 assert.equal(finish.elements.get("#course-finish").hidden, true, "faltando un examen la ruta no se cierra");
 
-finish.run("approvedExams.add(5); renderProgress();");
+finish.run("approvedExams.add(10); renderProgress();");
 assert.equal(finish.elements.get("#course-finish").hidden, false, "con todo aprobado la ruta se cierra");
 
 /* 9. Las soluciones de referencia son Python válido de verdad. */
@@ -355,4 +361,4 @@ try {
 const detalle = contrastadas >= 0
   ? contrastadas + " soluciones contrastadas con CPython"
   : "CPython no disponible en este equipo";
-console.log(`Python: 5 niveles, 20 proyectos resueltos, ${validaciones} validaciones, 5 exámenes y 25 preguntas (${detalle})`);
+console.log(`Python: 10 niveles, 40 proyectos resueltos, ${validaciones} validaciones, 10 exámenes y 50 preguntas (${detalle})`);

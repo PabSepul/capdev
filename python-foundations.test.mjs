@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 const {JSDOM} = require(path.join(process.env.CONTENT_QA_MODULES || path.join(os.tmpdir(), 'capsulasdev-content-qa', 'node_modules'), 'jsdom'));
 const read = file => fs.readFileSync(new URL(file, import.meta.url), 'utf8');
 const w = new JSDOM(read('python.html'), {url:'http://localhost/python.html', runScripts:'outside-only'}).window;
-for (const file of ['learning-state.js', 'python-runtime.js', 'python.js']) w.eval(read(file));
+for (const file of ['learning-state.js', 'python-runtime.js', 'python-advanced-course.js', 'python.js']) w.eval(read(file));
 const doc = w.document;
 const output = () => doc.querySelector('#course-project-output').textContent;
 const coaching = () => doc.querySelector('#python-coaching');

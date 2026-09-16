@@ -101,6 +101,8 @@
 .experience-page .workspace-step { color: var(--purple-dark); font-size: .64rem; letter-spacing: .065em; text-transform: uppercase; font-weight: 700; margin: 0 0 22px; }
 .experience-page :is(.project-lesson h3,.starter-lesson > h2) { font-size: 1.6rem; line-height: 1.2; }
 .experience-page :is(.project-kicker,.starter-intro,#course-project-summary) { line-height: 1.8; }
+.experience-page .project-prerequisites { margin: 12px 0 0; padding: 10px 12px; border-left: 3px solid var(--purple); border-radius: 0 7px 7px 0; background: var(--purple-soft); color: var(--ink-soft); font-size: .7rem; line-height: 1.65; }
+.experience-page .project-prerequisites[hidden] { display: none; }
 .experience-page .concept-card { border-radius: 10px; }
 .experience-page .lab-scope { margin-top: 16px; color: var(--ink-soft); font-size: .74rem; }
 .experience-page .lab-scope summary { cursor: pointer; padding: 8px 0; line-height: 1.7; }
@@ -144,6 +146,10 @@
 .experience-page .exercise-feedback button:hover, .experience-page .exercise-feedback button.is-selected { border-color: var(--purple); background: var(--purple-soft); }
 .experience-page .exercise-feedback-areas { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
 .experience-page .exercise-feedback-status { margin-top: 12px !important; color: var(--success-dark) !important; }
+@media (min-width: 821px) {
+  .experience-page.python-page .level-tabs { flex-wrap: wrap; }
+  .experience-page.python-page .level-tab { flex: 1 1 calc(20% - 7px); max-width: calc(20% - 6px); }
+}
 .experience-page .starter-progress { padding: 16px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
 .experience-page .capi-checkpoint-note { display: flex; align-items: center; gap: 11px; max-width: 620px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.16); color: var(--on-dark-muted); font-size: .7rem; line-height: 1.6; }
 .experience-page .capi-checkpoint-note .capi-character { flex: 0 0 auto; width: 42px; height: 48px; }

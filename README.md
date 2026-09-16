@@ -1,6 +1,6 @@
 # CápsulasDev
 
-Plataforma educativa estática en español. Estado actualizado el 15 de septiembre de 2026.
+Plataforma educativa estática en español. Estado actualizado el 16 de septiembre de 2026.
 El sitio se publica en `capsulasdev.com` desde el repositorio `PabSepul/capdev`.
 La pantalla pública de mantenimiento continúa activa hasta que se autorice su apertura.
 
@@ -13,14 +13,14 @@ El lanzamiento inicial es para mayores de 18 años y conserva la pantalla de
 mantenimiento mientras se decide la apertura pública.
 
 Ver [CUENTAS.md](CUENTAS.md) para arquitectura, SQL, configuración, DNS y verificación.
-Hay 23 páginas y 28 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
+Hay 23 páginas y 29 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
 y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 
 ## Catálogo actual
 
 | Ruta | Ejercicios | Niveles | Mini exámenes |
 | --- | ---: | ---: | ---: |
-| Python | 20 proyectos | 5 | 5 |
+| Python | 40 proyectos | 10 | 10 |
 | HTML y CSS | 16 módulos | 4 | 4 |
 | JavaScript | 16 módulos | 4 | 4 |
 | SQL | 16 módulos + 3 desafíos independientes | 4 | 4 |
@@ -40,7 +40,7 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | Docker | 12 módulos | 3 | 3 |
 | MongoDB | 12 módulos | 3 | 3 |
 
-Hay 256 ejercicios con progreso y 64 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
+Hay 276 ejercicios con progreso y 69 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
 La portada ofrece tres itinerarios: Desarrollo web, Python y datos, y Herramientas profesionales.
 Cada ruta muestra su posición y el siguiente paso del itinerario elegido. Después de ejecutar un ejercicio,
 la persona puede indicar si fue claro y señalar qué parte conviene revisar, sin enviar texto libre ni código.
@@ -104,6 +104,8 @@ El sitio no requiere build ni instalación npm para servir sus páginas. CommonM
 y el SDK de Supabase se distribuyen localmente en vendor con sus licencias.
 Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio externo.
 
+- `python-advanced-course.js`: niveles 6–10 de Python, con 20 proyectos sobre recorridos, transformaciones,
+  funciones robustas, procesamiento de datos y desarrollo modular aplicado.
 - `python-runtime.js`: intérprete propio de un subconjunto de Python, con límites de pasos, profundidad y salida.
   Incluye variables, condiciones, ciclos, colecciones, conjuntos, funciones, lambda, comprensiones de lista, de
   conjunto y de diccionario, f-strings con alineación y manejo de errores. No es CPython; no admite import,
@@ -189,7 +191,7 @@ cuenta activa, el avance y los borradores se sincronizan automáticamente; la
 exportación operativa se realiza desde la base de datos mediante el procedimiento
 cifrado descrito en `RESPALDOS.md`.
 
-Python usa ids de proyecto 1–20; las otras rutas usan índices desde 0.
+Python usa ids de proyecto 1–40; las otras rutas usan índices desde 0.
 No limpiar el almacenamiento del usuario para hacer pruebas; usar un origen
 local de QA separado.
 
@@ -202,7 +204,7 @@ La portada ofrece tres itinerarios sin bloquear la exploración libre. La elecci
 `analizar-avance.mjs` continúa disponible para revisar exportaciones del piloto. Las operaciones de feedback también quedan en `learning_operations`, asociadas a la cuenta que las envió y protegidas por RLS.
 ## Verificación
 
-La verificación completa tiene 28 suites. Para ejecutarlas todas desde PowerShell:
+La verificación completa tiene 29 suites. Para ejecutarlas todas desde PowerShell:
 
 ```powershell
 Get-ChildItem -Filter *.test.mjs | Sort-Object Name | ForEach-Object { node $_.FullName; if ($LASTEXITCODE -ne 0) { throw "Falló $($_.Name)" } }

@@ -32,7 +32,7 @@
   const scopedKey = (key) => account ? "capsulasdev.user." + account + "." + key : key;
 
   const routes = [
-    { id: "python", name: "Python", count: 20, offset: 1, unit: "proyectos", anchor: "proyectos" },
+    { id: "python", name: "Python", count: 40, offset: 1, unit: "proyectos", anchor: "proyectos" },
     { id: "html-css", name: "HTML y CSS", count: 16, offset: 0, unit: "módulos" },
     { id: "javascript", name: "JavaScript", count: 16, offset: 0, unit: "módulos" },
     { id: "sql", name: "SQL", count: 16, offset: 0, unit: "módulos" },

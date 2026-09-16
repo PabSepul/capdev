@@ -283,6 +283,10 @@ const CASES = [
     "expected": "Python 120\nGit 75\nSQL 40"
   },
   {
+    "program": "datos = [{\"nombre\": \"primero\", \"puntos\": 8}, {\"nombre\": \"segundo\", \"puntos\": 8}, {\"nombre\": \"tercero\", \"puntos\": 5}]\nordenados = sorted(datos, key=lambda fila: fila[\"puntos\"], reverse=True)\nfor fila in ordenados:\n    print(fila[\"nombre\"])",
+    "expected": "primero\nsegundo\ntercero"
+  },
+  {
     "program": "nombres = [\"ana\", \"Bruno\", \"carla\"]\nprint(sorted(nombres, key=lambda texto: texto.lower()))",
     "expected": "['ana', 'Bruno', 'carla']"
   },

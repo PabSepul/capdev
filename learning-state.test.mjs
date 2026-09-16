@@ -71,21 +71,21 @@ for (const id of ['html-css', 'javascript', 'sql', 'git', 'apis']) {
   assert.equal(bloqueado.resumeIndex(id), 4);
 }
 
-/* ---------- Python usa identificadores de proyecto 1–20 ---------- */
+/* ---------- Python usa identificadores de proyecto 1–40 ---------- */
 {
-  const todos = Array.from({length: 20}, (_, i) => i + 1);
+  const todos = Array.from({length: 40}, (_, i) => i + 1);
   const {state} = setup();
   avanzar(state, 'python', [...todos.slice(0, 12), 0, -1, 99], [1, 2, 4]);
-  assert.equal(state.progress('python').count, 20, 'Python tiene 20 proyectos');
+  assert.equal(state.progress('python').count, 40, 'Python tiene 40 proyectos');
   assert.equal(state.progress('python').completed, 12);
   assert.equal(state.progress('python').exams, 2);
   assert.equal(state.resumeIndex('python'), 12);
   avanzar(state, 'python', todos, [3]);
-  assert.equal(state.progress('python').completed, 20);
-  assert.equal(state.progress('python').done, false, 'faltando el quinto examen la ruta sigue abierta');
-  assert.equal(state.resumeIndex('python'), 16, 'sin proyectos pendientes retoma el nivel del examen que falta');
-  avanzar(state, 'python', [], [5]);
-  assert.equal(state.progress('python').exams, 5);
+  assert.equal(state.progress('python').completed, 40);
+  assert.equal(state.progress('python').done, false, 'si quedan exámenes la ruta sigue abierta');
+  assert.equal(state.resumeIndex('python'), 16, 'sin proyectos pendientes retoma el primer nivel cuyo examen falta');
+  avanzar(state, 'python', [], [3, 5, 6, 7, 8, 9, 10]);
+  assert.equal(state.progress('python').exams, 10);
   assert.equal(state.progress('python').done, true);
   assert.equal(state.progress('python').percent, 100);
 }
@@ -356,16 +356,16 @@ home.context.window = {addEventListener(name, callback) { events[name] = callbac
 vm.runInContext(read('catalog.js'), home.context);
 assert.equal(root.querySelector('#continue-learning').hidden, false);
 assert.match(root.querySelector('#continue-title').textContent, /Python/);
-assert.match(root.querySelector('#continue-description').textContent, /Proyecto 5 de 20/);
+assert.match(root.querySelector('#continue-description').textContent, /Proyecto 5 de 40/);
 assert.equal(root.querySelector('#continue-link').href, 'python.html#proyectos');
 const pythonCard = root.querySelector('[data-learning-route="python"]');
-assert.equal(pythonCard.querySelector('[data-route-progress]').textContent, '4/20 proyectos');
-assert.match(pythonCard.querySelector('[data-route-detail]').textContent, /1\/5 exámenes/);
-assert.equal(pythonCard.querySelector('[data-route-fill]').style.width, '20%');
+assert.equal(pythonCard.querySelector('[data-route-progress]').textContent, '4/40 proyectos');
+assert.match(pythonCard.querySelector('[data-route-detail]').textContent, /1\/10 exámenes/);
+assert.equal(pythonCard.querySelector('[data-route-fill]').style.width, '10%');
 
 /* Otra pestaña completó la ruta: la portada tiene que releer, no mostrar lo viejo. */
 const otra = setup(Object.fromEntries(home.storage)).state;
-avanzar(otra, 'python', Array.from({length:20},(_,i)=>i+1), [1,2,3,4,5]);
+avanzar(otra, 'python', Array.from({length:40},(_,i)=>i+1), [1,2,3,4,5,6,7,8,9,10]);
 home.storage.set(CLAVE, JSON.stringify(otra.perfil()));
 events.storage();
 assert.equal(root.querySelector('#continue-learning').hidden, true, 'el cambio hecho en otra pestaña se refleja');
@@ -374,8 +374,8 @@ assert.equal(typeof events.pageshow, 'function');
 
 const routes = setup().state.routes;
 assert.equal(routes.length, 19);
-assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 256);
-assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 64);
+assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 276);
+assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 69);
 for (const id of ['markdown', 'accesibilidad', 'testing']) {
   const { state } = setup();
   avanzar(state, id, Array.from({length:12}, (_, i) => i), [1, 2, 3]);

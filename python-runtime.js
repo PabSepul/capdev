@@ -1483,15 +1483,16 @@
 
   function sortItems(items, keywords, context) {
     const keyFunction = keywords.key ?? null;
+    const reverse = truthy(keywords.reverse ?? false);
     const decorated = items.map((item) => ({
       item,
       key: keyFunction ? callValue(keyFunction, [item], {}, context) : item
     }));
     decorated.sort((left, right) => {
       if (pyEquals(left.key, right.key)) return 0;
-      return compareValues(left.key, right.key, "<") ? -1 : 1;
+      const ascending = compareValues(left.key, right.key, "<") ? -1 : 1;
+      return reverse ? -ascending : ascending;
     });
-    if (truthy(keywords.reverse ?? false)) decorated.reverse();
     return decorated.map((entry) => entry.item);
   }
 

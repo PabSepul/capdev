@@ -59,9 +59,9 @@ second.LearningState.completar('python', 1);
 second.dispatchEvent(new second.Event('pageshow'));
 assert.equal(second.document.querySelector('#continue-learning').hidden, false);
 assert.match(second.document.querySelector('#continue-title').textContent, /Python/);
-assert.match(second.document.querySelector('#continue-description').textContent, /proyecto 2 de 20/);
+assert.match(second.document.querySelector('#continue-description').textContent, /proyecto 2 de 40/);
 assert.equal(second.document.querySelector('[data-learning-route="python"] .route-progress').hidden, false);
-assert.match(second.document.querySelector('[data-learning-route="python"] [data-route-progress]').textContent, /1\/20/);
+assert.match(second.document.querySelector('[data-learning-route="python"] [data-route-progress]').textContent, /1\/40/);
 second.close();
 
 // Si hay varios niveles completos, recomienda el primer examen pendiente, no el último.

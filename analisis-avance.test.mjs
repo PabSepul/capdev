@@ -97,7 +97,7 @@ assert.equal(dificil.tiempos.length, 2, "solo se mide el tiempo de los intentos 
 
 /* Una ruta que nadie tocó no aparece. */
 assert.equal(rutas.has("terminal"), false);
-/* Python sí, y con su desplazamiento de proyectos 1–20 resuelto. */
+/* Python sí, y con su desplazamiento de proyectos 1–40 resuelto. */
 assert.equal(rutas.get("python").personas.size, 1);
 assert.deepEqual(rutas.get("python").masLejos, [1], "proyectos 1 y 2 completados = índice 1");
 
@@ -105,7 +105,7 @@ assert.deepEqual(rutas.get("python").masLejos, [1], "proyectos 1 y 2 completados
 const titulos = cargarTitulos();
 assert.equal(Object.keys(titulos).length, 19, "las diecinueve rutas aportan títulos");
 assert.equal(titulos.json.length, 12);
-assert.equal(titulos.python.length, 20, "Python incluye sus veinte proyectos");
+assert.equal(titulos.python.length, 40, "Python incluye sus cuarenta proyectos");
 assert.equal(titulos["html-css"].length, 16, "con el cuarto nivel de la ampliación");
 for (const [ruta, lista] of Object.entries(titulos)) {
   assert.ok(lista.every((titulo) => typeof titulo === "string" && titulo.length > 0),

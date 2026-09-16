@@ -90,6 +90,7 @@ function cargarTitulos() {
 
   /* Python tiene su propio controlador y guarda los proyectos en COURSE_LEVELS. */
   vm.runInContext(leer("learning-state.js"), contexto);
+  correr("python-advanced-course.js");
   if (correr("python.js", "\nglobalThis.__nivelesPython = COURSE_LEVELS;")) {
     const niveles = contexto.__nivelesPython || [];
     titulos.python = niveles.flatMap((nivel) => nivel.projects || nivel.modules || [])
@@ -138,7 +139,7 @@ function leerRespaldos(archivos) {
 /* ==================== Agregación ==================== */
 
 const RUTAS = {
-  python: { nombre: "Python", modulos: 20, offset: 1, unidad: "proyecto" },
+  python: { nombre: "Python", modulos: 40, offset: 1, unidad: "proyecto" },
   "html-css": { nombre: "HTML y CSS", modulos: 16 }, javascript: { nombre: "JavaScript", modulos: 16 },
   sql: { nombre: "SQL", modulos: 16 }, git: { nombre: "Git y GitHub", modulos: 16 },
   apis: { nombre: "APIs", modulos: 16 }, terminal: { nombre: "Terminal", modulos: 12 },

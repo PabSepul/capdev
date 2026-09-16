@@ -1,6 +1,38 @@
 # Traspaso y continuidad de CápsulasDev
 
-Estado al 15 de septiembre de 2026. Base inicial: `adf9e2b`.
+Estado al 16 de septiembre de 2026. Última base publicada: `2d7ef38`.
+
+### Entrega publicada: Python desde fundamentos hasta desarrollo avanzado aplicado
+
+La ruta de Python crece de 5 a 10 niveles y de 20 a 40 proyectos. Los niveles
+6–10 cubren recorridos con `while`, `enumerate`, `zip` y conjuntos;
+comprensiones, ordenamientos y decisiones sobre colecciones; funciones
+recursivas y manejo de errores; procesamiento de texto tabular; y un cierre
+modular que deduplica, valida, calcula métricas y genera un informe. Cada
+proyecto conserva la estructura educativa aprobada: propósito, ejemplo
+ejecutable explicado, predicción, misión, inicio incompleto, tres pistas,
+feedback por comprobación, reflexión, reto opcional y conexión con el siguiente
+paso. Se añadieron cinco mini exámenes, con 25 preguntas en total.
+
+El avance existente conserva sus identificadores 1–20 y continúa con 21–40.
+`learning-state.js`, el catálogo, el análisis de avance y la documentación ya
+reconocen 40 proyectos y 10 exámenes. La migración incremental
+`supabase/migrations/202609160001_python_advanced.sql` amplía el límite de la
+sincronización de cuentas a 40 sin modificar las filas guardadas. La migración
+se probó localmente con PostgreSQL/PGlite, se aplicó a Supabase el 16 de
+septiembre de 2026 y se verificó que la función remota admite 40 proyectos.
+
+El intérprete educativo ahora conserva el orden relativo de los empates al usar
+`sorted(..., reverse=True)`, igual que Python. La ampliación llega hasta el
+desarrollo avanzado que puede ejecutar este laboratorio: no simula clases,
+módulos o `import`, archivos, decoradores, generadores ni concurrencia. Esta
+limitación se explica dentro de la ruta para no confundirla con CPython.
+
+La navegación de diez niveles se revisó en escritorio y a 390 × 844 px, sin
+desbordamiento horizontal. Las pruebas específicas cubren 40 soluciones, 120
+validaciones, 10 exámenes y 50 preguntas, además de la sincronización del
+proyecto 40 y el examen 10. La entrega se publicó en `main` el 16 de septiembre
+de 2026.
 
 ### Entrega publicada: pistas adaptadas a los intentos
 

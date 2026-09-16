@@ -654,8 +654,8 @@ const COURSE_LEVELS = [
     description: "Filtros, errores y proyectos completos",
     stage: "Integración final",
     completionTitle: "Finalizaste la integración final de Python.",
-    completionCopy: "Terminaste los veinte proyectos: filtraste datos, manejaste una conversión inválida, construiste un reporte y reuniste todo en un gestor de tareas. Revisa tu proyecto final y aprueba el último mini examen para cerrar la ruta completa.",
-    approvedCopy: "Aprobaste los cinco mini exámenes de la ruta. Completaste Python de principio a fin.",
+    completionCopy: "Terminaste la primera mitad de la ruta: filtraste datos, manejaste una conversión inválida, construiste un reporte y reuniste todo en un gestor de tareas. El siguiente bloque profundiza en control, transformaciones y diseño de funciones.",
+    approvedCopy: "Aprobaste los cinco primeros mini exámenes. Continúa con control y recorridos para avanzar hacia proyectos aplicados.",
     projects: [
       {
         id: 17,
@@ -784,7 +784,7 @@ const COURSE_LEVELS = [
           'Calcula int(hechas / len(items) * 100), muestra el resumen con una f-string y haz otro recorrido: si not tarea["hecha"], usa print("-", tarea["nombre"]).'
         ],
         checks: ["Defines resumen() y la llamas", "Muestras “1 de 3” con su porcentaje", "Listas las dos tareas pendientes"],
-        success: "Construiste un programa completo que transforma datos en un resumen útil. Terminaste los veinte proyectos de la ruta Python.",
+        success: "Construiste un programa completo que transforma datos en un resumen útil. Ahora ampliarás tu repertorio con while, enumerate(), zip() y conjuntos.",
         lesson: {
           walkthrough: ["El primer ciclo encuentra una tarea hecha de un total de dos.", "1 / 2 × 100 produce 50, por lo que el resumen muestra Completadas 1 de 2 (50%).", "El segundo ciclo ignora Reservar porque está hecha y muestra - Confirmar hora como pendiente."],
           prediction: "Si marcas las dos tareas del ejemplo como hechas, ¿qué porcentaje y cuántas líneas pendientes aparecerán?",
@@ -806,7 +806,7 @@ const COURSE_LEVELS = [
       }
     ]
   }
-];
+].concat(globalThis.PythonAdvancedCourse?.levels || []);
 
 const LEVEL_EXAMS = [
   {
@@ -1074,7 +1074,7 @@ const LEVEL_EXAMS = [
       }
     ]
   }
-];
+].concat(globalThis.PythonAdvancedCourse?.exams || []);
 
 const allProjects = () => COURSE_LEVELS.flatMap((level) => level.projects);
 const TOTAL_PROJECTS = COURSE_LEVELS.reduce((total, level) => total + level.projects.length, 0);
@@ -1393,7 +1393,7 @@ function renderLevelTabs() {
     button.setAttribute("aria-controls", "course-project");
     button.tabIndex = isActive ? 0 : -1;
     button.disabled = Boolean(level.locked) || !isLevelUnlocked(level.id);
-    button.innerHTML = '<span>0' + level.id + '</span><strong>' + level.title + '</strong><small>'
+    button.innerHTML = '<span>' + String(level.id).padStart(2, "0") + '</span><strong>' + level.title + '</strong><small>'
       + levelStatusLabel(level) + "</small>";
     levelTabs.append(button);
   });
@@ -1484,10 +1484,15 @@ function renderProject() {
   projectOpenedAt = Date.now();
   const project = getActiveProject();
   const level = getActiveLevel();
-  document.querySelector("#course-project-kicker").textContent = "Nivel 0" + level.id + " · Proyecto "
+  document.querySelector("#course-project-kicker").textContent = "Nivel " + String(level.id).padStart(2, "0") + " · Proyecto "
     + String(project.id).padStart(2, "0") + " · " + project.duration;
   document.querySelector("#course-project-title").textContent = project.title;
   document.querySelector("#course-project-summary").textContent = project.summary;
+  const prerequisites = document.querySelector("#python-prerequisites");
+  if (prerequisites) {
+    prerequisites.hidden = !project.prerequisites;
+    prerequisites.textContent = project.prerequisites ? "Antes de empezar: " + project.prerequisites : "";
+  }
   document.querySelector("#course-project-example").textContent = project.example;
   document.querySelector("#course-project-explanation").textContent = project.explanation;
   document.querySelector("#course-project-concepts").innerHTML = project.concepts.map((concept) => "<li>" + concept + "</li>").join("");
@@ -1499,7 +1504,7 @@ function renderProject() {
   document.querySelector("#course-project-success-copy").textContent = project.success;
   const scopeNote = document.querySelector("#python-lab-scope");
   if (scopeNote) {
-    scopeNote.textContent = "Intérprete de Python del laboratorio: ejecuta variables, operaciones, f-strings, condiciones, ciclos, listas, diccionarios, funciones, comprensiones y try/except. Escribe tu propia solución: la salida se calcula de verdad. No incluye módulos externos (import) ni input().";
+    scopeNote.textContent = "Intérprete educativo de Python: ejecuta variables, f-strings, condiciones, ciclos, colecciones, funciones, recursión, lambda, comprensiones y manejo de errores. La salida se calcula de verdad. No incluye clases, módulos externos (import), archivos, input(), decoradores, generadores ni concurrencia.";
   }
   document.querySelector("#course-project").setAttribute("aria-labelledby", "level-tab-" + level.id + " course-project-title");
 
