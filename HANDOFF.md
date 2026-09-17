@@ -1,6 +1,38 @@
 # Traspaso y continuidad de CápsulasDev
 
-Estado al 16 de septiembre de 2026. Última base publicada: `2d7ef38`.
+Estado al 16 de septiembre de 2026. Última base publicada: `9494156`.
+
+### Entrega local pendiente de revisión: mínimo de 50 en Python y HTML/CSS
+
+Python continúa desde el proyecto 40 hasta el 50 con tres niveles: algoritmos
+sobre colecciones, calidad y mantenibilidad, y un proyecto profesional
+integrado. La ruta completa suma 13 niveles, 50 proyectos, 150 validaciones y
+13 mini exámenes con 65 preguntas. Los identificadores 1–40 se conservan.
+
+HTML/CSS continúa desde el módulo 16 hasta el 50 con nueve niveles sobre
+semántica avanzada, formularios robustos, sistemas visuales, responsive,
+componentes, composición, accesibilidad, calidad y dos proyectos integrados.
+La ruta completa suma 13 niveles, 50 módulos, 150 validaciones y 13 mini
+exámenes con 65 preguntas. Los índices 0–15 y sus borradores se conservan.
+
+`learning-state.js` reconoce 50 elementos y 13 exámenes en ambas rutas. El
+nivel final tiene dos ejercicios; el cálculo de cierre limita sus requisitos a
+los 50 existentes. La migración local
+`supabase/migrations/202609160002_course_minimum_fifty.sql` amplía los límites
+de sincronización y usa división redondeada hacia arriba para admitir el examen
+13. Está probada localmente, pero no se ha aplicado a Supabase porque esta
+entrega todavía no está publicada.
+
+La entrega local añade `python-mastery-course.js`,
+`html-css-fifty-course.js`, sus soluciones de referencia y dos suites
+específicas. La siguiente expansión debe continuar con las demás rutas según
+el estándar aprobado, sin reutilizar contenido genérico entre tecnologías.
+
+Las 31 suites pasan. La revisión visual se hizo en 1440 × 900 y 390 × 844 px:
+ambas páginas muestran 13 niveles, progreso 0 de 50 y ningún desbordamiento de
+la página. Los niveles 10–13 usan numeración de dos dígitos y, en escritorio,
+las pestañas de HTML/CSS se distribuyen en filas de cinco para conservar una
+lectura cómoda; en móvil mantienen el desplazamiento horizontal existente.
 
 ### Entrega publicada: Python desde fundamentos hasta desarrollo avanzado aplicado
 

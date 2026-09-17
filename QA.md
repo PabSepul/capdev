@@ -266,7 +266,7 @@ a propósito un script de una página: la suite lo detecta y lo explica.
 
 ## Ampliación: documentación, accesibilidad y pruebas
 
-Estado actual: 19 rutas, 276 ejercicios y 69 mini exámenes. Las tres rutas de esta ampliación aportaron 36 módulos,
+Estado de esa entrega: 19 rutas, 276 ejercicios y 69 mini exámenes. Las tres rutas de esta ampliación aportaron 36 módulos,
 108 validaciones y 45 preguntas distribuidas en nueve exámenes. La verificación completa tiene 18 suites.
 
 - Markdown: se resuelven los doce ejercicios; se comprueban HTML esperado, bloques literales que no deben

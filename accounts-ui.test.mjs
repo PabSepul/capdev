@@ -66,7 +66,7 @@ assert.deepEqual(requests.at(-1).ops.map(x=>x.kind),['weekly-plan']);
 assert.match(w.document.querySelector('#account-weekly-title').textContent,/7 cápsulas/);
 w.LearningState.completar('html-css',0);
 await eventually(()=>pending().length===0);
-assert.match(w.document.querySelector('#account-goal-copy').textContent,/ejercicio es el 2 de 16/);
+assert.match(w.document.querySelector('#account-goal-copy').textContent,/ejercicio es el 2 de 50/);
 assert.equal(Number(w.document.querySelector('#account-goal-progress').getAttribute('aria-valuenow'))>0,true);
 // Se cambia la cuenta mientras una respuesta anterior está en vuelo.
 let release;holds=new Promise(resolve=>release=resolve);

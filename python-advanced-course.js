@@ -662,8 +662,8 @@
       description: "Calidad de datos, métricas, validación y proyecto modular",
       stage: "Desarrollo avanzado aplicado",
       completionTitle: "Finalizaste el desarrollo avanzado aplicado de Python.",
-      completionCopy: "Completaste cuarenta proyectos: depuraste registros, diseñaste métricas seguras, validaste lotes y construiste un reporte modular. El último examen comprueba las decisiones que sostienen ese trabajo.",
-      approvedCopy: "Aprobaste los diez mini exámenes y completaste la ruta avanzada disponible en CápsulasDev.",
+      completionCopy: "Depuraste registros, diseñaste métricas seguras, validaste lotes y construiste un reporte modular. El examen comprueba esas decisiones antes de continuar con algoritmos sobre colecciones.",
+      approvedCopy: "Aprobaste el desarrollo avanzado aplicado. El siguiente nivel profundiza en algoritmos, calidad y programas verificables.",
       projects: [
         {
           id: 37,
@@ -798,7 +798,7 @@
             'Por cada item muestra nombre, ocupacion(item) y disponibles. Después del ciclo muestra f"Cupos disponibles: {libres}".'
           ],
           checks: ["Defines ocupacion() y reporte() con ordenamiento descendente", "Muestras las tres actividades con porcentaje y cupos correctos", "Calculas Cupos disponibles: 5"],
-          success: "Construiste un programa avanzado dentro del alcance del laboratorio: funciones coordinadas, registros, métrica, ordenamiento y resumen. Completaste los cuarenta proyectos de Python.",
+          success: "Construiste un programa avanzado con funciones coordinadas, registros, métricas, ordenamiento y resumen. En el proyecto 41 aplicarás una estructura LIFO.",
           lesson: {
             walkthrough: ["ocupacion calcula 80 % para Museo y 100 % para Parque.", "sorted usa esa métrica y coloca Parque primero.", "reporte calcula 2 cupos libres en Museo, 0 en Parque y muestra un total de 2."],
             prediction: "Cuando dos actividades tienen el mismo porcentaje, ¿qué orden conservan?",

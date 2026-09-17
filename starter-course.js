@@ -334,7 +334,7 @@
       button.tabIndex = index === activeLevel ? 0 : -1;
       button.setAttribute("aria-controls", "starter-workspace");
       button.disabled = !isLevelUnlocked(index);
-      button.innerHTML = `<span>0${index + 1}</span><strong>${level.title}</strong><small>${levelStatusLabel(index)}</small>`;
+      button.innerHTML = `<span>${String(index + 1).padStart(2, "0")}</span><strong>${level.title}</strong><small>${levelStatusLabel(index)}</small>`;
       button.addEventListener("click", () => selectLevel(index));
       return button;
     });

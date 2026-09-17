@@ -806,7 +806,9 @@ const COURSE_LEVELS = [
       }
     ]
   }
-].concat(globalThis.PythonAdvancedCourse?.levels || []);
+]
+  .concat(globalThis.PythonAdvancedCourse?.levels || [])
+  .concat(globalThis.PythonMasteryCourse?.levels || []);
 
 const LEVEL_EXAMS = [
   {
@@ -1074,7 +1076,9 @@ const LEVEL_EXAMS = [
       }
     ]
   }
-].concat(globalThis.PythonAdvancedCourse?.exams || []);
+]
+  .concat(globalThis.PythonAdvancedCourse?.exams || [])
+  .concat(globalThis.PythonMasteryCourse?.exams || []);
 
 const allProjects = () => COURSE_LEVELS.flatMap((level) => level.projects);
 const TOTAL_PROJECTS = COURSE_LEVELS.reduce((total, level) => total + level.projects.length, 0);

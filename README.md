@@ -13,15 +13,15 @@ El lanzamiento inicial es para mayores de 18 años y conserva la pantalla de
 mantenimiento mientras se decide la apertura pública.
 
 Ver [CUENTAS.md](CUENTAS.md) para arquitectura, SQL, configuración, DNS y verificación.
-Hay 23 páginas y 29 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
+Hay 23 páginas y 31 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
 y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 
 ## Catálogo actual
 
 | Ruta | Ejercicios | Niveles | Mini exámenes |
 | --- | ---: | ---: | ---: |
-| Python | 40 proyectos | 10 | 10 |
-| HTML y CSS | 16 módulos | 4 | 4 |
+| Python | 50 proyectos | 13 | 13 |
+| HTML y CSS | 50 módulos | 13 | 13 |
 | JavaScript | 16 módulos | 4 | 4 |
 | SQL | 16 módulos + 3 desafíos independientes | 4 | 4 |
 | Git y GitHub | 16 módulos | 4 | 4 |
@@ -40,14 +40,14 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | Docker | 12 módulos | 3 | 3 |
 | MongoDB | 12 módulos | 3 | 3 |
 
-Hay 276 ejercicios con progreso y 69 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
+Hay 320 ejercicios con progreso y 81 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
 La portada ofrece tres itinerarios: Desarrollo web, Python y datos, y Herramientas profesionales.
 Cada ruta muestra su posición y el siguiente paso del itinerario elegido. Después de ejecutar un ejercicio,
 la persona puede indicar si fue claro y señalar qué parte conviene revisar, sin enviar texto libre ni código.
 Las tres rutas pendientes del mapa —Markdown, accesibilidad y pruebas automatizadas— ya están desarrolladas.
 
 Cada módulo tiene explicación, conceptos, ejemplo, misión, tres pistas y tres comprobaciones.
-Cada ruta desbloquea el nivel siguiente al completar los cuatro ejercicios del anterior.
+Cada ruta desbloquea el nivel siguiente al completar todos los ejercicios del anterior.
 Cada examen tiene cinco preguntas, cuatro alternativas y explicación; se aprueba con cuatro aciertos.
 Los exámenes no bloquean el siguiente nivel, pero todos deben aprobarse para cerrar la ruta.
 Un intento posterior reprobado no elimina una aprobación anterior.
@@ -106,6 +106,10 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 
 - `python-advanced-course.js`: niveles 6–10 de Python, con 20 proyectos sobre recorridos, transformaciones,
   funciones robustas, procesamiento de datos y desarrollo modular aplicado.
+- `python-mastery-course.js`: niveles 11–13 y proyectos 41–50 de Python, con algoritmos sobre colecciones,
+  calidad, mantenibilidad y dos proyectos profesionales integrados.
+- `html-css-fifty-course.js`: niveles 5–13 y módulos 17–50 de HTML/CSS, desde semántica y formularios
+  robustos hasta accesibilidad, calidad visual y dos interfaces integradas.
 - `python-runtime.js`: intérprete propio de un subconjunto de Python, con límites de pasos, profundidad y salida.
   Incluye variables, condiciones, ciclos, colecciones, conjuntos, funciones, lambda, comprensiones de lista, de
   conjunto y de diccionario, f-strings con alineación y manejo de errores. No es CPython; no admite import,
@@ -191,7 +195,7 @@ cuenta activa, el avance y los borradores se sincronizan automáticamente; la
 exportación operativa se realiza desde la base de datos mediante el procedimiento
 cifrado descrito en `RESPALDOS.md`.
 
-Python usa ids de proyecto 1–40; las otras rutas usan índices desde 0.
+Python usa ids de proyecto 1–50; las otras rutas usan índices desde 0.
 No limpiar el almacenamiento del usuario para hacer pruebas; usar un origen
 local de QA separado.
 
@@ -204,7 +208,7 @@ La portada ofrece tres itinerarios sin bloquear la exploración libre. La elecci
 `analizar-avance.mjs` continúa disponible para revisar exportaciones del piloto. Las operaciones de feedback también quedan en `learning_operations`, asociadas a la cuenta que las envió y protegidas por RLS.
 ## Verificación
 
-La verificación completa tiene 29 suites. Para ejecutarlas todas desde PowerShell:
+La verificación completa tiene 31 suites. Para ejecutarlas todas desde PowerShell:
 
 ```powershell
 Get-ChildItem -Filter *.test.mjs | Sort-Object Name | ForEach-Object { node $_.FullName; if ($LASTEXITCODE -ne 0) { throw "Falló $($_.Name)" } }

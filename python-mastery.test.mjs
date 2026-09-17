@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
-import { ADVANCED_SOLUTIONS } from "./python-advanced-fixtures.mjs";
+import { MASTERY_SOLUTIONS } from "./python-mastery-fixtures.mjs";
 
 const require = createRequire(import.meta.url);
 const modules = process.env.CONTENT_QA_MODULES || path.join(os.tmpdir(), "capsulasdev-content-qa", "node_modules");
@@ -13,14 +13,12 @@ const read = file => fs.readFileSync(new URL(file, import.meta.url), "utf8");
 const window = new JSDOM(read("python.html"), { url: "http://localhost/python.html", runScripts: "outside-only" }).window;
 for (const file of ["learning-state.js", "python-runtime.js", "python-advanced-course.js", "python-mastery-course.js", "python.js"]) window.eval(read(file));
 
-const levels = JSON.parse(JSON.stringify(window.PythonAdvancedCourse.levels.map(level => ({ id: level.id, projects: level.projects.map(project => project.id) }))));
-assert.deepEqual(levels.map(level => level.id), [6, 7, 8, 9, 10]);
-assert.deepEqual(levels.map(level => level.projects.length), [4, 4, 4, 4, 4]);
-assert.deepEqual(levels.flatMap(level => level.projects), Array.from({ length: 20 }, (_, index) => index + 21));
+const levels = window.PythonMasteryCourse.levels;
+assert.deepEqual(Array.from(levels, level => level.id), [11, 12, 13]);
+assert.deepEqual(Array.from(levels, level => level.projects.length), [4, 4, 2]);
+assert.deepEqual(Array.from(levels.flatMap(level => level.projects), project => project.id), Array.from({ length: 10 }, (_, index) => index + 41));
 
-const exams = JSON.parse(JSON.stringify(window.PythonAdvancedCourse.exams));
-assert.deepEqual(exams.map(exam => exam.levelId), [6, 7, 8, 9, 10]);
-for (const exam of exams) {
+for (const exam of window.PythonMasteryCourse.exams) {
   assert.equal(exam.questions.length, 5, `nivel ${exam.levelId}: cinco preguntas`);
   assert.equal(exam.passing, 4);
   for (const question of exam.questions) {
@@ -30,28 +28,27 @@ for (const exam of exams) {
   }
 }
 
-const projects = window.PythonAdvancedCourse.levels.flatMap(level => level.projects);
 let validations = 0;
-for (const project of projects) {
+for (const project of levels.flatMap(level => level.projects)) {
   for (const field of ["title", "shortTitle", "summary", "prerequisites", "example", "explanation", "goal", "starter", "success"]) {
     assert.ok(typeof project[field] === "string" && project[field].length > 0, `proyecto ${project.id}: falta ${field}`);
   }
   assert.equal(project.concepts.length, 3, `proyecto ${project.id}: tres conceptos`);
   assert.equal(project.hints.length, 3, `proyecto ${project.id}: tres pistas`);
   assert.equal(project.checks.length, 3, `proyecto ${project.id}: tres comprobaciones`);
-  assert.equal(project.lesson.feedback.length, 3, `proyecto ${project.id}: orientación por criterio`);
-  assert.ok(project.lesson.walkthrough.length >= 2 && project.lesson.walkthrough.length <= 4);
+  assert.equal(project.lesson.feedback.length, 3, `proyecto ${project.id}: feedback por criterio`);
+  assert.equal(project.lesson.walkthrough.length, 3, `proyecto ${project.id}: tres pasos`);
   for (const field of ["prediction", "answer", "reflection", "extension"]) assert.ok(project.lesson[field].length > 20);
 
   const example = window.PythonRuntime.run(project.example);
   assert.equal(example.error, null, `ejemplo ${project.id}: ${example.error}`);
-  assert.ok(example.output.length > 0, `ejemplo ${project.id}: debe producir una salida observable`);
+  assert.ok(example.output.length > 0, `ejemplo ${project.id}: salida observable`);
 
   const starter = window.PythonRuntime.run(project.starter);
   assert.equal(starter.error, null, `inicio ${project.id}: ${starter.error}`);
   assert.equal(project.validate(starter, project.starter).every(Boolean), false, `inicio ${project.id}: no debe aprobar`);
 
-  const solution = ADVANCED_SOLUTIONS[project.id];
+  const solution = MASTERY_SOLUTIONS[project.id];
   assert.ok(solution, `proyecto ${project.id}: falta solución de referencia`);
   const solved = window.PythonRuntime.run(solution);
   assert.equal(solved.error, null, `solución ${project.id}: ${solved.error}`);
@@ -59,12 +56,13 @@ for (const project of projects) {
   validations += 3;
 }
 
-assert.match(read("python.js"), /python-prerequisites[\s\S]*Antes de empezar:/, "el controlador muestra los prerrequisitos avanzados");
+assert.equal(window.document.querySelectorAll("[data-level-target]").length, 13);
+assert.match(read("python.html"), /13 niveles · 50 proyectos/);
 
 let contrasted = 0;
 try {
-  const file = path.join(os.tmpdir(), "capsulasdev-python-avanzado.py");
-  for (const [id, solution] of Object.entries(ADVANCED_SOLUTIONS)) {
+  const file = path.join(os.tmpdir(), "capsulasdev-python-maestria.py");
+  for (const [id, solution] of Object.entries(MASTERY_SOLUTIONS)) {
     fs.writeFileSync(file, solution, "utf8");
     const real = execFileSync("python", [file], { encoding: "utf8", env: { ...process.env, PYTHONIOENCODING: "utf-8" } })
       .replace(/\r\n/g, "\n").replace(/\n$/, "");
@@ -79,4 +77,4 @@ try {
 }
 
 window.close();
-console.log(`Python avanzado: 5 niveles, 20 proyectos, ${validations} validaciones y 5 exámenes (${contrasted < 0 ? "CPython no disponible" : contrasted + " soluciones contrastadas con CPython"})`);
+console.log(`Python 41–50: 3 niveles, 10 proyectos, ${validations} validaciones y 3 exámenes (${contrasted < 0 ? "CPython no disponible" : contrasted + " soluciones contrastadas con CPython"})`);

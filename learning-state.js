@@ -32,8 +32,8 @@
   const scopedKey = (key) => account ? "capsulasdev.user." + account + "." + key : key;
 
   const routes = [
-    { id: "python", name: "Python", count: 40, offset: 1, unit: "proyectos", anchor: "proyectos" },
-    { id: "html-css", name: "HTML y CSS", count: 16, offset: 0, unit: "módulos" },
+    { id: "python", name: "Python", count: 50, offset: 1, unit: "proyectos", anchor: "proyectos" },
+    { id: "html-css", name: "HTML y CSS", count: 50, offset: 0, unit: "módulos" },
     { id: "javascript", name: "JavaScript", count: 16, offset: 0, unit: "módulos" },
     { id: "sql", name: "SQL", count: 16, offset: 0, unit: "módulos" },
     { id: "git", name: "Git y GitHub", count: 16, offset: 0, unit: "módulos" },
@@ -443,7 +443,7 @@
     const unlocked = (i) => Array.from({ length: Math.floor(i / 4) * 4 }, (_, n) => n).every((n) => completed.has(n));
     const levels = Math.ceil(route.count / 4);
     const exams = new Set(estado.examenes.filter((i) =>
-      Array.from({ length: i * 4 }, (_, n) => n).every((n) => completed.has(n))));
+      Array.from({ length: Math.min(i * 4, route.count) }, (_, n) => n).every((n) => completed.has(n))));
     let active = estado.activo;
     const first = Array.from({ length: route.count }, (_, i) => i).find((i) => !completed.has(i) && unlocked(i));
     const pendingExam = Array.from({ length: levels }, (_, n) => n + 1).find((nivel) => !exams.has(nivel));

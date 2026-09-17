@@ -44,6 +44,7 @@ await db.exec(read('supabase/migrations/202609070001_accounts.sql'));
 await db.exec(read('supabase/migrations/202609150001_weekly_learning_plan.sql'));
 await db.exec(read('supabase/migrations/202609150002_weekly_sessions.sql'));
 await db.exec(read('supabase/migrations/202609160001_python_advanced.sql'));
+await db.exec(read('supabase/migrations/202609160002_course_minimum_fifty.sql'));
 await db.query('insert into auth.users values ($1),($2)',[a,b]);
 await db.exec('set role authenticated');
 const asUser=async id=>db.query("select set_config('request.jwt.claim.sub',$1,false)",[id]);
@@ -82,10 +83,20 @@ remote=await rpc([
 ]);
 assert.deepEqual(remote.routes.python.completados,[1,40],'la cuenta sincroniza el proyecto 40');
 assert.deepEqual(remote.routes.python.examenes,[10],'la cuenta sincroniza el examen del nivel 10');
-await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'python',module:40}]),/Operación inválida/);
+remote=await rpc([
+  {id:randomUUID(),kind:'complete',route:'python',module:49},
+  {id:randomUUID(),kind:'exam',route:'python',module:12},
+  {id:randomUUID(),kind:'complete',route:'html-css',module:49},
+  {id:randomUUID(),kind:'exam',route:'html-css',module:12}
+]);
+assert.deepEqual(remote.routes.python.completados,[1,40,50],'la cuenta sincroniza el proyecto 50');
+assert.deepEqual(remote.routes.python.examenes,[10,13],'la cuenta sincroniza el examen del nivel 13');
+assert.deepEqual(remote.routes['html-css'].completados,[49],'HTML/CSS sincroniza el módulo 50');
+assert.deepEqual(remote.routes['html-css'].examenes,[13],'HTML/CSS sincroniza el examen final');
+await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'python',module:50}]),/Operación inválida/);
 await assert.rejects(rpc([{...attempt,ms:9}]),/identificador/);
 await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'python',module:1},{...attempt,id:randomUUID(),module:99}]),/Operación inválida/);
-assert.deepEqual((await rpc([])).routes.python.completados,[1,40],'un lote inválido revierte todos sus cambios');
+assert.deepEqual((await rpc([])).routes.python.completados,[1,40,50],'un lote inválido revierte todos sus cambios');
 const draft={id:randomUUID(),kind:'draft',route:'python',module:0,code:'print(1)',base:null};
 await rpc([draft]);
 const updated={...draft,id:randomUUID(),code:'print(2)',base:draft.id};await rpc([updated]);
@@ -100,7 +111,7 @@ await asUser(b);await enroll();assert.deepEqual((await rpc([])).routes,{});
 assert.equal((await db.query('select * from public.learning_operations')).rows.length,0,'RLS impide leer los intentos ajenos');
 await rpc([{...complete,id:randomUUID(),module:3,user_id:a}]);
 assert.deepEqual((await rpc([])).routes.python.completados,[4],'el propietario sale del token, no del cuerpo');
-await asUser(a);assert.deepEqual((await rpc([])).routes.python.completados,[1,40]);
+await asUser(a);assert.deepEqual((await rpc([])).routes.python.completados,[1,40,50]);
 const exported=(await db.query('select public.learning_export() as data')).rows[0].data;
 assert.equal(exported.operations.some(x=>x.operation.id===attempt.id),true);
 await db.exec('reset role');await db.query('delete from auth.users where id=$1',[a]);

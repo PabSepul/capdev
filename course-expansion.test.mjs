@@ -48,7 +48,8 @@ const execute = (ctx, id, lesson, code) => id === "html-css" ? { code } : id ===
 let modules = 0;
 for (const id of routeIds) {
   const fresh = setup(id);
-  assert.equal(fresh.get("#starter-level-tabs").children.length, 4);
+  assert.equal(fresh.get("#starter-level-tabs").children.length, id === "html-css" ? 13 : 4);
+  if (id === "html-css") assert.match(fresh.get("#starter-level-tabs").children[9].innerHTML, /^<span>10<\/span>/, "los niveles 10–13 no anteponen un cero extra");
   assert.equal(fresh.get("#starter-level-tabs").children[3].disabled, true, "el nivel nuevo empieza cerrado");
   const completeKey = `codigo-cero.${id}-v2.completed`;
   const examsKey = `codigo-cero.${id}-v2.exams`;
@@ -56,10 +57,10 @@ for (const id of routeIds) {
   const app = setup(id, storage);
   const { context: ctx, get } = app;
   const course = ctx.TestCourses[id];
-  assert.equal(course.levels.length, 4);
+  assert.equal(course.levels.length, id === "html-css" ? 13 : 4);
   if (id === "html-css") {
     const htmlModules = course.levels.flatMap(level => level.modules);
-    assert.equal(htmlModules.length, 16);
+    assert.equal(htmlModules.length, 50);
     for (const module of htmlModules) {
       assert.ok(module.example.includes("<"), module.title + ": ejemplo HTML completo");
       assert.equal(module.hints.length, 3, module.title + ": tres pistas graduales");
@@ -109,7 +110,7 @@ for (const id of routeIds) {
       assert.equal(module.lesson.feedback.length, module.checks.length, module.title + ": ayuda por comprobación");
     }
   }
-  assert.equal(ctx.LearningState.progress(id).count, 16);
+  assert.equal(ctx.LearningState.progress(id).count, id === "html-css" ? 50 : 16);
   assert.equal(ctx.LearningState.progress(id).completed, 12);
   assert.equal(ctx.LearningState.progress(id).exams, 3);
   assert.equal(ctx.LearningState.progress(id).done, false, "el avance previo se conserva y hay contenido nuevo");
@@ -156,11 +157,11 @@ for (const id of routeIds) {
   assert.match(get("#exam-result").textContent, /Responde/);
   exam.questions.forEach((q, i) => get("#exam-questions").children[i].children[1].children[q.answer].click());
   get("#exam-submit").click();
-  assert.equal(get("#starter-finish").hidden, false);
+  assert.equal(get("#starter-finish").hidden, id === "html-css");
   assert.deepEqual(guardado(storage, id).examenes, [1, 2, 3, 4]);
   const reload = setup(id, storage);
-  assert.equal(reload.context.LearningState.progress(id).done, true);
-  assert.equal(reload.get("#starter-finish").hidden, false);
+  assert.equal(reload.context.LearningState.progress(id).done, id !== "html-css");
+  assert.equal(reload.get("#starter-finish").hidden, id === "html-css");
   assert.equal(reload.get("#starter-code").value, course.levels[3].modules[3].solution);
 }
 
