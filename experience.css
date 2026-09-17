@@ -149,10 +149,12 @@
 @media (min-width: 821px) {
   .experience-page.python-page .level-tabs,
   .experience-page[data-course="html-css"] .level-tabs,
-  .experience-page[data-course="javascript"] .level-tabs { flex-wrap: wrap; }
+  .experience-page[data-course="javascript"] .level-tabs,
+  .experience-page[data-course="sql"] .level-tabs { flex-wrap: wrap; }
   .experience-page.python-page .level-tab,
   .experience-page[data-course="html-css"] .level-tab,
-  .experience-page[data-course="javascript"] .level-tab { flex: 1 1 calc(20% - 7px); max-width: calc(20% - 6px); }
+  .experience-page[data-course="javascript"] .level-tab,
+  .experience-page[data-course="sql"] .level-tab { flex: 1 1 calc(20% - 7px); max-width: calc(20% - 6px); }
 }
 .experience-page .starter-progress { padding: 16px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
 .experience-page .capi-checkpoint-note { display: flex; align-items: center; gap: 11px; max-width: 620px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.16); color: var(--on-dark-muted); font-size: .7rem; line-height: 1.6; }

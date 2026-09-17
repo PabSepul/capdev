@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Aprende SQL desde cero: entiende tablas y consultas con doce lecciones guiadas, ejemplos resueltos, datos visibles y ejercicios adicionales.">
+  <meta name="description" content="Aprende SQL en cincuenta módulos: desde tablas y filtros hasta agrupaciones, relaciones y reportes integrados.">
   <meta name="theme-color" content="#1c69d4">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="es_CL">
   <meta property="og:url" content="https://capsulasdev.com/sql.html">
   <meta property="og:title" content="Ruta SQL — CápsulasDev">
-  <meta property="og:description" content="Consulta tablas reales y entiende los datos con dieciséis módulos guiados.">
+  <meta property="og:description" content="Consulta tablas de práctica y construye reportes verificables en cincuenta módulos guiados.">
   <title>Ruta SQL — CápsulasDev</title>
   <script>
     (() => {
@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="sql.css?v=20260902-sql1">
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
   <link rel="stylesheet" href="account.css?v=20260915-plan2">
-  <link rel="stylesheet" href="experience.css?v=20260916-jsfifty1">
+  <link rel="stylesheet" href="experience.css?v=20260917-sqlfifty1">
   <link rel="stylesheet" href="course-learning.css?v=20260910-htmlcss3">
 </head>
 <body class="course-page starter-page sql-page experience-page" data-course="sql">
@@ -47,7 +47,7 @@
   </header>
   <p class="account-status" role="status" data-account-status><a href="cuenta.html">Crea tu perfil o entra</a> para guardar tu avance.</p>
   <main id="contenido"><nav class="course-breadcrumb" aria-label="Ubicación"><a href="index.html#rutas">← Explorar rutas</a><span aria-hidden="true">/</span><span aria-current="page">SQL</span></nav>
-    <section class="starter-hero" aria-labelledby="course-title"><div><p class="eyebrow"><span></span> Ruta inicial · SQL</p><h1 id="course-title">Entiende los datos.<br>Después, hazles preguntas.</h1><p>No necesitas saber programar. Primero leeremos una tabla, después construiremos consultas por partes y finalmente resolveremos preguntas sobre una pequeña academia.</p><div class="hero-actions"><a class="button button-primary" href="#antes-de-empezar">Empezar desde cero <span aria-hidden="true">→</span></a><span class="route-duration">4 niveles · 16 módulos</span></div></div><div class="starter-summary"><span>SQL</span><strong>Observa.<br>Pregunta. Comprueba.</strong><p>16 lecciones guiadas · 4 mini exámenes<br>Ejemplos resueltos · 3 desafíos adicionales</p></div></section>
+    <section class="starter-hero" aria-labelledby="course-title"><div><p class="eyebrow"><span></span> Ruta completa · SQL</p><h1 id="course-title">Entiende los datos.<br>Después, hazles preguntas.</h1><p>Empieza leyendo tablas y avanza hasta construir filtros, agrupaciones, relaciones y reportes que puedas explicar y comprobar.</p><div class="hero-actions"><a class="button button-primary" href="#antes-de-empezar">Empezar desde cero <span aria-hidden="true">→</span></a><span class="route-duration">13 niveles · 50 módulos</span></div></div><div class="starter-summary"><span>SQL</span><strong>Observa.<br>Pregunta. Comprueba.</strong><p>50 lecciones guiadas · 13 mini exámenes<br>Ejemplos resueltos · 3 desafíos adicionales</p></div></section>
     <nav class="sql-section-nav" aria-label="Secciones de la ruta SQL">
       <a href="#antes-de-empezar">1. Entiende lo básico</a><a href="#datos">2. Conoce los datos</a><a href="#modulos">3. Aprende y practica</a><a href="#guia-rapida">4. Consulta la guía</a><a href="#practica-extra">5. Práctica extra</a>
     </nav>
@@ -75,10 +75,10 @@
       <details class="sql-details" open><summary>Qué significa cada columna</summary><dl class="sql-dictionary" id="sql-data-schema"></dl></details>
       <div class="sql-callout"><strong>Cómo se conectan las dos tablas</strong><p>Ada tiene <code>curso_id = 1</code> en estudiantes. El curso con <code>id = 1</code> en cursos es Python. Esa referencia permite reunir información sin repetir el nombre del curso en cada estudiante. Más adelante harás esta búsqueda con <code>JOIN</code>.</p></div>
     </section>
-    <section class="starter-modules" id="modulos" aria-labelledby="modules-title"><div class="starter-section-heading"><p class="eyebrow"><span></span> Tu recorrido</p><h2 id="modules-title">Cuatro niveles. Dieciséis módulos encadenados.</h2></div><div class="level-tabs" id="starter-level-tabs" role="tablist" aria-label="Niveles de la ruta"></div><div class="starter-module-list" id="starter-module-list" role="tablist" aria-label="Módulos de SQL"></div></section>
+    <section class="starter-modules" id="modulos" aria-labelledby="modules-title"><div class="starter-section-heading"><p class="eyebrow"><span></span> Tu recorrido</p><h2 id="modules-title">Trece niveles. Cincuenta módulos encadenados.</h2></div><div class="level-tabs" id="starter-level-tabs" role="tablist" aria-label="Niveles de la ruta"></div><div class="starter-module-list" id="starter-module-list" role="tablist" aria-label="Módulos de SQL"></div></section>
     <section class="starter-lab-section" id="laboratorio" aria-labelledby="starter-module-title">
       <div class="starter-progress"><span id="starter-position">Módulo 1 de 16</span><div class="progress-track" aria-hidden="true"><span id="starter-progress-fill"></span></div><strong id="starter-completed">0 completados</strong></div>
-      <p class="starter-learning-note">Completa los cuatro módulos de cada nivel para abrir el siguiente y habilitar su mini examen. Cada examen tiene cinco preguntas y se aprueba con cuatro aciertos; completa los dieciséis módulos y aprueba los cuatro exámenes para cerrar la ruta.</p>
+      <p class="starter-learning-note">Completa los módulos de cada nivel para abrir el siguiente y habilitar su mini examen. Cada examen tiene cinco preguntas y se aprueba con cuatro aciertos; completa los cincuenta módulos y aprueba los trece exámenes para cerrar la ruta.</p>
       <p class="starter-exam-progress" id="starter-exam-progress" role="status">Mini exámenes: 0 de 3 aprobados</p>
       <article class="starter-workspace" id="starter-workspace" role="tabpanel" aria-labelledby="starter-module-title">
         <div class="starter-lesson"><p class="workspace-step">01 · Entiende la idea</p>
@@ -145,7 +145,7 @@
       </section>
       <div class="python-finish" id="starter-finish" hidden aria-live="polite">
         <span aria-hidden="true">✓</span>
-        <div><p id="starter-finish-title">Ruta completada</p><h3>Dieciséis módulos y cuatro mini exámenes superados.</h3><small>Ya tienes una base para seguir practicando. Puedes volver a cualquier nivel para repasar.</small></div>
+        <div><p id="starter-finish-title">Ruta completada</p><h3>Cincuenta módulos y trece mini exámenes superados.</h3><small>Ya puedes construir reportes con filtros, agrupaciones y relaciones. Puedes volver a cualquier nivel para repasar.</small></div>
       </div>
     </section>
     <section class="sql-section sql-reference-section" id="guia-rapida" aria-labelledby="sql-reference-title">
@@ -184,7 +184,7 @@ LIMIT cantidad;</pre><p>Solo SELECT y FROM son necesarios en los ejercicios de e
   </main>
   <footer><div class="footer-inner"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a><p>Programación clara para dar el primer paso.</p><p><a href="privacidad.html">Privacidad</a></p>
       <p class="footer-meta">Hecho para aprender · <span data-current-year></span></p></div></footer>
-  <script src="learning-state.js?v=20260916-jsfifty1"></script>
+  <script src="learning-state.js?v=20260917-sqlfifty1"></script>
   <script src="account-config.js?v=20260909-profile3"></script>
   <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
@@ -196,6 +196,7 @@ LIMIT cantidad;</pre><p>Solo SELECT y FROM son necesarios en los ejercicios de e
   <script src="sql-guide.js?v=20260902-sql1"></script>
   <script src="starter-exams.js?v=20260906-nuevas"></script>
   <script src="course-expansion.js?v=20260906-expansion1"></script>
+  <script src="sql-fifty-course.js?v=20260916-sqlfifty1"></script>
   <script src="starter-course.js?v=20260916-fifty2"></script>
 </body>
 </html>

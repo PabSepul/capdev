@@ -51,7 +51,7 @@ for (const id of setup().state.routes.map((route) => route.id)) {
 }
 
 /* ---------- desbloqueos y cierre en las rutas de dieciséis ---------- */
-for (const id of ['sql', 'git', 'apis']) {
+for (const id of ['git', 'apis']) {
   const doce = Array.from({length:12}, (_,i) => i);
   const {state} = setup();
   avanzar(state, id, [...doce, -1, 99], [1, 2, 4]);
@@ -374,8 +374,8 @@ assert.equal(typeof events.pageshow, 'function');
 
 const routes = setup().state.routes;
 assert.equal(routes.length, 19);
-assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 354);
-assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 90);
+assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 388);
+assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 99);
 for (const id of ['markdown', 'accesibilidad', 'testing']) {
   const { state } = setup();
   avanzar(state, id, Array.from({length:12}, (_, i) => i), [1, 2, 3]);
@@ -401,8 +401,8 @@ for (const id of ['markdown', 'accesibilidad', 'testing']) {
   assert.equal(restored.feedback('python', 0).area, 'explicacion');
 }
 
-/* ---------- HTML/CSS y JavaScript conservan los dieciséis anteriores y cierran en 50 ---------- */
-for (const id of ['html-css', 'javascript']) {
+/* ---------- Las rutas ampliadas conservan los dieciséis anteriores y cierran en 50 ---------- */
+for (const id of ['html-css', 'javascript', 'sql']) {
   const {state} = setup();
   avanzar(state, id, Array.from({length:16}, (_, i) => i), [1, 2, 3, 4]);
   assert.equal(state.progress(id).completed, 16);

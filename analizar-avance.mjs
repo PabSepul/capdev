@@ -65,7 +65,7 @@ function cargarTitulos() {
     "nodejs-course.js", "typescript-course.js", "react-course.js", "json-course.js",
     "markdown-course.js", "accessibility-course.js", "testing-course.js", "new-tech-courses.js",
     "course-expansion.js", "html-css-learning.js", "html-css-fifty-course.js",
-    "javascript-learning.js", "javascript-fifty-course.js"
+    "javascript-learning.js", "javascript-fifty-course.js", "sql-fifty-course.js"
   ]) correr(archivo);
 
   const titulos = {};
@@ -142,8 +142,8 @@ function leerRespaldos(archivos) {
 
 const RUTAS = {
   python: { nombre: "Python", modulos: 50, offset: 1, unidad: "proyecto" },
-  "html-css": { nombre: "HTML y CSS", modulos: 50 }, javascript: { nombre: "JavaScript", modulos: 16 },
-  sql: { nombre: "SQL", modulos: 16 }, git: { nombre: "Git y GitHub", modulos: 16 },
+  "html-css": { nombre: "HTML y CSS", modulos: 50 }, javascript: { nombre: "JavaScript", modulos: 50 },
+  sql: { nombre: "SQL", modulos: 50 }, git: { nombre: "Git y GitHub", modulos: 16 },
   apis: { nombre: "APIs", modulos: 16 }, terminal: { nombre: "Terminal", modulos: 12 },
   regex: { nombre: "Expresiones regulares", modulos: 12 }, ia: { nombre: "Inteligencia artificial", modulos: 12 },
   "datos-python": { nombre: "Datos con Python", modulos: 12 }, nodejs: { nombre: "Node.js", modulos: 12 },

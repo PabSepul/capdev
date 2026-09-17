@@ -1,8 +1,8 @@
 # Traspaso y continuidad de CápsulasDev
 
-Estado al 16 de septiembre de 2026. Última base publicada: `9494156`.
+Estado al 17 de septiembre de 2026. Última base publicada: `9494156`.
 
-### Entrega local pendiente de revisión: mínimo de 50 en Python, HTML/CSS y JavaScript
+### Entrega local pendiente de revisión: mínimo de 50 en Python, HTML/CSS, JavaScript y SQL
 
 Python continúa desde el proyecto 40 hasta el 50 con tres niveles: algoritmos
 sobre colecciones, calidad y mantenibilidad, y un proyecto profesional
@@ -22,26 +22,35 @@ reglas de dominio, calidad, pipelines y dos proyectos integrados. La ruta suma
 y soluciones nuevos se contrastan tanto con el intérprete educativo como con
 JavaScript real; los índices 0–15 y sus borradores se conservan.
 
-`learning-state.js` reconoce 50 elementos y 13 exámenes en las tres rutas. El
+SQL continúa desde el módulo 16 hasta el 50 con nueve niveles sobre filtros,
+indicadores, agrupaciones, relaciones y reportes integrados. Los 34 ejemplos y
+soluciones se ejecutan con el motor SQL educativo; la página explica que el
+alcance sigue limitado a consultas SELECT sobre las dos tablas ficticias. La
+ruta suma 13 niveles, 50 módulos y 13 mini exámenes, conservando los índices
+0–15 y sus borradores.
+
+`learning-state.js` reconoce 50 elementos y 13 exámenes en las cuatro rutas. El
 nivel final tiene dos ejercicios; el cálculo de cierre limita sus requisitos a
 los 50 existentes. La migración local
 `supabase/migrations/202609160002_course_minimum_fifty.sql` amplía Python y
 HTML/CSS; `202609160003_javascript_fifty.sql` añade JavaScript y conserva la
-división redondeada hacia arriba para admitir el examen 13. Están probadas
+división redondeada hacia arriba para admitir el examen 13. La migración
+`202609160004_sql_fifty.sql` añade SQL. Están probadas
 localmente, pero no se han aplicado a Supabase porque esta entrega todavía no
 está publicada.
 
 La entrega local añade `python-mastery-course.js`,
-`html-css-fifty-course.js`, `javascript-fifty-course.js`, sus soluciones de
-referencia y tres suites
+`html-css-fifty-course.js`, `javascript-fifty-course.js`,
+`sql-fifty-course.js`, sus soluciones de referencia y cuatro suites
 específicas. La siguiente expansión debe continuar con las demás rutas según
 el estándar aprobado, sin reutilizar contenido genérico entre tecnologías.
 
-Las 32 suites pasan. Python y HTML/CSS se revisaron en 1440 × 900 y 390 × 844 px:
-ambas páginas muestran 13 niveles, progreso 0 de 50 y ningún desbordamiento de
-la página. Los niveles 10–13 usan numeración de dos dígitos y, en escritorio,
-las pestañas de HTML/CSS se distribuyen en filas de cinco para conservar una
-lectura cómoda; en móvil mantienen el desplazamiento horizontal existente.
+Las 33 suites pasan. Python, HTML/CSS, JavaScript y SQL se revisaron en
+1440 × 900 y 390 × 844 px: las cuatro páginas muestran 13 niveles, progreso 0
+de 50 y ningún desbordamiento de la página. Los niveles 10–13 usan numeración
+de dos dígitos y, en escritorio, las pestañas se distribuyen en filas de cinco;
+en móvil mantienen el desplazamiento horizontal existente. SQL conserva el
+desplazamiento interno de su tabla de datos sin ensanchar el documento.
 
 ### Entrega publicada: Python desde fundamentos hasta desarrollo avanzado aplicado
 
@@ -758,14 +767,14 @@ dependencias de producción.**
 
 ## 3. Estado actual
 
-**19 rutas · 354 ejercicios · 90 mini exámenes · 23 páginas · 32 suites.**
+**19 rutas · 388 ejercicios · 99 mini exámenes · 23 páginas · 33 suites.**
 
 | Ruta | Ejercicios | Motor | Contrastado contra |
 | --- | ---: | --- | --- |
 | Python | 50 | `python-runtime.js` | CPython 3.12 y casos de referencia |
 | HTML y CSS | 50 | vista previa en iframe | — |
 | JavaScript | 50 | `starter-runtime.js` | JavaScript real en los módulos 17–50 |
-| SQL | 16 | motor SQL en `starter-runtime.js` | — |
+| SQL | 50 | motor SQL en `starter-runtime.js` | consultas de referencia del mismo motor |
 | Git y GitHub | 16 | `git-lab.js` | — |
 | APIs | 16 | `api-lab.js` | — |
 | Terminal | 12 | `terminal-lab.js` | — |
