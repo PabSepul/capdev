@@ -13,7 +13,7 @@ El lanzamiento inicial es para mayores de 18 años y conserva la pantalla de
 mantenimiento mientras se decide la apertura pública.
 
 Ver [CUENTAS.md](CUENTAS.md) para arquitectura, SQL, configuración, DNS y verificación.
-Hay 23 páginas y 31 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
+Hay 23 páginas y 32 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
 y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 
 ## Catálogo actual
@@ -22,7 +22,7 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | --- | ---: | ---: | ---: |
 | Python | 50 proyectos | 13 | 13 |
 | HTML y CSS | 50 módulos | 13 | 13 |
-| JavaScript | 16 módulos | 4 | 4 |
+| JavaScript | 50 módulos | 13 | 13 |
 | SQL | 16 módulos + 3 desafíos independientes | 4 | 4 |
 | Git y GitHub | 16 módulos | 4 | 4 |
 | APIs | 16 módulos | 4 | 4 |
@@ -40,7 +40,7 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | Docker | 12 módulos | 3 | 3 |
 | MongoDB | 12 módulos | 3 | 3 |
 
-Hay 320 ejercicios con progreso y 81 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
+Hay 354 ejercicios con progreso y 90 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
 La portada ofrece tres itinerarios: Desarrollo web, Python y datos, y Herramientas profesionales.
 Cada ruta muestra su posición y el siguiente paso del itinerario elegido. Después de ejecutar un ejercicio,
 la persona puede indicar si fue claro y señalar qué parte conviene revisar, sin enviar texto libre ni código.
@@ -110,6 +110,8 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
   calidad, mantenibilidad y dos proyectos profesionales integrados.
 - `html-css-fifty-course.js`: niveles 5–13 y módulos 17–50 de HTML/CSS, desde semántica y formularios
   robustos hasta accesibilidad, calidad visual y dos interfaces integradas.
+- `javascript-fifty-course.js`: niveles 5–13 y módulos 17–50 de JavaScript, desde transformaciones de
+  colecciones hasta reglas de dominio, calidad, pipelines y dos proyectos integrados.
 - `python-runtime.js`: intérprete propio de un subconjunto de Python, con límites de pasos, profundidad y salida.
   Incluye variables, condiciones, ciclos, colecciones, conjuntos, funciones, lambda, comprensiones de lista, de
   conjunto y de diccionario, f-strings con alineación y manejo de errores. No es CPython; no admite import,
@@ -208,7 +210,7 @@ La portada ofrece tres itinerarios sin bloquear la exploración libre. La elecci
 `analizar-avance.mjs` continúa disponible para revisar exportaciones del piloto. Las operaciones de feedback también quedan en `learning_operations`, asociadas a la cuenta que las envió y protegidas por RLS.
 ## Verificación
 
-La verificación completa tiene 31 suites. Para ejecutarlas todas desde PowerShell:
+La verificación completa tiene 32 suites. Para ejecutarlas todas desde PowerShell:
 
 ```powershell
 Get-ChildItem -Filter *.test.mjs | Sort-Object Name | ForEach-Object { node $_.FullName; if ($LASTEXITCODE -ne 0) { throw "Falló $($_.Name)" } }

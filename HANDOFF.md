@@ -2,7 +2,7 @@
 
 Estado al 16 de septiembre de 2026. Última base publicada: `9494156`.
 
-### Entrega local pendiente de revisión: mínimo de 50 en Python y HTML/CSS
+### Entrega local pendiente de revisión: mínimo de 50 en Python, HTML/CSS y JavaScript
 
 Python continúa desde el proyecto 40 hasta el 50 con tres niveles: algoritmos
 sobre colecciones, calidad y mantenibilidad, y un proyecto profesional
@@ -15,20 +15,29 @@ componentes, composición, accesibilidad, calidad y dos proyectos integrados.
 La ruta completa suma 13 niveles, 50 módulos, 150 validaciones y 13 mini
 exámenes con 65 preguntas. Los índices 0–15 y sus borradores se conservan.
 
-`learning-state.js` reconoce 50 elementos y 13 exámenes en ambas rutas. El
+JavaScript continúa desde el módulo 16 hasta el 50 con nueve niveles sobre
+transformaciones declarativas, reducciones, validación, objetos, algoritmos,
+reglas de dominio, calidad, pipelines y dos proyectos integrados. La ruta suma
+13 niveles, 50 módulos, 150 validaciones y 13 mini exámenes. Todos los ejemplos
+y soluciones nuevos se contrastan tanto con el intérprete educativo como con
+JavaScript real; los índices 0–15 y sus borradores se conservan.
+
+`learning-state.js` reconoce 50 elementos y 13 exámenes en las tres rutas. El
 nivel final tiene dos ejercicios; el cálculo de cierre limita sus requisitos a
 los 50 existentes. La migración local
-`supabase/migrations/202609160002_course_minimum_fifty.sql` amplía los límites
-de sincronización y usa división redondeada hacia arriba para admitir el examen
-13. Está probada localmente, pero no se ha aplicado a Supabase porque esta
-entrega todavía no está publicada.
+`supabase/migrations/202609160002_course_minimum_fifty.sql` amplía Python y
+HTML/CSS; `202609160003_javascript_fifty.sql` añade JavaScript y conserva la
+división redondeada hacia arriba para admitir el examen 13. Están probadas
+localmente, pero no se han aplicado a Supabase porque esta entrega todavía no
+está publicada.
 
 La entrega local añade `python-mastery-course.js`,
-`html-css-fifty-course.js`, sus soluciones de referencia y dos suites
+`html-css-fifty-course.js`, `javascript-fifty-course.js`, sus soluciones de
+referencia y tres suites
 específicas. La siguiente expansión debe continuar con las demás rutas según
 el estándar aprobado, sin reutilizar contenido genérico entre tecnologías.
 
-Las 31 suites pasan. La revisión visual se hizo en 1440 × 900 y 390 × 844 px:
+Las 32 suites pasan. Python y HTML/CSS se revisaron en 1440 × 900 y 390 × 844 px:
 ambas páginas muestran 13 niveles, progreso 0 de 50 y ningún desbordamiento de
 la página. Los niveles 10–13 usan numeración de dos dígitos y, en escritorio,
 las pestañas de HTML/CSS se distribuyen en filas de cinco para conservar una
@@ -749,13 +758,13 @@ dependencias de producción.**
 
 ## 3. Estado actual
 
-**19 rutas · 256 ejercicios · 64 mini exámenes · 22 páginas · 24 suites.**
+**19 rutas · 354 ejercicios · 90 mini exámenes · 23 páginas · 32 suites.**
 
 | Ruta | Ejercicios | Motor | Contrastado contra |
 | --- | ---: | --- | --- |
-| Python | 20 | `python-runtime.js` | CPython 3.12 (95 programas) |
-| HTML y CSS | 16 | vista previa en iframe | — |
-| JavaScript | 16 | `starter-runtime.js` | — |
+| Python | 50 | `python-runtime.js` | CPython 3.12 y casos de referencia |
+| HTML y CSS | 50 | vista previa en iframe | — |
+| JavaScript | 50 | `starter-runtime.js` | JavaScript real en los módulos 17–50 |
 | SQL | 16 | motor SQL en `starter-runtime.js` | — |
 | Git y GitHub | 16 | `git-lab.js` | — |
 | APIs | 16 | `api-lab.js` | — |

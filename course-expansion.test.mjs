@@ -47,9 +47,10 @@ function setup(id, storage = new Map()) {
 const execute = (ctx, id, lesson, code) => id === "html-css" ? { code } : id === "javascript" ? ctx.StarterRuntime.runJavaScript(code) : id === "sql" ? ctx.StarterRuntime.runSql(code) : id === "git" ? ctx.GitLab.run(code, lesson.scenario) : ctx.ApiLab.run(code);
 let modules = 0;
 for (const id of routeIds) {
+  const expandedToFifty = ["html-css", "javascript"].includes(id);
   const fresh = setup(id);
-  assert.equal(fresh.get("#starter-level-tabs").children.length, id === "html-css" ? 13 : 4);
-  if (id === "html-css") assert.match(fresh.get("#starter-level-tabs").children[9].innerHTML, /^<span>10<\/span>/, "los niveles 10–13 no anteponen un cero extra");
+  assert.equal(fresh.get("#starter-level-tabs").children.length, expandedToFifty ? 13 : 4);
+  if (expandedToFifty) assert.match(fresh.get("#starter-level-tabs").children[9].innerHTML, /^<span>10<\/span>/, "los niveles 10–13 no anteponen un cero extra");
   assert.equal(fresh.get("#starter-level-tabs").children[3].disabled, true, "el nivel nuevo empieza cerrado");
   const completeKey = `codigo-cero.${id}-v2.completed`;
   const examsKey = `codigo-cero.${id}-v2.exams`;
@@ -57,7 +58,7 @@ for (const id of routeIds) {
   const app = setup(id, storage);
   const { context: ctx, get } = app;
   const course = ctx.TestCourses[id];
-  assert.equal(course.levels.length, id === "html-css" ? 13 : 4);
+  assert.equal(course.levels.length, expandedToFifty ? 13 : 4);
   if (id === "html-css") {
     const htmlModules = course.levels.flatMap(level => level.modules);
     assert.equal(htmlModules.length, 50);
@@ -78,7 +79,7 @@ for (const id of routeIds) {
   }
   if (id === "javascript") {
     const javascriptModules = course.levels.flatMap(level => level.modules);
-    assert.equal(javascriptModules.length, 16);
+    assert.equal(javascriptModules.length, 50);
     for (const module of javascriptModules) {
       assert.equal(module.hints.length, 3, module.title + ": tres pistas graduales");
       for (const field of ["prerequisites", "prediction", "answer", "reflection", "extension"])
@@ -110,7 +111,7 @@ for (const id of routeIds) {
       assert.equal(module.lesson.feedback.length, module.checks.length, module.title + ": ayuda por comprobación");
     }
   }
-  assert.equal(ctx.LearningState.progress(id).count, id === "html-css" ? 50 : 16);
+  assert.equal(ctx.LearningState.progress(id).count, expandedToFifty ? 50 : 16);
   assert.equal(ctx.LearningState.progress(id).completed, 12);
   assert.equal(ctx.LearningState.progress(id).exams, 3);
   assert.equal(ctx.LearningState.progress(id).done, false, "el avance previo se conserva y hay contenido nuevo");
@@ -157,11 +158,11 @@ for (const id of routeIds) {
   assert.match(get("#exam-result").textContent, /Responde/);
   exam.questions.forEach((q, i) => get("#exam-questions").children[i].children[1].children[q.answer].click());
   get("#exam-submit").click();
-  assert.equal(get("#starter-finish").hidden, id === "html-css");
+  assert.equal(get("#starter-finish").hidden, expandedToFifty);
   assert.deepEqual(guardado(storage, id).examenes, [1, 2, 3, 4]);
   const reload = setup(id, storage);
-  assert.equal(reload.context.LearningState.progress(id).done, id !== "html-css");
-  assert.equal(reload.get("#starter-finish").hidden, id === "html-css");
+  assert.equal(reload.context.LearningState.progress(id).done, !expandedToFifty);
+  assert.equal(reload.get("#starter-finish").hidden, expandedToFifty);
   assert.equal(reload.get("#starter-code").value, course.levels[3].modules[3].solution);
 }
 

@@ -34,7 +34,7 @@
   const routes = [
     { id: "python", name: "Python", count: 50, offset: 1, unit: "proyectos", anchor: "proyectos" },
     { id: "html-css", name: "HTML y CSS", count: 50, offset: 0, unit: "módulos" },
-    { id: "javascript", name: "JavaScript", count: 16, offset: 0, unit: "módulos" },
+    { id: "javascript", name: "JavaScript", count: 50, offset: 0, unit: "módulos" },
     { id: "sql", name: "SQL", count: 16, offset: 0, unit: "módulos" },
     { id: "git", name: "Git y GitHub", count: 16, offset: 0, unit: "módulos" },
     { id: "apis", name: "APIs", count: 16, offset: 0, unit: "módulos" },

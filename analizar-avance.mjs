@@ -64,7 +64,8 @@ function cargarTitulos() {
     "terminal-course.js", "regex-course.js", "ia-course.js", "datos-python-course.js",
     "nodejs-course.js", "typescript-course.js", "react-course.js", "json-course.js",
     "markdown-course.js", "accessibility-course.js", "testing-course.js", "new-tech-courses.js",
-    "course-expansion.js", "html-css-learning.js", "html-css-fifty-course.js"
+    "course-expansion.js", "html-css-learning.js", "html-css-fifty-course.js",
+    "javascript-learning.js", "javascript-fifty-course.js"
   ]) correr(archivo);
 
   const titulos = {};
