@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Aprende Git y GitHub en dieciséis módulos: repositorio, commits, correcciones, ramas y publicación.">
+  <meta name="description" content="Aprende Git y GitHub en cincuenta módulos: commits, recuperación, ramas, integración, remotos y colaboración.">
   <meta property="og:title" content="Ruta Git y GitHub — CápsulasDev">
-  <meta property="og:description" content="Dieciséis módulos para versionar tu trabajo y publicarlo en GitHub.">
+  <meta property="og:description" content="Cincuenta módulos para versionar, revisar, integrar y publicar tu trabajo con Git y GitHub.">
   <meta name="theme-color" content="#1c69d4">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="es_CL">
@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="styles.css?v=20260909-profile3">
   <link rel="stylesheet" href="learning-review.css?v=20260903-review1">
   <link rel="stylesheet" href="account.css?v=20260915-plan2">
-  <link rel="stylesheet" href="experience.css?v=20260917-sqlfifty1">
+  <link rel="stylesheet" href="experience.css?v=20260917-gitfifty1">
   <link rel="stylesheet" href="course-learning.css?v=20260910-htmlcss3">
 </head>
 <body class="course-page starter-page experience-page" data-course="git">
@@ -49,16 +49,16 @@
   </header>
   <p class="account-status" role="status" data-account-status><a href="cuenta.html">Crea tu perfil o entra</a> para guardar tu avance.</p>
   <main id="contenido"><nav class="course-breadcrumb" aria-label="Ubicación"><a href="index.html#rutas">← Explorar rutas</a><span aria-hidden="true">/</span><span aria-current="page">Git y GitHub</span></nav>
-    <section class="starter-hero" aria-labelledby="course-title"><div><p class="eyebrow"><span></span> Ruta · Git y GitHub</p><h1 id="course-title">Guarda versiones y publica tu trabajo.</h1><p>Aprende el ciclo que usan todos los equipos de desarrollo: preparar, confirmar, corregir sin miedo, trabajar en ramas y publicar en GitHub.</p><div class="hero-actions"><a class="button button-primary" href="#laboratorio">Empezar a practicar <span aria-hidden="true">→</span></a><span class="route-duration">4 niveles · 16 módulos</span></div></div><div class="starter-summary"><span>Git</span><strong>Git y GitHub</strong><p>Una terminal simulada con un repositorio real en memoria.</p></div></section>
-    <section class="starter-modules" id="modulos" aria-labelledby="modules-title"><div class="starter-section-heading"><p class="eyebrow"><span></span> Tu recorrido</p><h2 id="modules-title">Cuatro niveles. Dieciséis módulos encadenados.</h2></div><details class="lesson-primer course-guide"><summary>Cómo funciona este laboratorio</summary><div class="course-guide-body"><p>Escribes comandos de Git, uno por línea, y se ejecutan en orden sobre un repositorio simulado. Los archivos de la carpeta ya están escritos: tu trabajo es decidir qué hace Git con ellos.</p><ol><li>Lee el estado inicial que describe cada módulo.</li><li>Empieza casi siempre por git status: te dice qué ve Git ahora mismo.</li><li>Comprueba el resultado con status o log antes de dar el módulo por terminado.</li></ol><p>El simulador reconoce init, status, add, commit, log, diff, restore, branch, switch, checkout, merge, remote y push. No ejecuta Git real, no toca tu disco y no se conecta a GitHub: cuando un comando no está disponible lo dice en lugar de inventar una salida.</p></div></details>
-      <div class="level-tabs" id="starter-level-tabs" role="tablist" aria-label="Niveles de la ruta"></div><div class="starter-module-list" id="starter-module-list" role="tablist" aria-label="Módulos de JavaScript"></div></section>
+    <section class="starter-hero" aria-labelledby="course-title"><div><p class="eyebrow"><span></span> Ruta · Git y GitHub</p><h1 id="course-title">Guarda versiones y publica tu trabajo.</h1><p>Aprende a preparar cambios precisos, recuperar trabajo, colaborar con ramas, integrar historias y publicar entregas verificables en GitHub.</p><div class="hero-actions"><a class="button button-primary" href="#laboratorio">Empezar a practicar <span aria-hidden="true">→</span></a><span class="route-duration">13 niveles · 50 módulos</span></div></div><div class="starter-summary"><span>Git</span><strong>Git y GitHub</strong><p>Una terminal simulada con un repositorio real en memoria.</p></div></section>
+    <section class="starter-modules" id="modulos" aria-labelledby="modules-title"><div class="starter-section-heading"><p class="eyebrow"><span></span> Tu recorrido</p><h2 id="modules-title">Trece niveles. Cincuenta módulos encadenados.</h2></div><details class="lesson-primer course-guide"><summary>Cómo funciona este laboratorio</summary><div class="course-guide-body"><p>Escribes comandos de Git, uno por línea, y se ejecutan en orden sobre un repositorio simulado. Los archivos de la carpeta ya están escritos: tu trabajo es decidir qué hace Git con ellos.</p><ol><li>Lee el estado inicial que describe cada módulo.</li><li>Empieza casi siempre por git status: te dice qué ve Git ahora mismo.</li><li>Comprueba el resultado con status, diff, log, branch o remote antes de dar el módulo por terminado.</li></ol><p>El simulador reconoce init, status, add, commit, log, diff, restore, branch, switch, checkout, merge, remote y push. No ejecuta Git real, no toca tu disco y no se conecta a GitHub. Las revisiones y aprobaciones de pull requests se explican como pasos humanos, sin fingir que el laboratorio las realiza.</p></div></details>
+      <div class="level-tabs" id="starter-level-tabs" role="tablist" aria-label="Niveles de la ruta"></div><div class="starter-module-list" id="starter-module-list" role="tablist" aria-label="Módulos de Git y GitHub"></div></section>
     <section class="starter-lab-section" id="laboratorio" aria-labelledby="starter-module-title">
-      <div class="starter-progress"><span id="starter-position">Módulo 1 de 16</span><div class="progress-track" aria-hidden="true"><span id="starter-progress-fill"></span></div><strong id="starter-completed">0 completados</strong></div>
-      <p class="starter-learning-note">Completa los cuatro módulos de cada nivel para abrir el siguiente y habilitar su mini examen. Cada examen tiene cinco preguntas y se aprueba con cuatro aciertos; completa los dieciséis módulos y aprueba los cuatro exámenes para cerrar la ruta.</p>
-      <p class="starter-exam-progress" id="starter-exam-progress" role="status">Mini exámenes: 0 de 3 aprobados</p>
+      <div class="starter-progress"><span id="starter-position">Módulo 1 de 50</span><div class="progress-track" aria-hidden="true"><span id="starter-progress-fill"></span></div><strong id="starter-completed">0 completados</strong></div>
+      <p class="starter-learning-note">Completa los módulos de cada nivel para abrir el siguiente y habilitar su mini examen. Cada examen tiene cinco preguntas y se aprueba con cuatro aciertos; completa los cincuenta módulos y aprueba los trece exámenes para cerrar la ruta.</p>
+      <p class="starter-exam-progress" id="starter-exam-progress" role="status">Mini exámenes: 0 de 13 aprobados</p>
       <article class="starter-workspace" id="starter-workspace" role="tabpanel" aria-labelledby="starter-module-title"><div class="starter-lesson"><p class="workspace-step">01 · Entiende la idea</p><p class="project-kicker" id="starter-kicker"></p><h2 id="starter-module-title"></h2><p class="starter-intro" id="starter-intro"></p><div class="concept-card lesson-explanation"><code id="starter-example"></code><div><h3>La idea clave</h3><p id="starter-explanation"></p><ul id="starter-concepts"></ul></div></div><aside class="lesson-primer" id="learning-guidance" aria-label="Guía de la misión"></aside><div class="project-goal"><span aria-hidden="true">✓</span><p><strong>Tu misión</strong><span id="starter-goal"></span></p></div><section class="course-learning-support" id="starter-lesson-support" hidden aria-label="Comprende el ejemplo"><p class="course-prerequisites"><strong>Antes de empezar</strong><span id="starter-prerequisites"></span></p><details id="starter-walkthrough"><summary>El ejemplo, paso a paso</summary><ol id="starter-example-steps"></ol></details><div class="course-prediction"><h4>Antes de ejecutar, piensa</h4><p id="starter-prediction"></p><details id="starter-prediction-answer"><summary>Comparar con la explicación</summary><p id="starter-prediction-explanation"></p></details></div></section><div class="hint-box"><div><div><span>AYUDA GRADUAL</span><strong>Pistas del módulo</strong></div><button type="button" id="starter-show-hint">Ver pista 1</button></div><ol id="starter-hints" aria-live="polite"></ol></div><details class="course-learning-extra" id="starter-lesson-extra" hidden><summary>Explora un poco más (opcional)</summary><h4>Comprueba que lo entendiste</h4><p id="starter-reflection"></p><h4>Tu siguiente reto</h4><p id="starter-extension"></p><p class="course-save-note">Estos retos no añaden requisitos a las tres comprobaciones. Si quieres conservar tu solución principal, cópiala antes de experimentar.</p></details></div>
         <div class="starter-lab"><p class="workspace-step">02 · Prueba tu código</p><div class="lab-heading"><div><span>TERMINAL</span><strong id="starter-lab-title"></strong></div><span class="difficulty" id="starter-difficulty">Inicio</span></div><div class="lab-editor"><div class="lab-file"><span aria-hidden="true">●</span> <span id="starter-file"></span></div><label class="sr-only" for="starter-code">Comandos de Git del módulo</label><div class="code-input starter-code-input"><textarea id="starter-code" rows="12" spellcheck="false"></textarea></div><div class="lab-actions"><button class="run-button" id="starter-run" type="button"><span aria-hidden="true">▶</span> Ejecutar comandos</button><button class="reset-button" id="starter-reset" type="button">Restablecer</button></div></div><div class="starter-preview-panel"><div><span>SALIDA</span><strong>Terminal</strong></div><iframe id="starter-preview" title="Vista previa" sandbox="" hidden></iframe><pre id="starter-output" aria-live="polite"></pre></div><div class="validation-panel" aria-live="polite"><div><span>03 · Comprueba el resultado</span><strong>Qué comprobaremos</strong></div><ul id="starter-validations"></ul></div><div class="lab-success" id="starter-success" hidden><span aria-hidden="true">✓</span><div><strong>¡Módulo superado!</strong><p id="starter-success-copy">Tu solución cumple los objetivos.</p></div></div><button class="button complete-project" id="starter-complete" type="button" disabled>Completar módulo</button></div></article>
-      <div class="project-navigation"><button type="button" class="nav-project-button" id="starter-previous" disabled><span aria-hidden="true">←</span> Anterior</button><p id="starter-navigation-position">Módulo 1 de 16</p><button type="button" class="nav-project-button" id="starter-next">Siguiente <span aria-hidden="true">→</span></button></div>
+      <div class="project-navigation"><button type="button" class="nav-project-button" id="starter-previous" disabled><span aria-hidden="true">←</span> Anterior</button><p id="starter-navigation-position">Módulo 1 de 50</p><button type="button" class="nav-project-button" id="starter-next">Siguiente <span aria-hidden="true">→</span></button></div>
 
       <section class="checkpoint-panel" id="level-checkpoint" hidden aria-labelledby="checkpoint-title">
         <div class="checkpoint-copy">
@@ -89,13 +89,13 @@
       </section>
       <div class="python-finish" id="starter-finish" hidden aria-live="polite">
         <span aria-hidden="true">✓</span>
-        <div><p id="starter-finish-title">Ruta completada</p><h3>Dieciséis módulos y cuatro mini exámenes superados.</h3><small>Ya tienes una base para seguir practicando. Puedes volver a cualquier nivel para repasar.</small></div>
+        <div><p id="starter-finish-title">Ruta completada</p><h3>Cincuenta módulos y trece mini exámenes superados.</h3><small>Ya puedes recorrer un flujo completo desde la preparación hasta una integración publicada. Puedes volver a cualquier nivel para repasar.</small></div>
       </div>
     </section>
   </main>
   <footer><div class="footer-inner"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">&gt;_</span><span>CápsulasDev</span></a><p>Programación clara para dar el primer paso.</p><p><a href="privacidad.html">Privacidad</a></p>
       <p class="footer-meta">Hecho para aprender · <span data-current-year></span></p></div></footer>
-  <script src="learning-state.js?v=20260917-sqlfifty1"></script>
+  <script src="learning-state.js?v=20260917-gitfifty1"></script>
   <script src="account-config.js?v=20260909-profile3"></script>
   <script src="vendor/supabase-2.116.0.js?v=2.116.0"></script>
   <script src="learning-sync.js?v=20260907-cuentas1"></script>
@@ -106,6 +106,7 @@
   <script src="git-lab.js?v=20260906-expansion1"></script>
   <script src="git-course.js?v=20260904-rutas"></script>
   <script src="course-expansion.js?v=20260906-expansion1"></script>
+  <script src="git-fifty-course.js?v=20260917-gitfifty1"></script>
   <script src="starter-course.js?v=20260916-fifty2"></script>
 </body>
 </html>

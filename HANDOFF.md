@@ -2,7 +2,7 @@
 
 Estado al 17 de septiembre de 2026. Última base publicada: `9494156`.
 
-### Entrega local pendiente de revisión: mínimo de 50 en Python, HTML/CSS, JavaScript y SQL
+### Entrega local pendiente de revisión: mínimo de 50 en Python, HTML/CSS, JavaScript, SQL y Git
 
 Python continúa desde el proyecto 40 hasta el 50 con tres niveles: algoritmos
 sobre colecciones, calidad y mantenibilidad, y un proyecto profesional
@@ -29,28 +29,43 @@ alcance sigue limitado a consultas SELECT sobre las dos tablas ficticias. La
 ruta suma 13 niveles, 50 módulos y 13 mini exámenes, conservando los índices
 0–15 y sus borradores.
 
-`learning-state.js` reconoce 50 elementos y 13 exámenes en las cuatro rutas. El
+Git y GitHub continúa desde el módulo 16 hasta el 50 con nueve niveles sobre
+preparación precisa, recuperación segura, ramas, integraciones fast-forward y
+divergentes, remotos, auditoría, higiene del repositorio, colaboración y dos
+proyectos completos. Los 34 ejemplos y soluciones se ejecutan sobre
+`git-lab.js`; el contenido distingue los comandos simulados de las revisiones y
+aprobaciones humanas que ocurren en GitHub. La ruta suma 13 niveles, 50 módulos
+y 13 mini exámenes, conservando los índices 0–15 y sus borradores.
+
+`learning-state.js` reconoce 50 elementos y 13 exámenes en las cinco rutas. El
 nivel final tiene dos ejercicios; el cálculo de cierre limita sus requisitos a
 los 50 existentes. La migración local
 `supabase/migrations/202609160002_course_minimum_fifty.sql` amplía Python y
 HTML/CSS; `202609160003_javascript_fifty.sql` añade JavaScript y conserva la
 división redondeada hacia arriba para admitir el examen 13. La migración
-`202609160004_sql_fifty.sql` añade SQL. Están probadas
+`202609160004_sql_fifty.sql` añade SQL y `202609170001_git_fifty.sql` añade Git.
+Están probadas
 localmente, pero no se han aplicado a Supabase porque esta entrega todavía no
 está publicada.
 
 La entrega local añade `python-mastery-course.js`,
 `html-css-fifty-course.js`, `javascript-fifty-course.js`,
-`sql-fifty-course.js`, sus soluciones de referencia y cuatro suites
+`sql-fifty-course.js`, `git-fifty-course.js`, sus soluciones de referencia y cinco suites
 específicas. La siguiente expansión debe continuar con las demás rutas según
 el estándar aprobado, sin reutilizar contenido genérico entre tecnologías.
 
-Las 33 suites pasan. Python, HTML/CSS, JavaScript y SQL se revisaron en
-1440 × 900 y 390 × 844 px: las cuatro páginas muestran 13 niveles, progreso 0
+Las 34 suites pasan. Python, HTML/CSS, JavaScript, SQL y Git se revisaron en
+1440 × 900 y 390 × 844 px. Las cinco páginas muestran 13 niveles, progreso 0
 de 50 y ningún desbordamiento de la página. Los niveles 10–13 usan numeración
 de dos dígitos y, en escritorio, las pestañas se distribuyen en filas de cinco;
 en móvil mantienen el desplazamiento horizontal existente. SQL conserva el
 desplazamiento interno de su tabla de datos sin ensanchar el documento.
+En Git se recorrieron los 16 módulos previos por la interfaz para abrir el
+módulo 17; el nivel nuevo, la terminal, el apoyo educativo y sus cuatro módulos
+se comprobaron en ambos anchos. A 390 px, la vista midió 390 px y el documento
+y body 375 px, sin desbordamiento horizontal. No hubo errores ni advertencias
+en la consola. También se ocultó el contenedor de orientación cuando una ruta
+no aporta contenido específico, evitando una franja vacía antes de la misión.
 
 ### Entrega publicada: Python desde fundamentos hasta desarrollo avanzado aplicado
 
@@ -767,7 +782,7 @@ dependencias de producción.**
 
 ## 3. Estado actual
 
-**19 rutas · 388 ejercicios · 99 mini exámenes · 23 páginas · 33 suites.**
+**19 rutas · 422 ejercicios · 108 mini exámenes · 23 páginas · 34 suites.**
 
 | Ruta | Ejercicios | Motor | Contrastado contra |
 | --- | ---: | --- | --- |
@@ -775,7 +790,7 @@ dependencias de producción.**
 | HTML y CSS | 50 | vista previa en iframe | — |
 | JavaScript | 50 | `starter-runtime.js` | JavaScript real en los módulos 17–50 |
 | SQL | 50 | motor SQL en `starter-runtime.js` | consultas de referencia del mismo motor |
-| Git y GitHub | 16 | `git-lab.js` | — |
+| Git y GitHub | 50 | `git-lab.js` | 34 soluciones y estados finales de referencia |
 | APIs | 16 | `api-lab.js` | — |
 | Terminal | 12 | `terminal-lab.js` | — |
 | Expresiones regulares | 12 | `RegExp` del navegador | — |

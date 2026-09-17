@@ -109,6 +109,7 @@ assert.equal(titulos.python.length, 50, "Python incluye sus cincuenta proyectos"
 assert.equal(titulos["html-css"].length, 50, "HTML y CSS incluye sus cincuenta módulos");
 assert.equal(titulos.javascript.length, 50, "JavaScript incluye sus cincuenta módulos");
 assert.equal(titulos.sql.length, 50, "SQL incluye sus cincuenta módulos");
+assert.equal(titulos.git.length, 50, "Git y GitHub incluye sus cincuenta módulos");
 for (const [ruta, lista] of Object.entries(titulos)) {
   assert.ok(lista.every((titulo) => typeof titulo === "string" && titulo.length > 0),
     ruta + ": todos los módulos tienen título");

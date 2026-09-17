@@ -50,8 +50,8 @@ for (const id of setup().state.routes.map((route) => route.id)) {
   assert.equal(restored.session(id).active, 1);
 }
 
-/* ---------- desbloqueos y cierre en las rutas de dieciséis ---------- */
-for (const id of ['git', 'apis']) {
+/* ---------- desbloqueos y cierre en la ruta de dieciséis ---------- */
+for (const id of ['apis']) {
   const doce = Array.from({length:12}, (_,i) => i);
   const {state} = setup();
   avanzar(state, id, [...doce, -1, 99], [1, 2, 4]);
@@ -69,6 +69,19 @@ for (const id of ['git', 'apis']) {
   avanzar(bloqueado, id, [0, 1, 2, 3]);
   bloqueado.save(id, 10, 'no debe abrirse un nivel bloqueado');
   assert.equal(bloqueado.resumeIndex(id), 4);
+}
+
+/* ---------- rutas ampliadas a cincuenta módulos ---------- */
+for (const id of ['html-css', 'javascript', 'sql', 'git']) {
+  const { state } = setup();
+  avanzar(state, id, Array.from({ length: 16 }, (_, i) => i), [1, 2, 3, 4]);
+  assert.equal(state.progress(id).count, 50, id + ': conserva los dieciséis módulos previos');
+  assert.equal(state.progress(id).done, false, id + ': la ampliación sigue pendiente');
+  assert.equal(state.resumeIndex(id), 16, id + ': retoma en el módulo nuevo');
+  avanzar(state, id, Array.from({ length: 34 }, (_, i) => i + 16), Array.from({ length: 9 }, (_, i) => i + 5));
+  assert.equal(state.progress(id).completed, 50, id + ': completa cincuenta módulos');
+  assert.equal(state.progress(id).exams, 13, id + ': completa trece exámenes');
+  assert.equal(state.progress(id).done, true, id + ': cierra la ruta ampliada');
 }
 
 /* ---------- Python usa identificadores de proyecto 1–50 ---------- */
@@ -374,8 +387,8 @@ assert.equal(typeof events.pageshow, 'function');
 
 const routes = setup().state.routes;
 assert.equal(routes.length, 19);
-assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 388);
-assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 99);
+assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 422);
+assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 108);
 for (const id of ['markdown', 'accesibilidad', 'testing']) {
   const { state } = setup();
   avanzar(state, id, Array.from({length:12}, (_, i) => i), [1, 2, 3]);

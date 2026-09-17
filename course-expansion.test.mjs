@@ -47,7 +47,7 @@ function setup(id, storage = new Map()) {
 const execute = (ctx, id, lesson, code) => id === "html-css" ? { code } : id === "javascript" ? ctx.StarterRuntime.runJavaScript(code) : id === "sql" ? ctx.StarterRuntime.runSql(code) : id === "git" ? ctx.GitLab.run(code, lesson.scenario) : ctx.ApiLab.run(code);
 let modules = 0;
 for (const id of routeIds) {
-  const expandedToFifty = ["html-css", "javascript", "sql"].includes(id);
+  const expandedToFifty = ["html-css", "javascript", "sql", "git"].includes(id);
   const fresh = setup(id);
   assert.equal(fresh.get("#starter-level-tabs").children.length, expandedToFifty ? 13 : 4);
   if (expandedToFifty) assert.match(fresh.get("#starter-level-tabs").children[9].innerHTML, /^<span>10<\/span>/, "los niveles 10–13 no anteponen un cero extra");
