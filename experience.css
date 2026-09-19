@@ -151,12 +151,14 @@
   .experience-page[data-course="html-css"] .level-tabs,
   .experience-page[data-course="javascript"] .level-tabs,
   .experience-page[data-course="sql"] .level-tabs,
-  .experience-page[data-course="git"] .level-tabs { flex-wrap: wrap; }
+  .experience-page[data-course="git"] .level-tabs,
+  .experience-page[data-course="apis"] .level-tabs { flex-wrap: wrap; }
   .experience-page.python-page .level-tab,
   .experience-page[data-course="html-css"] .level-tab,
   .experience-page[data-course="javascript"] .level-tab,
   .experience-page[data-course="sql"] .level-tab,
-  .experience-page[data-course="git"] .level-tab { flex: 1 1 calc(20% - 7px); max-width: calc(20% - 6px); }
+  .experience-page[data-course="git"] .level-tab,
+  .experience-page[data-course="apis"] .level-tab { flex: 1 1 calc(20% - 7px); max-width: calc(20% - 6px); }
 }
 .experience-page .starter-progress { padding: 16px 20px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
 .experience-page #learning-guidance:empty { display: none; }

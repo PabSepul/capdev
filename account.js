@@ -194,7 +194,7 @@
       const progress=path.routes.map(id=>state.progress(id));
       const completed=progress.reduce((sum,item)=>sum+item.completed,0);
       const total=progress.reduce((sum,item)=>sum+item.count,0);
-      const percent=total ? Math.round(completed/total*100) : 0;
+      const percent=total ? Math.max(completed ? 1 : 0,Math.round(completed/total*100)) : 0;
       const nextIndex=progress.findIndex(item=>!item.done);
       const next=nextIndex<0 ? null : progress[nextIndex];
       meter.hidden=false; meterCopy.hidden=false; itinerary.hidden=false;

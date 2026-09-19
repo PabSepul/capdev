@@ -50,29 +50,8 @@ for (const id of setup().state.routes.map((route) => route.id)) {
   assert.equal(restored.session(id).active, 1);
 }
 
-/* ---------- desbloqueos y cierre en la ruta de dieciséis ---------- */
-for (const id of ['apis']) {
-  const doce = Array.from({length:12}, (_,i) => i);
-  const {state} = setup();
-  avanzar(state, id, [...doce, -1, 99], [1, 2, 4]);
-  assert.equal(state.progress(id).completed, 12, 'los índices imposibles se descartan');
-  assert.equal(state.progress(id).exams, 2, 'solo cuentan los exámenes de niveles terminados');
-  assert.equal(state.progress(id).done, false);
-  assert.equal(state.resumeIndex(id), 12, 'retoma el cuarto nivel conservando los doce anteriores');
-
-  avanzar(state, id, [], [3]);
-  assert.equal(state.progress(id).done, false, 'la ampliación tiene cuatro módulos pendientes');
-  avanzar(state, id, [12, 13, 14, 15], [4]);
-  assert.equal(state.progress(id).done, true);
-
-  const bloqueado = setup().state;
-  avanzar(bloqueado, id, [0, 1, 2, 3]);
-  bloqueado.save(id, 10, 'no debe abrirse un nivel bloqueado');
-  assert.equal(bloqueado.resumeIndex(id), 4);
-}
-
 /* ---------- rutas ampliadas a cincuenta módulos ---------- */
-for (const id of ['html-css', 'javascript', 'sql', 'git']) {
+for (const id of ['html-css', 'javascript', 'sql', 'git', 'apis']) {
   const { state } = setup();
   avanzar(state, id, Array.from({ length: 16 }, (_, i) => i), [1, 2, 3, 4]);
   assert.equal(state.progress(id).count, 50, id + ': conserva los dieciséis módulos previos');
@@ -387,8 +366,8 @@ assert.equal(typeof events.pageshow, 'function');
 
 const routes = setup().state.routes;
 assert.equal(routes.length, 19);
-assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 422);
-assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 108);
+assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 456);
+assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 117);
 for (const id of ['markdown', 'accesibilidad', 'testing']) {
   const { state } = setup();
   avanzar(state, id, Array.from({length:12}, (_, i) => i), [1, 2, 3]);

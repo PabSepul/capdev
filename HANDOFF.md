@@ -1,8 +1,8 @@
 # Traspaso y continuidad de CápsulasDev
 
-Estado al 17 de septiembre de 2026. Última base publicada: `9494156`.
+Estado al 19 de septiembre de 2026. Última base publicada: `9494156`.
 
-### Entrega local pendiente de revisión: mínimo de 50 en Python, HTML/CSS, JavaScript, SQL y Git
+### Entrega local pendiente de revisión: mínimo de 50 en Python, HTML/CSS, JavaScript, SQL, Git y APIs
 
 Python continúa desde el proyecto 40 hasta el 50 con tres niveles: algoritmos
 sobre colecciones, calidad y mantenibilidad, y un proyecto profesional
@@ -37,25 +37,36 @@ proyectos completos. Los 34 ejemplos y soluciones se ejecutan sobre
 aprobaciones humanas que ocurren en GitHub. La ruta suma 13 niveles, 50 módulos
 y 13 mini exámenes, conservando los índices 0–15 y sus borradores.
 
-`learning-state.js` reconoce 50 elementos y 13 exámenes en las cinco rutas. El
+APIs continúa desde el módulo 16 hasta el 50 con nueve niveles sobre consultas
+precisas, errores HTTP, creación, actualización, eliminación, relaciones y
+flujos completos de producto. Los 34 ejemplos y soluciones se ejecutan sobre
+`api-lab.js`; cada secuencia comprueba método, ruta, códigos de estado, cuerpos
+y estado final de los recursos. La ruta suma 13 niveles, 50 módulos y 13 mini
+exámenes, conservando los índices 0–15 y sus borradores.
+
+`learning-state.js` reconoce 50 elementos y 13 exámenes en las seis rutas. El
 nivel final tiene dos ejercicios; el cálculo de cierre limita sus requisitos a
 los 50 existentes. La migración local
 `supabase/migrations/202609160002_course_minimum_fifty.sql` amplía Python y
 HTML/CSS; `202609160003_javascript_fifty.sql` añade JavaScript y conserva la
 división redondeada hacia arriba para admitir el examen 13. La migración
-`202609160004_sql_fifty.sql` añade SQL y `202609170001_git_fifty.sql` añade Git.
+`202609160004_sql_fifty.sql` añade SQL, `202609170001_git_fifty.sql` añade Git y
+`202609170002_apis_fifty.sql` añade APIs.
 Están probadas
 localmente, pero no se han aplicado a Supabase porque esta entrega todavía no
 está publicada.
 
 La entrega local añade `python-mastery-course.js`,
 `html-css-fifty-course.js`, `javascript-fifty-course.js`,
-`sql-fifty-course.js`, `git-fifty-course.js`, sus soluciones de referencia y cinco suites
+`sql-fifty-course.js`, `git-fifty-course.js`, `apis-fifty-course.js`, sus soluciones de referencia y seis suites
 específicas. La siguiente expansión debe continuar con las demás rutas según
 el estándar aprobado, sin reutilizar contenido genérico entre tecnologías.
 
-Las 34 suites pasan. Python, HTML/CSS, JavaScript, SQL y Git se revisaron en
-1440 × 900 y 390 × 844 px. Las cinco páginas muestran 13 niveles, progreso 0
+Las 35 suites pasan. Python, HTML/CSS, JavaScript, SQL y Git se revisaron en
+1440 × 900 y 390 × 844 px. APIs se revisó también en escritorio y en 390 × 844 px:
+los trece niveles conservan el desplazamiento horizontal interno, no generan
+desbordamiento en el documento y la consola queda sin advertencias ni errores.
+Las seis páginas muestran 13 niveles, progreso 0
 de 50 y ningún desbordamiento de la página. Los niveles 10–13 usan numeración
 de dos dígitos y, en escritorio, las pestañas se distribuyen en filas de cinco;
 en móvil mantienen el desplazamiento horizontal existente. SQL conserva el
@@ -782,7 +793,7 @@ dependencias de producción.**
 
 ## 3. Estado actual
 
-**19 rutas · 422 ejercicios · 108 mini exámenes · 23 páginas · 34 suites.**
+**19 rutas · 456 ejercicios · 117 mini exámenes · 23 páginas · 35 suites.**
 
 | Ruta | Ejercicios | Motor | Contrastado contra |
 | --- | ---: | --- | --- |
@@ -791,7 +802,7 @@ dependencias de producción.**
 | JavaScript | 50 | `starter-runtime.js` | JavaScript real en los módulos 17–50 |
 | SQL | 50 | motor SQL en `starter-runtime.js` | consultas de referencia del mismo motor |
 | Git y GitHub | 50 | `git-lab.js` | 34 soluciones y estados finales de referencia |
-| APIs | 16 | `api-lab.js` | — |
+| APIs | 50 | `api-lab.js` | 34 soluciones y estados HTTP de referencia |
 | Terminal | 12 | `terminal-lab.js` | — |
 | Expresiones regulares | 12 | `RegExp` del navegador | — |
 | Inteligencia artificial | 12 | `ia-lab.js` (solo calcula) | — |

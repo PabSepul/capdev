@@ -1,6 +1,6 @@
 # CápsulasDev
 
-Plataforma educativa estática en español. Estado actualizado el 17 de septiembre de 2026.
+Plataforma educativa estática en español. Estado actualizado el 19 de septiembre de 2026.
 El sitio se publica en `capsulasdev.com` desde el repositorio `PabSepul/capdev`.
 La pantalla pública de mantenimiento continúa activa hasta que se autorice su apertura.
 
@@ -13,7 +13,7 @@ El lanzamiento inicial es para mayores de 18 años y conserva la pantalla de
 mantenimiento mientras se decide la apertura pública.
 
 Ver [CUENTAS.md](CUENTAS.md) para arquitectura, SQL, configuración, DNS y verificación.
-Hay 23 páginas y 34 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
+Hay 23 páginas y 35 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
 y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 
 ## Catálogo actual
@@ -25,7 +25,7 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | JavaScript | 50 módulos | 13 | 13 |
 | SQL | 50 módulos + 3 desafíos independientes | 13 | 13 |
 | Git y GitHub | 50 módulos | 13 | 13 |
-| APIs | 16 módulos | 4 | 4 |
+| APIs | 50 módulos | 13 | 13 |
 | Terminal | 12 módulos | 3 | 3 |
 | Expresiones regulares | 12 módulos | 3 | 3 |
 | Inteligencia artificial | 12 módulos | 3 | 3 |
@@ -40,7 +40,7 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | Docker | 12 módulos | 3 | 3 |
 | MongoDB | 12 módulos | 3 | 3 |
 
-Hay 422 ejercicios con progreso y 108 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
+Hay 456 ejercicios con progreso y 117 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
 La portada ofrece tres itinerarios: Desarrollo web, Python y datos, y Herramientas profesionales.
 Cada ruta muestra su posición y el siguiente paso del itinerario elegido. Después de ejecutar un ejercicio,
 la persona puede indicar si fue claro y señalar qué parte conviene revisar, sin enviar texto libre ni código.
@@ -212,7 +212,7 @@ La portada ofrece tres itinerarios sin bloquear la exploración libre. La elecci
 `analizar-avance.mjs` continúa disponible para revisar exportaciones del piloto. Las operaciones de feedback también quedan en `learning_operations`, asociadas a la cuenta que las envió y protegidas por RLS.
 ## Verificación
 
-La verificación completa tiene 34 suites. Para ejecutarlas todas desde PowerShell:
+La verificación completa tiene 35 suites. Para ejecutarlas todas desde PowerShell:
 
 ```powershell
 Get-ChildItem -Filter *.test.mjs | Sort-Object Name | ForEach-Object { node $_.FullName; if ($LASTEXITCODE -ne 0) { throw "Falló $($_.Name)" } }

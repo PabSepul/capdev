@@ -37,7 +37,7 @@
     { id: "javascript", name: "JavaScript", count: 50, offset: 0, unit: "módulos" },
     { id: "sql", name: "SQL", count: 50, offset: 0, unit: "módulos" },
     { id: "git", name: "Git y GitHub", count: 50, offset: 0, unit: "módulos" },
-    { id: "apis", name: "APIs", count: 16, offset: 0, unit: "módulos" },
+    { id: "apis", name: "APIs", count: 50, offset: 0, unit: "módulos" },
     { id: "terminal", name: "Terminal", count: 12, offset: 0, unit: "módulos" },
     { id: "regex", name: "Expresiones regulares", count: 12, offset: 0, unit: "módulos" },
     { id: "ia", name: "Inteligencia artificial", count: 12, offset: 0, unit: "módulos" },
