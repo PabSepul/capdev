@@ -49,6 +49,7 @@ await db.exec(read('supabase/migrations/202609160003_javascript_fifty.sql'));
 await db.exec(read('supabase/migrations/202609160004_sql_fifty.sql'));
 await db.exec(read('supabase/migrations/202609170001_git_fifty.sql'));
 await db.exec(read('supabase/migrations/202609170002_apis_fifty.sql'));
+await db.exec(read('supabase/migrations/202609190001_all_routes_fifty.sql'));
 await db.query('insert into auth.users values ($1),($2)',[a,b]);
 await db.exec('set role authenticated');
 const asUser=async id=>db.query("select set_config('request.jwt.claim.sub',$1,false)",[id]);
@@ -113,11 +114,21 @@ assert.deepEqual(remote.routes.git.completados,[49],'Git sincroniza el módulo 5
 assert.deepEqual(remote.routes.git.examenes,[13],'Git sincroniza el examen final');
 assert.deepEqual(remote.routes.apis.completados,[49],'APIs sincroniza el módulo 50');
 assert.deepEqual(remote.routes.apis.examenes,[13],'APIs sincroniza el examen final');
+const remainingRoutes=['terminal','regex','ia','datos-python','nodejs','typescript','react','json','markdown','accesibilidad','testing','docker','mongodb'];
+remote=await rpc(remainingRoutes.flatMap(route=>[
+  {id:randomUUID(),kind:'complete',route,module:49},
+  {id:randomUUID(),kind:'exam',route,module:12}
+]));
+for(const route of remainingRoutes){
+  assert.deepEqual(remote.routes[route].completados,['docker','mongodb'].includes(route)?[0,49]:[49],route+' sincroniza el módulo 50');
+  assert.deepEqual(remote.routes[route].examenes,[13],route+' sincroniza el examen final');
+}
 await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'python',module:50}]),/Operación inválida/);
 await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'javascript',module:50}]),/Operación inválida/);
 await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'sql',module:50}]),/Operación inválida/);
 await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'git',module:50}]),/Operación inválida/);
 await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'apis',module:50}]),/Operación inválida/);
+await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'docker',module:50}]),/Operación inválida/);
 await assert.rejects(rpc([{...attempt,ms:9}]),/identificador/);
 await assert.rejects(rpc([{id:randomUUID(),kind:'complete',route:'python',module:1},{...attempt,id:randomUUID(),module:99}]),/Operación inválida/);
 assert.deepEqual((await rpc([])).routes.python.completados,[1,40,50],'un lote inválido revierte todos sus cambios');

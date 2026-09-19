@@ -38,19 +38,19 @@
     { id: "sql", name: "SQL", count: 50, offset: 0, unit: "módulos" },
     { id: "git", name: "Git y GitHub", count: 50, offset: 0, unit: "módulos" },
     { id: "apis", name: "APIs", count: 50, offset: 0, unit: "módulos" },
-    { id: "terminal", name: "Terminal", count: 12, offset: 0, unit: "módulos" },
-    { id: "regex", name: "Expresiones regulares", count: 12, offset: 0, unit: "módulos" },
-    { id: "ia", name: "Inteligencia artificial", count: 12, offset: 0, unit: "módulos" },
-    { id: "datos-python", name: "Datos con Python", count: 12, offset: 0, unit: "módulos" },
-    { id: "nodejs", name: "Node.js", count: 12, offset: 0, unit: "módulos" },
-    { id: "typescript", name: "TypeScript", count: 12, offset: 0, unit: "módulos" },
-    { id: "react", name: "React", count: 12, offset: 0, unit: "módulos" },
-    { id: "json", name: "JSON", count: 12, offset: 0, unit: "módulos" },
-    { id: "markdown", name: "Markdown y documentación", count: 12, offset: 0, unit: "módulos" },
-    { id: "accesibilidad", name: "Accesibilidad web", count: 12, offset: 0, unit: "módulos" },
-    { id: "testing", name: "Pruebas automatizadas", count: 12, offset: 0, unit: "módulos" },
-    { id: "docker", name: "Docker", count: 12, offset: 0, unit: "módulos" },
-    { id: "mongodb", name: "MongoDB", count: 12, offset: 0, unit: "módulos" }
+    { id: "terminal", name: "Terminal", count: 50, offset: 0, unit: "módulos" },
+    { id: "regex", name: "Expresiones regulares", count: 50, offset: 0, unit: "módulos" },
+    { id: "ia", name: "Inteligencia artificial", count: 50, offset: 0, unit: "módulos" },
+    { id: "datos-python", name: "Datos con Python", count: 50, offset: 0, unit: "módulos" },
+    { id: "nodejs", name: "Node.js", count: 50, offset: 0, unit: "módulos" },
+    { id: "typescript", name: "TypeScript", count: 50, offset: 0, unit: "módulos" },
+    { id: "react", name: "React", count: 50, offset: 0, unit: "módulos" },
+    { id: "json", name: "JSON", count: 50, offset: 0, unit: "módulos" },
+    { id: "markdown", name: "Markdown y documentación", count: 50, offset: 0, unit: "módulos" },
+    { id: "accesibilidad", name: "Accesibilidad web", count: 50, offset: 0, unit: "módulos" },
+    { id: "testing", name: "Pruebas automatizadas", count: 50, offset: 0, unit: "módulos" },
+    { id: "docker", name: "Docker", count: 50, offset: 0, unit: "módulos" },
+    { id: "mongodb", name: "MongoDB", count: 50, offset: 0, unit: "módulos" }
   ].map((route) => ({ offset: 0, unit: "módulos", anchor: "laboratorio", ...route, path: route.id + ".html" }));
 
   let available = true;

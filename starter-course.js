@@ -151,7 +151,7 @@
       course.levels.forEach((level, levelIndex) => {
         level.completionTitle = `Completaste ${level.title.toLowerCase()} de ${course.name}.`;
         level.completionCopy = levelIndex < course.levels.length - 1
-          ? `Terminaste los cuatro módulos y conectaste sus conceptos. Rinde el mini examen; el siguiente nivel ya está disponible.`
+          ? `Terminaste los ${level.modules.length} módulos y conectaste sus conceptos. Rinde el mini examen; el siguiente nivel ya está disponible.`
           : `Terminaste todos los módulos de la ruta. Rinde este mini examen y repasa los ejemplos que todavía no puedas explicar con tus palabras.`;
       });
     }
@@ -181,7 +181,7 @@
   course.levels.forEach((level, levelIndex) => {
     level.stage ||= stages[levelIndex];
     level.completionTitle ||= `Finalizaste ${level.title.toLowerCase()} de ${course.name}.`;
-    level.completionCopy ||= `Completaste los cuatro módulos de este nivel. Rinde el mini examen para comprobar lo aprendido. ${levelIndex < course.levels.length - 1 ? "El siguiente nivel ya está disponible." : `Aprueba los ${course.levels.length} mini exámenes para cerrar la ruta.`}`;
+    level.completionCopy ||= `Completaste los ${level.modules.length} módulos de este nivel. Rinde el mini examen para comprobar lo aprendido. ${levelIndex < course.levels.length - 1 ? "El siguiente nivel ya está disponible." : `Aprueba los ${course.levels.length} mini exámenes para cerrar la ruta.`}`;
     level.approvedCopy ||= "Mini examen aprobado. Puedes repetirlo para repasar sin perder tu aprobación anterior.";
     levelStart.push(modules.length);
     level.modules.forEach((module) => {

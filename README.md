@@ -13,7 +13,7 @@ El lanzamiento inicial es para mayores de 18 años y conserva la pantalla de
 mantenimiento mientras se decide la apertura pública.
 
 Ver [CUENTAS.md](CUENTAS.md) para arquitectura, SQL, configuración, DNS y verificación.
-Hay 23 páginas y 35 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
+Hay 23 páginas y 36 suites. Las pruebas de cuentas incluyen `accounts.test.mjs` (PostgreSQL/PGlite)
 y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 
 ## Catálogo actual
@@ -26,21 +26,21 @@ y `accounts-ui.test.mjs` (flujo de interfaz, desconexión y cambios de cuenta).
 | SQL | 50 módulos + 3 desafíos independientes | 13 | 13 |
 | Git y GitHub | 50 módulos | 13 | 13 |
 | APIs | 50 módulos | 13 | 13 |
-| Terminal | 12 módulos | 3 | 3 |
-| Expresiones regulares | 12 módulos | 3 | 3 |
-| Inteligencia artificial | 12 módulos | 3 | 3 |
-| Datos con Python | 12 módulos | 3 | 3 |
-| Node.js | 12 módulos | 3 | 3 |
-| TypeScript | 12 módulos | 3 | 3 |
-| React | 12 módulos | 3 | 3 |
-| JSON | 12 módulos | 3 | 3 |
-| Markdown y documentación | 12 módulos | 3 | 3 |
-| Accesibilidad web | 12 módulos | 3 | 3 |
-| Pruebas automatizadas | 12 módulos | 3 | 3 |
-| Docker | 12 módulos | 3 | 3 |
-| MongoDB | 12 módulos | 3 | 3 |
+| Terminal | 50 módulos | 13 | 13 |
+| Expresiones regulares | 50 módulos | 13 | 13 |
+| Inteligencia artificial | 50 módulos | 13 | 13 |
+| Datos con Python | 50 módulos | 13 | 13 |
+| Node.js | 50 módulos | 13 | 13 |
+| TypeScript | 50 módulos | 13 | 13 |
+| React | 50 módulos | 13 | 13 |
+| JSON | 50 módulos | 13 | 13 |
+| Markdown y documentación | 50 módulos | 13 | 13 |
+| Accesibilidad web | 50 módulos | 13 | 13 |
+| Pruebas automatizadas | 50 módulos | 13 | 13 |
+| Docker | 50 módulos | 13 | 13 |
+| MongoDB | 50 módulos | 13 | 13 |
 
-Hay 456 ejercicios con progreso y 117 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
+Hay 950 ejercicios con progreso y 247 mini exámenes en 19 rutas. Todas tienen editor libre, niveles y exámenes.
 La portada ofrece tres itinerarios: Desarrollo web, Python y datos, y Herramientas profesionales.
 Cada ruta muestra su posición y el siguiente paso del itinerario elegido. Después de ejecutar un ejercicio,
 la persona puede indicar si fue claro y señalar qué parte conviene revisar, sin enviar texto libre ni código.
@@ -130,14 +130,17 @@ Cada tecnología tiene su propia página HTML. Las cuentas requieren el servicio
 - `api-lab.js`: servidor HTTP simulado con cursos y estudiantes, autenticación de práctica, JSON y paginación.
   Cada intento reinicia los datos. Las respuestas guardan una instantánea; una URL mal codificada devuelve 400.
   No usa red. El token clave-demo-2026 es parte pública del ejercicio, no una credencial.
-- `terminal-lab.js` y `terminal-course.js`: shell simulado y los 12 módulos de la ruta Terminal.
-- `regex-lab.js` y `regex-course.js`: motor de patrones del navegador y los 12 módulos de expresiones regulares.
-- `ia-lab.js` y `ia-course.js`: consola de cálculos y los 12 módulos de inteligencia artificial.
-- `datos-python-course.js`: los 12 módulos de Datos con Python, sobre el intérprete de Python.
-- `node-lab.js` y `nodejs-course.js`: entorno de Node simulado y los 12 módulos de la ruta.
-- `ts-lab.js` y `typescript-course.js`: verificador de tipos y los 12 módulos de TypeScript.
-- `react-lab.js` y `react-course.js`: transformación de JSX, React mínimo y los 12 módulos de React.
-- `json-lab.js` y `json-course.js`: analizador de JSON, validador de esquemas y los 12 módulos de la ruta.
+- `terminal-lab.js` y `terminal-course.js`: shell simulado y los 12 módulos base de la ruta Terminal.
+- `regex-lab.js` y `regex-course.js`: motor de patrones del navegador y los 12 módulos base de expresiones regulares.
+- `ia-lab.js` y `ia-course.js`: consola de cálculos y los 12 módulos base de inteligencia artificial.
+- `datos-python-course.js`: los 12 módulos base de Datos con Python, sobre el intérprete de Python.
+- `node-lab.js` y `nodejs-course.js`: entorno de Node simulado y los 12 módulos base de la ruta.
+- `ts-lab.js` y `typescript-course.js`: verificador de tipos y los 12 módulos base de TypeScript.
+- `react-lab.js` y `react-course.js`: transformación de JSX, React mínimo y los 12 módulos base de React.
+- `json-lab.js` y `json-course.js`: analizador de JSON, validador de esquemas y los 12 módulos base de la ruta.
+- `remaining-fifty-courses.js`: niveles 4–13 y módulos 13–50 de Terminal, Regex, IA, Datos con Python,
+  Node.js, TypeScript, React, JSON, Markdown, Accesibilidad, Testing, Docker y MongoDB. Usa el laboratorio
+  propio de cada ruta y conserva los módulos base.
 - `learning-state.js`, `catalog.js`, `learning-experience.js`: continuidad, borradores, avance,
   itinerarios, feedback, orientación propia de cada tecnología y apariciones
   contextuales de Capi en las diecinueve rutas y sus mini exámenes. Después de
@@ -212,7 +215,7 @@ La portada ofrece tres itinerarios sin bloquear la exploración libre. La elecci
 `analizar-avance.mjs` continúa disponible para revisar exportaciones del piloto. Las operaciones de feedback también quedan en `learning_operations`, asociadas a la cuenta que las envió y protegidas por RLS.
 ## Verificación
 
-La verificación completa tiene 35 suites. Para ejecutarlas todas desde PowerShell:
+La verificación completa tiene 36 suites. Para ejecutarlas todas desde PowerShell:
 
 ```powershell
 Get-ChildItem -Filter *.test.mjs | Sort-Object Name | ForEach-Object { node $_.FullName; if ($LASTEXITCODE -ne 0) { throw "Falló $($_.Name)" } }

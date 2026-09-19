@@ -104,13 +104,15 @@ assert.deepEqual(rutas.get("python").masLejos, [1], "proyectos 1 y 2 completados
 /* ---------- títulos ---------- */
 const titulos = cargarTitulos();
 assert.equal(Object.keys(titulos).length, 19, "las diecinueve rutas aportan títulos");
-assert.equal(titulos.json.length, 12);
+assert.equal(titulos.json.length, 50);
 assert.equal(titulos.python.length, 50, "Python incluye sus cincuenta proyectos");
 assert.equal(titulos["html-css"].length, 50, "HTML y CSS incluye sus cincuenta módulos");
 assert.equal(titulos.javascript.length, 50, "JavaScript incluye sus cincuenta módulos");
 assert.equal(titulos.sql.length, 50, "SQL incluye sus cincuenta módulos");
 assert.equal(titulos.git.length, 50, "Git y GitHub incluye sus cincuenta módulos");
 assert.equal(titulos.apis.length, 50, "APIs incluye sus cincuenta módulos");
+for (const id of ["terminal", "regex", "ia", "datos-python", "nodejs", "typescript", "react", "json", "markdown", "accesibilidad", "testing", "docker", "mongodb"])
+  assert.equal(titulos[id].length, 50, id + " incluye sus cincuenta módulos");
 for (const [ruta, lista] of Object.entries(titulos)) {
   assert.ok(lista.every((titulo) => typeof titulo === "string" && titulo.length > 0),
     ruta + ": todos los módulos tienen título");

@@ -50,14 +50,18 @@ for (const id of setup().state.routes.map((route) => route.id)) {
   assert.equal(restored.session(id).active, 1);
 }
 
-/* ---------- rutas ampliadas a cincuenta módulos ---------- */
-for (const id of ['html-css', 'javascript', 'sql', 'git', 'apis']) {
+/* ---------- todas las rutas ampliadas a cincuenta módulos ---------- */
+const EXPANDED_ROUTES = ['html-css', 'javascript', 'sql', 'git', 'apis', 'terminal', 'regex', 'ia',
+  'datos-python', 'nodejs', 'typescript', 'react', 'json', 'markdown', 'accesibilidad', 'testing', 'docker', 'mongodb'];
+for (const id of EXPANDED_ROUTES) {
   const { state } = setup();
-  avanzar(state, id, Array.from({ length: 16 }, (_, i) => i), [1, 2, 3, 4]);
-  assert.equal(state.progress(id).count, 50, id + ': conserva los dieciséis módulos previos');
+  const previous = ['html-css', 'javascript', 'sql', 'git', 'apis'].includes(id) ? 16 : 12;
+  const previousExams = previous / 4;
+  avanzar(state, id, Array.from({ length: previous }, (_, i) => i), Array.from({ length: previousExams }, (_, i) => i + 1));
+  assert.equal(state.progress(id).count, 50, id + ': conserva los módulos previos');
   assert.equal(state.progress(id).done, false, id + ': la ampliación sigue pendiente');
-  assert.equal(state.resumeIndex(id), 16, id + ': retoma en el módulo nuevo');
-  avanzar(state, id, Array.from({ length: 34 }, (_, i) => i + 16), Array.from({ length: 9 }, (_, i) => i + 5));
+  assert.equal(state.resumeIndex(id), previous, id + ': retoma en el módulo nuevo');
+  avanzar(state, id, Array.from({ length: 50 - previous }, (_, i) => i + previous), Array.from({ length: 13 - previousExams }, (_, i) => i + previousExams + 1));
   assert.equal(state.progress(id).completed, 50, id + ': completa cincuenta módulos');
   assert.equal(state.progress(id).exams, 13, id + ': completa trece exámenes');
   assert.equal(state.progress(id).done, true, id + ': cierra la ruta ampliada');
@@ -366,11 +370,11 @@ assert.equal(typeof events.pageshow, 'function');
 
 const routes = setup().state.routes;
 assert.equal(routes.length, 19);
-assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 456);
-assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 117);
+assert.equal(routes.reduce((sum, route) => sum + route.count, 0), 950);
+assert.equal(routes.reduce((sum, route) => sum + Math.ceil(route.count / 4), 0), 247);
 for (const id of ['markdown', 'accesibilidad', 'testing']) {
   const { state } = setup();
-  avanzar(state, id, Array.from({length:12}, (_, i) => i), [1, 2, 3]);
+  avanzar(state, id, Array.from({length:50}, (_, i) => i), Array.from({length:13}, (_, i) => i + 1));
   assert.equal(state.progress(id).done, true, id + ': cierre con módulos y exámenes');
   assert.equal(state.progress('json').started, false, 'el avance de otra ruta sigue independiente');
 }

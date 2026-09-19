@@ -66,7 +66,7 @@ function cargarTitulos() {
     "markdown-course.js", "accessibility-course.js", "testing-course.js", "new-tech-courses.js",
     "course-expansion.js", "html-css-learning.js", "html-css-fifty-course.js",
     "javascript-learning.js", "javascript-fifty-course.js", "sql-fifty-course.js", "git-fifty-course.js",
-    "apis-fifty-course.js"
+    "apis-fifty-course.js", "remaining-fifty-courses.js"
   ]) correr(archivo);
 
   const titulos = {};
@@ -145,13 +145,13 @@ const RUTAS = {
   python: { nombre: "Python", modulos: 50, offset: 1, unidad: "proyecto" },
   "html-css": { nombre: "HTML y CSS", modulos: 50 }, javascript: { nombre: "JavaScript", modulos: 50 },
   sql: { nombre: "SQL", modulos: 50 }, git: { nombre: "Git y GitHub", modulos: 50 },
-  apis: { nombre: "APIs", modulos: 50 }, terminal: { nombre: "Terminal", modulos: 12 },
-  regex: { nombre: "Expresiones regulares", modulos: 12 }, ia: { nombre: "Inteligencia artificial", modulos: 12 },
-  "datos-python": { nombre: "Datos con Python", modulos: 12 }, nodejs: { nombre: "Node.js", modulos: 12 },
-  typescript: { nombre: "TypeScript", modulos: 12 }, react: { nombre: "React", modulos: 12 },
-  json: { nombre: "JSON", modulos: 12 }, markdown: { nombre: "Markdown y documentación", modulos: 12 },
-  accesibilidad: { nombre: "Accesibilidad web", modulos: 12 }, testing: { nombre: "Pruebas automatizadas", modulos: 12 },
-  docker: { nombre: "Docker", modulos: 12 }, mongodb: { nombre: "MongoDB", modulos: 12 }
+  apis: { nombre: "APIs", modulos: 50 }, terminal: { nombre: "Terminal", modulos: 50 },
+  regex: { nombre: "Expresiones regulares", modulos: 50 }, ia: { nombre: "Inteligencia artificial", modulos: 50 },
+  "datos-python": { nombre: "Datos con Python", modulos: 50 }, nodejs: { nombre: "Node.js", modulos: 50 },
+  typescript: { nombre: "TypeScript", modulos: 50 }, react: { nombre: "React", modulos: 50 },
+  json: { nombre: "JSON", modulos: 50 }, markdown: { nombre: "Markdown y documentación", modulos: 50 },
+  accesibilidad: { nombre: "Accesibilidad web", modulos: 50 }, testing: { nombre: "Pruebas automatizadas", modulos: 50 },
+  docker: { nombre: "Docker", modulos: 50 }, mongodb: { nombre: "MongoDB", modulos: 50 }
 };
 
 function analizar(respaldos) {

@@ -355,6 +355,9 @@ Esas comparaciones no fueron un trámite: encontraron trece defectos, todos corr
 - `routes-git-apis.test.mjs`, `routes-regex-ia.test.mjs`, `terminal-route.test.mjs`, `sql-guide.test.mjs`,
   `course-expansion.test.mjs`, `learning-state.test.mjs`, `review-preview.test.mjs`: sin cambios de
   alcance respecto de la revisión anterior, salvo el retiro de lo que probaba el motor guiado.
+- `remaining-fifty.test.mjs`: ejecuta las 494 soluciones añadidas a las trece rutas que partían con
+  doce módulos, exige 1.482 validaciones, 130 exámenes nuevos y una distribución final de 13 niveles
+  y 50 módulos por curso.
 - Las dos suites que necesitan TypeScript y React **fallan** si no encuentran esas herramientas. Antes
   terminaban con éxito y la suite pasaba sin comprobar nada; ahora hay que declarar `CONTENT_QA_SKIP=1`
   para omitirlas a sabiendas.
@@ -380,7 +383,8 @@ de cada recorrido para no heredar avance de pruebas anteriores.
 ## Límites que se deben mantener explícitos
 
 - Solo navegador integrado de escritorio; falta probar dispositivos físicos, Safari y lectores de pantalla.
-- Los doce ejercicios de cada ruta se cubren automáticamente; no se recorrieron manualmente todos en navegador.
+- Los cincuenta ejercicios de cada ruta se cubren automáticamente. En navegador se revisaron las
+  diecinueve páginas en escritorio y a 390 × 844 px; no se recorrieron manualmente los 950 ejercicios.
 - La ruta de inteligencia artificial no ejecuta ningún modelo: calcula tokens, costos, similitud y softmax
   sobre datos locales, y analiza la estructura de un prompt. No evalúa la calidad de una respuesta ni genera
   texto; los precios y el tokenizador son aproximaciones declaradas en pantalla.
@@ -398,11 +402,10 @@ de cada recorrido para no heredar avance de pruebas anteriores.
 - El validador de JSON cubre un subconjunto de JSON Schema. Quedan fuera las referencias, los combinadores
   como `allOf` o `anyOf`, los formatos y las expresiones regulares dentro del esquema.
 - Las comprobaciones HTML/CSS son patrones educativos, no un validador completo de semántica o accesibilidad.
-- Progreso y borradores se guardan en un solo navegador y origen. No hay cuentas ni sincronización. Las
-  cuatro rutas que dejaron de ser mini cursos empiezan con progreso vacío: cambian de clave de
-  almacenamiento y no migran el avance anterior.
-- La vista previa permite revisar el sitio publicado, pero sus archivos y el repositorio siguen siendo
-  públicos. El enlace de revisión no autentica ni protege información privada.
+- El progreso, los borradores, los exámenes y el feedback requieren un perfil y se sincronizan con
+  Supabase; la copia local queda aislada por cuenta y sirve para continuidad y recuperación.
+- La vista previa local permite revisar el sitio antes de publicar. El repositorio actual es privado y
+  la pantalla pública de mantenimiento sigue activa.
 
 ## Próxima revisión
 
