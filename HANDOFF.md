@@ -1,8 +1,8 @@
 # Traspaso y continuidad de CápsulasDev
 
-Estado al 19 de septiembre de 2026. Última base publicada: `9494156`.
+Estado al 19 de septiembre de 2026. Última base publicada: `36c8e14`.
 
-### Entrega local pendiente de revisión: las 19 rutas alcanzan 50 ejercicios
+### Entrega publicada: las 19 rutas alcanzan 50 ejercicios
 
 Python continúa desde el proyecto 40 hasta el 50 con tres niveles: algoritmos
 sobre colecciones, calidad y mantenibilidad, y un proyecto profesional
@@ -60,12 +60,14 @@ HTML/CSS; `202609160003_javascript_fifty.sql` añade JavaScript y conserva la
 división redondeada hacia arriba para admitir el examen 13. La migración
 `202609160004_sql_fifty.sql` añade SQL, `202609170001_git_fifty.sql` añade Git y
 `202609170002_apis_fifty.sql` añade APIs. La migración acumulativa
-`202609190001_all_routes_fifty.sql` amplía las trece rutas restantes.
-Están probadas
-localmente, pero no se han aplicado a Supabase porque esta entrega todavía no
-está publicada.
+`202609190001_all_routes_fifty.sql` reúne el límite final de las diecinueve
+rutas. En producción se aplicó únicamente esta migración acumulativa el 19 de
+septiembre de 2026, después de crear y verificar el respaldo cifrado
+`capsulasdev-20260919-142730.7z`. La consulta posterior confirmó en
+`learning_sync` la ruta MongoDB, el límite de 50 módulos y el cálculo de 13
+mini exámenes.
 
-La entrega local añade `python-mastery-course.js`,
+La entrega añade `python-mastery-course.js`,
 `html-css-fifty-course.js`, `javascript-fifty-course.js`,
 `sql-fifty-course.js`, `git-fifty-course.js`, `apis-fifty-course.js`,
 `remaining-fifty-courses.js`, sus soluciones de referencia y siete suites

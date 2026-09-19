@@ -247,7 +247,7 @@ node route-accessibility.test.mjs
 Las tres admiten CONTENT_QA_MODULES apuntando a un node_modules con esas herramientas. Solo TypeScript
 y React admiten CONTENT_QA_SKIP=1 para omitir el contraste a sabiendas. Omitirlo no cuenta como contraste
 nativo aprobado. La comparación de Node también es obligatoria y cierra sus servidores antes de terminar.
-`.github/workflows/quality.yml` repite las 28 suites en cada push y pull request.
+`.github/workflows/quality.yml` repite las 36 suites en cada push y pull request.
 
 Para una vista local: `python -m http.server 4174 --bind 127.0.0.1`.
 Ver `QA.md` para el alcance de la revisión y `HANDOFF.md` para continuidad operativa.

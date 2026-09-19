@@ -1,5 +1,22 @@
 # Revisión de calidad de CápsulasDev
 
+## Publicación de las 19 rutas con 50 módulos
+
+La entrega del 19 de septiembre de 2026 amplía las diecinueve rutas a 50
+módulos y 13 mini exámenes, para un total de 950 ejercicios y 247 exámenes. Las
+36 suites pasan localmente. Las rutas se revisaron en escritorio y móvil; las
+páginas mostraron el progreso inicial 0 de 50, conservaron los borradores e
+identificadores existentes y no produjeron desbordamiento horizontal ni errores
+en consola.
+
+Antes de actualizar Supabase se creó y verificó el respaldo cifrado
+`capsulasdev-20260919-142730.7z`. Después se aplicó a producción la migración
+acumulativa `202609190001_all_routes_fifty.sql`. La verificación remota confirmó
+la ruta MongoDB, el límite de 50 módulos y el cálculo de 13 mini exámenes. El
+commit `36c8e14` se publicó en `main`; GitHub Pages terminó correctamente y
+capsulasdev.com respondió 200 para la portada, MongoDB y el paquete compartido
+de las rutas ampliadas. La pantalla pública de mantenimiento permanece activa.
+
 ## Entrega local del 13 de septiembre de 2026
 
 La entrega agrega itinerarios, orientación contextual y feedback estructurado a
